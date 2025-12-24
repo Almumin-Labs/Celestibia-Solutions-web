@@ -1,123 +1,36 @@
 import { motion } from "framer-motion";
-import { Link2, Cloud, Brain } from "lucide-react";
+import { Link2 } from "lucide-react";
 import veeamLogo from "@/assets/veeam-logo.jpg";
+import { AWSLogo, AzureLogo, GCPLogo, GitLabLogo } from "@/components/logos/TechLogos";
 
 const partners = [
   {
     name: "AWS",
     certification: "Select Consulting Partner",
-    logo: "aws",
+    Logo: AWSLogo,
   },
   {
     name: "Microsoft Azure",
     certification: "Solutions Partner",
-    logo: "azure",
+    Logo: AzureLogo,
   },
   {
     name: "Google Cloud",
     certification: "Certified Partner",
-    logo: "gcp",
+    Logo: GCPLogo,
   },
   {
     name: "GitLab",
     certification: "Select Partner",
-    logo: "gitlab",
+    Logo: GitLabLogo,
   },
   {
     name: "Veeam",
     certification: "ProPartner",
-    logo: "veeam",
+    Logo: null,
+    image: veeamLogo,
   },
 ];
-
-const LogoIcon = ({ logo }: { logo: string }) => {
-  switch (logo) {
-    case "aws":
-      return (
-        <div className="flex flex-col items-center gap-1">
-          <motion.div
-            whileHover={{ scale: 1.1, rotate: 5 }}
-            className="relative"
-          >
-            <Cloud className="w-8 h-8 text-orange-500" />
-            <motion.div
-              animate={{ scale: [1, 1.2, 1], opacity: [0.5, 1, 0.5] }}
-              transition={{ duration: 2, repeat: Infinity }}
-              className="absolute -top-1 -right-1 w-3 h-3 bg-orange-400 rounded-full"
-            />
-          </motion.div>
-          <span className="text-xs font-semibold text-foreground">AWS</span>
-        </div>
-      );
-    case "azure":
-      return (
-        <div className="flex flex-col items-center gap-1">
-          <motion.div
-            whileHover={{ scale: 1.1, rotate: -5 }}
-            className="relative"
-          >
-            <Cloud className="w-8 h-8 text-blue-500" />
-            <motion.div
-              animate={{ y: [0, -3, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-              className="absolute -top-1 -right-1 w-3 h-3 bg-blue-400 rounded-full"
-            />
-          </motion.div>
-          <span className="text-xs font-semibold text-foreground">Azure</span>
-        </div>
-      );
-    case "gcp":
-      return (
-        <div className="flex flex-col items-center gap-1">
-          <motion.div
-            whileHover={{ scale: 1.1, rotate: 5 }}
-            className="relative"
-          >
-            <Cloud className="w-8 h-8 text-red-500" />
-            <motion.div
-              animate={{ scale: [1, 1.3, 1] }}
-              transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
-              className="absolute -top-1 -right-1 w-3 h-3 bg-yellow-400 rounded-full"
-            />
-          </motion.div>
-          <span className="text-xs font-semibold text-foreground">GCP</span>
-        </div>
-      );
-    case "gitlab":
-      return (
-        <div className="flex flex-col items-center gap-1">
-          <motion.div
-            whileHover={{ scale: 1.1, rotate: -5 }}
-          >
-            <svg viewBox="0 0 24 24" className="w-8 h-8">
-              <path
-                d="M22.65 14.39L12 22.13 1.35 14.39a.84.84 0 01-.3-.94l1.22-3.78 2.44-7.51a.42.42 0 01.82 0l2.44 7.51h8.06l2.44-7.51a.42.42 0 01.82 0l2.44 7.51 1.22 3.78a.84.84 0 01-.3.94z"
-                fill="#FC6D26"
-              />
-            </svg>
-          </motion.div>
-          <span className="text-xs font-semibold text-foreground">GitLab</span>
-        </div>
-      );
-    case "veeam":
-      return (
-        <div className="flex flex-col items-center gap-1">
-          <motion.div
-            whileHover={{ scale: 1.1 }}
-            className="w-16 h-10 overflow-hidden rounded"
-          >
-            <img 
-              src={veeamLogo} 
-              alt="Veeam" 
-              className="w-full h-full object-contain"
-            />
-          </motion.div>
-        </div>
-      );
-    default:
-      return null;
-  }
-};
 
 export const Partners = () => {
   return (
@@ -151,9 +64,20 @@ export const Partners = () => {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="flex flex-col items-center text-center group"
             >
-              <div className="w-24 h-24 md:w-28 md:h-28 rounded-full border-2 border-border/50 flex items-center justify-center mb-4 transition-all duration-300 group-hover:border-primary/50 group-hover:bg-primary/5 text-foreground">
-                <LogoIcon logo={partner.logo} />
-              </div>
+              <motion.div 
+                whileHover={{ scale: 1.05, y: -5 }}
+                className="w-28 h-28 md:w-32 md:h-32 rounded-2xl border-2 border-border/50 bg-card flex items-center justify-center mb-4 transition-all duration-300 group-hover:border-primary/50 group-hover:shadow-xl"
+              >
+                {partner.Logo ? (
+                  <partner.Logo className="w-16 h-16 md:w-20 md:h-20" />
+                ) : partner.image ? (
+                  <img 
+                    src={partner.image} 
+                    alt={partner.name} 
+                    className="w-20 h-12 object-contain"
+                  />
+                ) : null}
+              </motion.div>
               <h3 className="font-semibold text-foreground mb-1">{partner.name}</h3>
               <p className="text-sm text-muted-foreground">{partner.certification}</p>
             </motion.div>
