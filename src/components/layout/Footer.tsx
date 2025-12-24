@@ -26,8 +26,11 @@ const footerLinks = {
 
 export const Footer = () => {
   return (
-    <footer className="bg-gradient-dark text-primary-foreground">
-      <div className="container mx-auto px-4 py-16">
+    <footer className="bg-gradient-footer text-primary-foreground relative overflow-hidden">
+      {/* Decorative glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-px bg-gradient-to-r from-transparent via-coral/40 to-transparent" />
+      
+      <div className="container mx-auto px-4 py-16 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
           {/* Brand Section */}
           <div className="lg:col-span-2">
