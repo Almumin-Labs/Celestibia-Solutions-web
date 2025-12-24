@@ -207,12 +207,20 @@ export const Header = () => {
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
-              <Button variant="outline" size="sm" asChild>
-                <Link to="/login">
-                  <User className="w-4 h-4 mr-1" />
-                  Login
-                </Link>
-              </Button>
+              <div className="flex items-center gap-2">
+                <Button variant="outline" size="sm" asChild>
+                  <Link to="/login">
+                    <User className="w-4 h-4 mr-1" />
+                    User Login
+                  </Link>
+                </Button>
+                <Button variant="ghost" size="sm" asChild>
+                  <Link to="/admin">
+                    <Settings className="w-4 h-4 mr-1" />
+                    Admin
+                  </Link>
+                </Button>
+              </div>
             )}
             <Button variant="gradient" size="lg" asChild>
               <Link to="/contact">Get Started</Link>
@@ -311,12 +319,20 @@ export const Header = () => {
                   </div>
                 </div>
               ) : (
-                <Button variant="outline" className="w-full mt-4" asChild>
-                  <Link to="/login">
-                    <User className="w-4 h-4 mr-2" />
-                    Login
-                  </Link>
-                </Button>
+                <div className="mt-4 space-y-2">
+                  <Button variant="outline" className="w-full" asChild>
+                    <Link to="/login">
+                      <User className="w-4 h-4 mr-2" />
+                      User Login
+                    </Link>
+                  </Button>
+                  <Button variant="ghost" className="w-full" asChild>
+                    <Link to="/admin">
+                      <Settings className="w-4 h-4 mr-2" />
+                      Admin Login
+                    </Link>
+                  </Button>
+                </div>
               )}
               <Button variant="gradient" size="lg" className="w-full mt-2" asChild>
                 <Link to="/contact">Get Started</Link>
