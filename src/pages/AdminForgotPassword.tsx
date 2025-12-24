@@ -6,98 +6,37 @@ import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
-import { KeyRound, Mail, Lock, ArrowLeft } from "lucide-react";
-
-const ADMINS_KEY = "celestibia_admins";
-
-interface Admin {
-  id: string;
-  email: string;
-  password: string;
-}
-
-const getAdmins = (): Admin[] => {
-  const data = localStorage.getItem(ADMINS_KEY);
-  return data ? JSON.parse(data) : [];
-};
+import { KeyRound, Mail, ArrowLeft, Loader2 } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 const AdminForgotPassword = () => {
-  const [step, setStep] = useState<"email" | "reset">("email");
   const [email, setEmail] = useState("");
-  const [newPassword, setNewPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [emailSent, setEmailSent] = useState(false);
   const { toast } = useToast();
 
-  const handleEmailSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    await new Promise((resolve) => setTimeout(resolve, 500));
 
-    const admins = getAdmins();
-    const admin = admins.find(
-      (a) => a.email.toLowerCase() === email.toLowerCase()
-    );
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${window.location.origin}/admin/reset-password`,
+    });
 
-    if (admin) {
-      setStep("reset");
+    if (error) {
       toast({
-        title: "Email Verified",
-        description: "Please enter your new password.",
+        title: "Error",
+        description: error.message,
+        variant: "destructive",
       });
     } else {
+      setEmailSent(true);
       toast({
-        title: "Email Not Found",
-        description: "No admin account found with this email.",
-        variant: "destructive",
+        title: "Check your email",
+        description: "We've sent you a password reset link.",
       });
     }
-    setIsLoading(false);
-  };
 
-  const handleResetPassword = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
-    await new Promise((resolve) => setTimeout(resolve, 500));
-
-    if (newPassword !== confirmPassword) {
-      toast({
-        title: "Password Mismatch",
-        description: "Passwords do not match. Please try again.",
-        variant: "destructive",
-      });
-      setIsLoading(false);
-      return;
-    }
-
-    if (newPassword.length < 6) {
-      toast({
-        title: "Password Too Short",
-        description: "Password must be at least 6 characters.",
-        variant: "destructive",
-      });
-      setIsLoading(false);
-      return;
-    }
-
-    const admins = getAdmins();
-    const adminIndex = admins.findIndex(
-      (a) => a.email.toLowerCase() === email.toLowerCase()
-    );
-
-    if (adminIndex !== -1) {
-      admins[adminIndex].password = newPassword;
-      localStorage.setItem(ADMINS_KEY, JSON.stringify(admins));
-
-      toast({
-        title: "Password Reset Successful!",
-        description: "You can now login with your new password.",
-      });
-      setStep("email");
-      setEmail("");
-      setNewPassword("");
-      setConfirmPassword("");
-    }
     setIsLoading(false);
   };
 
@@ -120,14 +59,27 @@ const AdminForgotPassword = () => {
                 </div>
                 <h1 className="font-heading text-2xl font-bold">Reset Password</h1>
                 <p className="text-muted-foreground mt-2">
-                  {step === "email"
-                    ? "Enter your email to reset your password"
-                    : "Enter your new password"}
+                  {emailSent
+                    ? "Check your email for the reset link"
+                    : "Enter your email to receive a reset link"}
                 </p>
               </div>
 
-              {step === "email" ? (
-                <form onSubmit={handleEmailSubmit} className="space-y-4">
+              {emailSent ? (
+                <div className="text-center">
+                  <p className="text-muted-foreground mb-6">
+                    We've sent a password reset link to <strong>{email}</strong>.
+                    Please check your inbox and follow the instructions.
+                  </p>
+                  <Button variant="outline" asChild>
+                    <Link to="/admin">
+                      <ArrowLeft className="w-4 h-4 mr-2" />
+                      Back to Login
+                    </Link>
+                  </Button>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
                     <label className="block text-sm font-medium mb-2">Email</label>
                     <div className="relative">
@@ -150,67 +102,15 @@ const AdminForgotPassword = () => {
                     className="w-full"
                     disabled={isLoading}
                   >
-                    {isLoading ? "Verifying..." : "Continue"}
+                    {isLoading ? (
+                      <>
+                        <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                        Sending...
+                      </>
+                    ) : (
+                      "Send Reset Link"
+                    )}
                   </Button>
-                </form>
-              ) : (
-                <form onSubmit={handleResetPassword} className="space-y-4">
-                  <div>
-                    <label className="block text-sm font-medium mb-2">
-                      New Password
-                    </label>
-                    <div className="relative">
-                      <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-                      <Input
-                        type="password"
-                        value={newPassword}
-                        onChange={(e) => setNewPassword(e.target.value)}
-                        placeholder="Enter new password"
-                        className="h-12 pl-10"
-                        minLength={6}
-                        required
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium mb-2">
-                      Confirm Password
-                    </label>
-                    <div className="relative">
-                      <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-                      <Input
-                        type="password"
-                        value={confirmPassword}
-                        onChange={(e) => setConfirmPassword(e.target.value)}
-                        placeholder="Confirm new password"
-                        className="h-12 pl-10"
-                        minLength={6}
-                        required
-                      />
-                    </div>
-                  </div>
-
-                  <div className="flex gap-3">
-                    <Button
-                      type="button"
-                      variant="outline"
-                      size="lg"
-                      onClick={() => setStep("email")}
-                    >
-                      <ArrowLeft className="w-4 h-4 mr-2" />
-                      Back
-                    </Button>
-                    <Button
-                      type="submit"
-                      variant="gradient"
-                      size="lg"
-                      className="flex-1"
-                      disabled={isLoading}
-                    >
-                      {isLoading ? "Resetting..." : "Reset Password"}
-                    </Button>
-                  </div>
                 </form>
               )}
 
