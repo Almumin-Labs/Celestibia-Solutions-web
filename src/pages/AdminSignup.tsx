@@ -5,46 +5,27 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useAdminAuth } from "@/contexts/AdminAuthContext";
 import { useToast } from "@/hooks/use-toast";
-import { UserPlus, Mail, Lock, Key } from "lucide-react";
-
-const ADMIN_REGISTRATION_KEY = "celestibia_admin_2024"; // Secret key for admin registration
-const ADMINS_KEY = "celestibia_admins";
-
-interface Admin {
-  id: string;
-  email: string;
-  password: string;
-}
-
-const getAdmins = (): Admin[] => {
-  const data = localStorage.getItem(ADMINS_KEY);
-  return data ? JSON.parse(data) : [];
-};
+import { UserPlus, Mail, Lock, Loader2 } from "lucide-react";
 
 const AdminSignup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [registrationKey, setRegistrationKey] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const { signup, isAdmin, isLoading: authLoading } = useAdminAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
 
+  // Redirect if already logged in
+  if (!authLoading && isAdmin) {
+    navigate("/admin/dashboard");
+    return null;
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true);
-    await new Promise((resolve) => setTimeout(resolve, 500));
-
-    if (registrationKey !== ADMIN_REGISTRATION_KEY) {
-      toast({
-        title: "Invalid Registration Key",
-        description: "Please enter the correct admin registration key.",
-        variant: "destructive",
-      });
-      setIsLoading(false);
-      return;
-    }
 
     if (password !== confirmPassword) {
       toast({
@@ -52,7 +33,6 @@ const AdminSignup = () => {
         description: "Passwords do not match. Please try again.",
         variant: "destructive",
       });
-      setIsLoading(false);
       return;
     }
 
@@ -62,41 +42,37 @@ const AdminSignup = () => {
         description: "Password must be at least 6 characters.",
         variant: "destructive",
       });
-      setIsLoading(false);
       return;
     }
 
-    const admins = getAdmins();
-    const existingAdmin = admins.find(
-      (a) => a.email.toLowerCase() === email.toLowerCase()
-    );
+    setIsLoading(true);
 
-    if (existingAdmin) {
+    const { error } = await signup(email, password);
+
+    if (error) {
       toast({
-        title: "Email Already Registered",
-        description: "An admin account with this email already exists.",
+        title: "Signup Failed",
+        description: error,
         variant: "destructive",
       });
-      setIsLoading(false);
-      return;
+    } else {
+      toast({
+        title: "Account Created!",
+        description: "You can now sign in to your admin account.",
+      });
+      navigate("/admin");
     }
 
-    const newAdmin: Admin = {
-      id: Date.now().toString(),
-      email,
-      password,
-    };
-
-    admins.push(newAdmin);
-    localStorage.setItem(ADMINS_KEY, JSON.stringify(admins));
-
-    toast({
-      title: "Admin Account Created!",
-      description: "You can now login with your credentials.",
-    });
-    navigate("/admin");
     setIsLoading(false);
   };
+
+  if (authLoading) {
+    return (
+      <main className="min-h-screen flex items-center justify-center">
+        <Loader2 className="w-8 h-8 animate-spin text-coral" />
+      </main>
+    );
+  }
 
   return (
     <main className="min-h-screen">
@@ -122,23 +98,6 @@ const AdminSignup = () => {
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium mb-2">
-                    Registration Key
-                  </label>
-                  <div className="relative">
-                    <Key className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-                    <Input
-                      type="password"
-                      value={registrationKey}
-                      onChange={(e) => setRegistrationKey(e.target.value)}
-                      placeholder="Enter admin registration key"
-                      className="h-12 pl-10"
-                      required
-                    />
-                  </div>
-                </div>
-
                 <div>
                   <label className="block text-sm font-medium mb-2">Email</label>
                   <div className="relative">
@@ -195,7 +154,14 @@ const AdminSignup = () => {
                   className="w-full"
                   disabled={isLoading}
                 >
-                  {isLoading ? "Creating Account..." : "Create Admin Account"}
+                  {isLoading ? (
+                    <>
+                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                      Creating Account...
+                    </>
+                  ) : (
+                    "Create Admin Account"
+                  )}
                 </Button>
               </form>
 
