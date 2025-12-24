@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AdminAuthProvider } from "@/contexts/AdminAuthContext";
+import { UserAuthProvider } from "@/contexts/UserAuthContext";
 import Index from "./pages/Index";
 import About from "./pages/About";
 import Services from "./pages/Services";
@@ -20,7 +21,12 @@ import AIMLServices from "./pages/services/AIMLServices";
 import ApplicationServices from "./pages/services/ApplicationServices";
 import SecurityServices from "./pages/services/SecurityServices";
 import AdminLogin from "./pages/AdminLogin";
+import AdminSignup from "./pages/AdminSignup";
+import AdminForgotPassword from "./pages/AdminForgotPassword";
 import AdminDashboard from "./pages/AdminDashboard";
+import UserLogin from "./pages/UserLogin";
+import TermsAndConditions from "./pages/TermsAndConditions";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 
 const queryClient = new QueryClient();
 
@@ -28,29 +34,36 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <AdminAuthProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/services/cloud" element={<CloudServices />} />
-            <Route path="/services/devops" element={<DevOpsServices />} />
-            <Route path="/services/data-engineering" element={<DataEngineering />} />
-            <Route path="/services/ai-ml" element={<AIMLServices />} />
-            <Route path="/services/application" element={<ApplicationServices />} />
-            <Route path="/services/security" element={<SecurityServices />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/case-studies" element={<CaseStudies />} />
-            <Route path="/industries" element={<Industries />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/blog/:slug" element={<BlogPostPage />} />
-            <Route path="/admin" element={<AdminLogin />} />
-            <Route path="/admin/dashboard" element={<AdminDashboard />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
+        <UserAuthProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/services" element={<Services />} />
+              <Route path="/services/cloud" element={<CloudServices />} />
+              <Route path="/services/devops" element={<DevOpsServices />} />
+              <Route path="/services/data-engineering" element={<DataEngineering />} />
+              <Route path="/services/ai-ml" element={<AIMLServices />} />
+              <Route path="/services/application" element={<ApplicationServices />} />
+              <Route path="/services/security" element={<SecurityServices />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/case-studies" element={<CaseStudies />} />
+              <Route path="/industries" element={<Industries />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:slug" element={<BlogPostPage />} />
+              <Route path="/login" element={<UserLogin />} />
+              <Route path="/admin" element={<AdminLogin />} />
+              <Route path="/admin/signup" element={<AdminSignup />} />
+              <Route path="/admin/forgot-password" element={<AdminForgotPassword />} />
+              <Route path="/admin/dashboard" element={<AdminDashboard />} />
+              <Route path="/terms" element={<TermsAndConditions />} />
+              <Route path="/privacy" element={<PrivacyPolicy />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </UserAuthProvider>
       </AdminAuthProvider>
     </TooltipProvider>
   </QueryClientProvider>
