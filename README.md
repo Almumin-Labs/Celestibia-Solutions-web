@@ -2,7 +2,8 @@
 
 <div align="center">
 
-![Celestibia Banner](public/preview.png)
+![Celestibia Banner] ![front](https://github.com/user-attachments/assets/d20d96bd-d172-4470-a303-57126cd0f2cf)
+
 
 **Innovative Cloud Solutions for a Connected World**
 
