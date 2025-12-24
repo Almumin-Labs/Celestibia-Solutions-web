@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Mail, Phone, MapPin, Send, Clock, Globe } from "lucide-react";
@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { saveContact } from "@/lib/storage";
+import { useABTest } from "@/hooks/useABTest";
 
 const contactInfo = [
   {
@@ -47,9 +48,21 @@ const Contact = () => {
     message: "",
   });
 
+  const contactButton = useABTest('contact_button');
+
+  // Track page view for contact form experiment
+  useEffect(() => {
+    if (contactButton.experiment) {
+      contactButton.trackConversion('page_view');
+    }
+  }, [contactButton.experiment]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+
+    // Track form submission as conversion
+    await contactButton.trackConversion('form_submit');
 
     // Save to database
     const result = await saveContact(formData);
@@ -185,11 +198,20 @@ const Contact = () => {
                     "Sending..."
                   ) : (
                     <>
-                      Send Message
+                      {contactButton.isLoading 
+                        ? "Send Message" 
+                        : contactButton.getVariantValue()}
                       <Send className="w-4 h-4 ml-2" />
                     </>
                   )}
                 </Button>
+
+                {/* A/B Test Indicator (only in dev) */}
+                {import.meta.env.DEV && (
+                  <p className="text-xs text-muted-foreground/50">
+                    A/B Test: Button={contactButton.variant || 'loading'}
+                  </p>
+                )}
               </form>
             </motion.div>
 

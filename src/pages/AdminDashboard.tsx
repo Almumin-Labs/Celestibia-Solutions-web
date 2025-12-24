@@ -33,7 +33,9 @@ import {
   Eye,
   X,
   Loader2,
+  BarChart3,
 } from "lucide-react";
+import { ABTestingDashboard } from "@/components/admin/ABTestingDashboard";
 
 const AdminDashboard = () => {
   const { isAdmin, isLoading: authLoading, logout } = useAdminAuth();
@@ -263,6 +265,10 @@ const AdminDashboard = () => {
               <TabsTrigger value="blogs" className="gap-2">
                 <FileText className="w-4 h-4" />
                 Blog Posts
+              </TabsTrigger>
+              <TabsTrigger value="ab-testing" className="gap-2">
+                <BarChart3 className="w-4 h-4" />
+                A/B Testing
               </TabsTrigger>
             </TabsList>
 
@@ -657,6 +663,11 @@ const AdminDashboard = () => {
                   </div>
                 )}
               </div>
+            </TabsContent>
+
+            {/* A/B Testing Tab */}
+            <TabsContent value="ab-testing">
+              <ABTestingDashboard />
             </TabsContent>
           </Tabs>
         </div>
