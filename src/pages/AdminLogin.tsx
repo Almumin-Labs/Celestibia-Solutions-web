@@ -1,15 +1,29 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useAdminAuth } from "@/contexts/AdminAuthContext";
 import { useToast } from "@/hooks/use-toast";
-import { Lock, LogIn } from "lucide-react";
+import { Lock, LogIn, Mail } from "lucide-react";
+
+const ADMINS_KEY = "celestibia_admins";
+
+interface Admin {
+  id: string;
+  email: string;
+  password: string;
+}
+
+const getAdmins = (): Admin[] => {
+  const data = localStorage.getItem(ADMINS_KEY);
+  return data ? JSON.parse(data) : [];
+};
 
 const AdminLogin = () => {
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const { login, isAdmin } = useAdminAuth();
@@ -28,7 +42,22 @@ const AdminLogin = () => {
 
     await new Promise((resolve) => setTimeout(resolve, 500));
 
-    if (login(password)) {
+    // Check registered admins first
+    const admins = getAdmins();
+    const registeredAdmin = admins.find(
+      (a) => a.email.toLowerCase() === email.toLowerCase() && a.password === password
+    );
+
+    if (registeredAdmin) {
+      // Use the context login with the legacy password to set isAdmin true
+      login("celestibia2024");
+      toast({
+        title: "Welcome Admin!",
+        description: "You have successfully logged in.",
+      });
+      navigate("/admin/dashboard");
+    } else if (login(password)) {
+      // Fallback to legacy password-only login
       toast({
         title: "Welcome Admin!",
         description: "You have successfully logged in.",
@@ -36,8 +65,8 @@ const AdminLogin = () => {
       navigate("/admin/dashboard");
     } else {
       toast({
-        title: "Invalid Password",
-        description: "Please check your credentials and try again.",
+        title: "Invalid Credentials",
+        description: "Please check your email and password.",
         variant: "destructive",
       });
     }
@@ -67,19 +96,37 @@ const AdminLogin = () => {
                 </p>
               </div>
 
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
                   <label className="block text-sm font-medium mb-2">
-                    Admin Password
+                    Email
                   </label>
-                  <Input
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Enter admin password"
-                    className="h-12"
-                    required
-                  />
+                  <div className="relative">
+                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                    <Input
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="Enter admin email"
+                      className="h-12 pl-10"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-2">
+                    Password
+                  </label>
+                  <div className="relative">
+                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                    <Input
+                      type="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      placeholder="Enter admin password"
+                      className="h-12 pl-10"
+                      required
+                    />
+                  </div>
                 </div>
 
                 <Button
@@ -99,6 +146,20 @@ const AdminLogin = () => {
                   )}
                 </Button>
               </form>
+
+              <div className="mt-6 space-y-2 text-center text-sm">
+                <p className="text-muted-foreground">
+                  <Link to="/admin/forgot-password" className="text-coral hover:underline">
+                    Forgot password?
+                  </Link>
+                </p>
+                <p className="text-muted-foreground">
+                  Need an account?{" "}
+                  <Link to="/admin/signup" className="text-coral hover:underline">
+                    Register here
+                  </Link>
+                </p>
+              </div>
             </div>
           </motion.div>
         </div>

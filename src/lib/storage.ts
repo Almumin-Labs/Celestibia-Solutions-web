@@ -18,6 +18,8 @@ export interface BlogPost {
   readTime: string;
   category: string;
   slug: string;
+  metaTitle?: string;
+  metaDescription?: string;
 }
 
 const CONTACTS_KEY = "celestibia_contacts";
