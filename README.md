@@ -112,8 +112,9 @@ src/
 
 ### Prerequisites
 
-- Node.js 18+ 
-- npm or bun
+- Node.js 18+ (recommended: Node.js 20+)
+- npm, yarn, or bun package manager
+- Git
 
 ### Installation
 
@@ -126,22 +127,56 @@ cd celestibia
 
 # Install dependencies
 npm install
-# or
+# or with yarn
+yarn install
+# or with bun
 bun install
+```
 
-# Start development server
+### Environment Setup
+
+Create a `.env` file in the root directory (or copy from `.env.example` if available):
+
+```env
+VITE_SUPABASE_URL=your_supabase_project_url
+VITE_SUPABASE_PUBLISHABLE_KEY=your_supabase_anon_key
+```
+
+> **Note:** If you're using Lovable Cloud, these environment variables are automatically configured for you.
+
+### Running Locally
+
+```bash
+# Start the development server
 npm run dev
+# or
+yarn dev
 # or
 bun dev
 ```
 
+The app will be available at **http://localhost:5173** (or the next available port).
+
+### Available Scripts
+
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start development server with hot reload |
+| `npm run build` | Build for production |
+| `npm run preview` | Preview production build locally |
+| `npm run lint` | Run ESLint for code quality |
+
 ### Build for Production
 
 ```bash
+# Create optimized production build
 npm run build
-# or
-bun run build
+
+# Preview the production build
+npm run preview
 ```
+
+The build output will be in the `dist/` folder, ready for deployment.
 
 ## 🔒 Admin Setup
 
