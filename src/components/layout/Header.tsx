@@ -25,6 +25,7 @@ const navItems = [
       { name: "Cloud Services", href: "/services/cloud" },
       { name: "DevOps", href: "/services/devops" },
       { name: "Data Engineering", href: "/services/data-engineering" },
+      { name: "Application Services", href: "/services/application" },
       { name: "Security", href: "/services/security" },
       { name: "AI & ML", href: "/services/ai-ml" },
     ],
