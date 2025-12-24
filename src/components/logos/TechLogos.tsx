@@ -152,6 +152,15 @@ export const ELKLogo = ({ className = "w-12 h-12" }: { className?: string }) => 
   </svg>
 );
 
+// GitHub Actions Logo
+export const GitHubActionsLogo = ({ className = "w-12 h-12" }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 48 48">
+    <path fill="#2088FF" d="M24 4C12.95 4 4 12.95 4 24s8.95 20 20 20 20-8.95 20-20S35.05 4 24 4z"/>
+    <path fill="#fff" d="M33 20l-6-6-3 3 6 6 3 3 6-6-3-3zM15 28l6 6 3-3-6-6-3-3-6 6 3 3z"/>
+    <circle fill="#fff" cx="24" cy="24" r="3"/>
+  </svg>
+);
+
 // CircleCI Logo
 export const CircleCILogo = ({ className = "w-12 h-12" }: { className?: string }) => (
   <svg className={className} viewBox="0 0 48 48">
@@ -160,12 +169,81 @@ export const CircleCILogo = ({ className = "w-12 h-12" }: { className?: string }
   </svg>
 );
 
-// GitHub Actions Logo
-export const GitHubActionsLogo = ({ className = "w-12 h-12" }: { className?: string }) => (
+// Redis Logo
+export const RedisLogo = ({ className = "w-12 h-12" }: { className?: string }) => (
   <svg className={className} viewBox="0 0 48 48">
-    <path fill="#2088FF" d="M24 4C12.95 4 4 12.95 4 24s8.95 20 20 20 20-8.95 20-20S35.05 4 24 4z"/>
-    <path fill="#fff" d="M33 20l-6-6-3 3 6 6 3 3 6-6-3-3zM15 28l6 6 3-3-6-6-3-3-6 6 3 3z"/>
-    <circle fill="#fff" cx="24" cy="24" r="3"/>
+    <path fill="#D82C20" d="M45.5 22.5c0 3-9.6 5.5-21.5 5.5S2.5 25.5 2.5 22.5s9.6-5.5 21.5-5.5 21.5 2.5 21.5 5.5z"/>
+    <path fill="#A41E11" d="M45.5 22.5v6c0 3-9.6 5.5-21.5 5.5S2.5 31.5 2.5 28.5v-6c0 3 9.6 5.5 21.5 5.5s21.5-2.5 21.5-5.5z"/>
+    <path fill="#D82C20" d="M45.5 16.5c0 3-9.6 5.5-21.5 5.5S2.5 19.5 2.5 16.5s9.6-5.5 21.5-5.5 21.5 2.5 21.5 5.5z"/>
+    <path fill="#A41E11" d="M45.5 16.5v6c0 3-9.6 5.5-21.5 5.5S2.5 25.5 2.5 22.5v-6c0 3 9.6 5.5 21.5 5.5s21.5-2.5 21.5-5.5z"/>
+    <ellipse fill="#D82C20" cx="24" cy="10.5" rx="21.5" ry="5.5"/>
+  </svg>
+);
+
+// MongoDB Logo
+export const MongoDBLogo = ({ className = "w-12 h-12" }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 48 48">
+    <path fill="#4FAA41" d="M24 4c-1.5 6.5-3 10-6 14-3.5 4.5-4 8.5-4 11 0 8 4.5 15 10 15s10-7 10-15c0-2.5-.5-6.5-4-11-3-4-4.5-7.5-6-14z"/>
+    <path fill="#3C873A" d="M24 4c-1.5 6.5-3 10-6 14-3.5 4.5-4 8.5-4 11 0 8 4.5 15 10 15V4z"/>
+    <path fill="#2D572C" d="M23 24h2v20h-2z"/>
+  </svg>
+);
+
+// PostgreSQL Logo
+export const PostgreSQLLogo = ({ className = "w-12 h-12" }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 48 48">
+    <path fill="#336791" d="M39.5 18c-1-6-5-10-11-12-5-1.5-11 0-15 4-3 3-5 7.5-5 12 0 3 .5 5 1.5 7.5 1.5 3.5 4 6 7.5 7.5 2 1 4 1.5 6.5 1.5h1c4-.5 7.5-2.5 10-6 2-3 3-6.5 3-10 0-1.5-.5-3-1.5-4.5zm-7.5 3c.5 2 0 4-1 5.5-1 1-2.5 1.5-4 1.5-1 0-2-.5-2.5-1-.5-1-1-2-1-3.5 0-2 .5-3.5 2-4.5 1-1 2.5-1 4-.5 1.5.5 2 1.5 2.5 2.5z"/>
+    <ellipse fill="#336791" cx="29" cy="22" rx="4" ry="5"/>
+    <path fill="none" stroke="#336791" strokeWidth="2" d="M17 37c2 3 5 5 9 5s7-2 9-5"/>
+  </svg>
+);
+
+// Nginx Logo
+export const NginxLogo = ({ className = "w-12 h-12" }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 48 48">
+    <path fill="#009639" d="M24 4L6 14v20l18 10 18-10V14L24 4z"/>
+    <path fill="#fff" d="M16 32V16l6 8 6-8v16h-4V24l-2 2.5-2-2.5v8h-4zm16 0V16h4v16h-4z"/>
+  </svg>
+);
+
+// Linux Logo
+export const LinuxLogo = ({ className = "w-12 h-12" }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 48 48">
+    <ellipse fill="#FFCC00" cx="24" cy="26" rx="14" ry="16"/>
+    <ellipse fill="#FFCC00" cx="24" cy="12" rx="10" ry="8"/>
+    <circle fill="#fff" cx="20" cy="11" r="3"/>
+    <circle fill="#fff" cx="28" cy="11" r="3"/>
+    <circle fill="#000" cx="20" cy="11" r="1.5"/>
+    <circle fill="#000" cx="28" cy="11" r="1.5"/>
+    <ellipse fill="#F57C00" cx="24" cy="15" rx="2" ry="1.5"/>
+    <path fill="#5D4037" d="M16 38c-2 2-4 4-5 6h6l3-6h-4zm16 0c2 2 4 4 5 6h-6l-3-6h4z"/>
+  </svg>
+);
+
+// AWS Lambda Logo
+export const LambdaLogo = ({ className = "w-12 h-12" }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 48 48">
+    <path fill="#FF9900" d="M24 4L4 24l20 20 20-20L24 4z"/>
+    <path fill="#fff" d="M17 32l7-16 7 16h-4l-3-7-3 7h-4z"/>
+  </svg>
+);
+
+// SonarQube Logo
+export const SonarQubeLogo = ({ className = "w-12 h-12" }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 48 48">
+    <path fill="#549DD0" d="M8 40V8h4v28h28v4H8z"/>
+    <path fill="#549DD0" d="M16 32V16h4v12h12v4H16z"/>
+    <path fill="#549DD0" d="M24 24v-8h4v4h4v4h-8z"/>
+  </svg>
+);
+
+// Slack Logo
+export const SlackLogo = ({ className = "w-12 h-12" }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 48 48">
+    <path fill="#E01E5A" d="M13 28a3 3 0 1 1 0-6h3v3a3 3 0 0 1-3 3zm7.5 0a3 3 0 0 1-3-3v-9a3 3 0 1 1 6 0v9a3 3 0 0 1-3 3z"/>
+    <path fill="#36C5F0" d="M20 13a3 3 0 1 1 6 0v3h-3a3 3 0 0 1-3-3zm0 7.5a3 3 0 0 1 3-3h9a3 3 0 1 1 0 6h-9a3 3 0 0 1-3-3z"/>
+    <path fill="#2EB67D" d="M35 20a3 3 0 1 1 0 6h-3v-3a3 3 0 0 1 3-3zm-7.5 0a3 3 0 0 1 3 3v9a3 3 0 1 1-6 0v-9a3 3 0 0 1 3-3z"/>
+    <path fill="#ECB22E" d="M28 35a3 3 0 1 1-6 0v-3h3a3 3 0 0 1 3 3zm0-7.5a3 3 0 0 1-3 3h-9a3 3 0 1 1 0-6h9a3 3 0 0 1 3 3z"/>
   </svg>
 );
 
@@ -189,4 +267,12 @@ export const techLogos = {
   React: ReactLogo,
   "ELK Stack": ELKLogo,
   CircleCI: CircleCILogo,
+  Redis: RedisLogo,
+  MongoDB: MongoDBLogo,
+  PostgreSQL: PostgreSQLLogo,
+  Nginx: NginxLogo,
+  Linux: LinuxLogo,
+  Lambda: LambdaLogo,
+  SonarQube: SonarQubeLogo,
+  Slack: SlackLogo,
 };
