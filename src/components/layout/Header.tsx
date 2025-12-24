@@ -1,8 +1,17 @@
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ChevronDown, LogIn, LogOut } from "lucide-react";
+import { Menu, X, ChevronDown, LogIn, LogOut, LayoutDashboard, User, Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { useAdminAuth } from "@/contexts/AdminAuthContext";
 import logo from "@/assets/logo.jpeg";
 
@@ -31,7 +40,13 @@ export const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const location = useLocation();
+  const navigate = useNavigate();
   const { isAdmin, logout } = useAdminAuth();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -113,15 +128,50 @@ export const Header = () => {
           {/* CTA Button */}
           <div className="hidden lg:flex items-center gap-3">
             {isAdmin ? (
-              <>
-                <Button variant="outline" size="sm" asChild>
-                  <Link to="/admin/dashboard">Dashboard</Link>
-                </Button>
-                <Button variant="ghost" size="sm" onClick={logout}>
-                  <LogOut className="w-4 h-4 mr-1" />
-                  Logout
-                </Button>
-              </>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <button className="flex items-center gap-2 p-1 rounded-full hover:bg-secondary transition-colors">
+                    <Avatar className="h-9 w-9 border-2 border-coral">
+                      <AvatarFallback className="bg-gradient-primary text-primary-foreground font-semibold">
+                        AD
+                      </AvatarFallback>
+                    </Avatar>
+                    <ChevronDown className="w-4 h-4 text-muted-foreground" />
+                  </button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-56 bg-card border border-border z-50">
+                  <DropdownMenuLabel className="font-normal">
+                    <div className="flex flex-col space-y-1">
+                      <p className="text-sm font-medium">Admin</p>
+                      <p className="text-xs text-muted-foreground">admin@celestibia.com</p>
+                    </div>
+                  </DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem asChild className="cursor-pointer">
+                    <Link to="/admin/dashboard" className="flex items-center">
+                      <LayoutDashboard className="mr-2 h-4 w-4" />
+                      Dashboard
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild className="cursor-pointer">
+                    <Link to="/admin/dashboard" className="flex items-center">
+                      <User className="mr-2 h-4 w-4" />
+                      View Contacts
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild className="cursor-pointer">
+                    <Link to="/admin/dashboard" className="flex items-center">
+                      <Settings className="mr-2 h-4 w-4" />
+                      Manage Blogs
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={handleLogout} className="cursor-pointer text-destructive focus:text-destructive">
+                    <LogOut className="mr-2 h-4 w-4" />
+                    Logout
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             ) : (
               <Button variant="outline" size="sm" asChild>
                 <Link to="/admin">
@@ -183,13 +233,30 @@ export const Header = () => {
                 </div>
               ))}
               {isAdmin ? (
-                <div className="flex gap-2 mt-4">
-                  <Button variant="outline" className="flex-1" asChild>
-                    <Link to="/admin/dashboard">Dashboard</Link>
-                  </Button>
-                  <Button variant="ghost" onClick={logout}>
-                    <LogOut className="w-4 h-4" />
-                  </Button>
+                <div className="mt-4 p-4 rounded-lg bg-secondary/50">
+                  <div className="flex items-center gap-3 mb-4">
+                    <Avatar className="h-10 w-10 border-2 border-coral">
+                      <AvatarFallback className="bg-gradient-primary text-primary-foreground font-semibold">
+                        AD
+                      </AvatarFallback>
+                    </Avatar>
+                    <div>
+                      <p className="font-medium text-sm">Admin</p>
+                      <p className="text-xs text-muted-foreground">admin@celestibia.com</p>
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <Button variant="outline" className="w-full justify-start" asChild>
+                      <Link to="/admin/dashboard">
+                        <LayoutDashboard className="w-4 h-4 mr-2" />
+                        Dashboard
+                      </Link>
+                    </Button>
+                    <Button variant="ghost" className="w-full justify-start text-destructive" onClick={handleLogout}>
+                      <LogOut className="w-4 h-4 mr-2" />
+                      Logout
+                    </Button>
+                  </div>
                 </div>
               ) : (
                 <Button variant="outline" className="w-full mt-4" asChild>
