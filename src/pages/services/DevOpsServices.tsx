@@ -15,6 +15,20 @@ import {
   Terminal
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import {
+  KubernetesLogo,
+  DockerLogo,
+  TerraformLogo,
+  AnsibleLogo,
+  JenkinsLogo,
+  GitLabLogo,
+  GitHubActionsLogo,
+  ArgoCDLogo,
+  HelmLogo,
+  PrometheusLogo,
+  GrafanaLogo,
+  ELKLogo
+} from "@/components/logos/TechLogos";
 
 const features = [
   {
@@ -50,8 +64,18 @@ const features = [
 ];
 
 const tools = [
-  "Kubernetes", "Docker", "Terraform", "Ansible", "Jenkins", "GitLab CI",
-  "GitHub Actions", "ArgoCD", "Helm", "Prometheus", "Grafana", "ELK Stack"
+  { name: "Kubernetes", Logo: KubernetesLogo },
+  { name: "Docker", Logo: DockerLogo },
+  { name: "Terraform", Logo: TerraformLogo },
+  { name: "Ansible", Logo: AnsibleLogo },
+  { name: "Jenkins", Logo: JenkinsLogo },
+  { name: "GitLab CI", Logo: GitLabLogo },
+  { name: "GitHub Actions", Logo: GitHubActionsLogo },
+  { name: "ArgoCD", Logo: ArgoCDLogo },
+  { name: "Helm", Logo: HelmLogo },
+  { name: "Prometheus", Logo: PrometheusLogo },
+  { name: "Grafana", Logo: GrafanaLogo },
+  { name: "ELK Stack", Logo: ELKLogo },
 ];
 
 const DevOpsServices = () => {
@@ -159,7 +183,7 @@ const DevOpsServices = () => {
             </p>
           </motion.div>
 
-          <div className="flex flex-wrap justify-center gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
             {tools.map((tool, index) => (
               <motion.div
                 key={index}
@@ -167,10 +191,11 @@ const DevOpsServices = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.05 }}
-                whileHover={{ scale: 1.05 }}
-                className="px-6 py-3 rounded-full bg-card border border-border hover:border-primary/50 transition-all cursor-default"
+                whileHover={{ scale: 1.05, y: -5 }}
+                className="flex flex-col items-center gap-3 p-6 rounded-xl bg-card border border-border hover:border-primary/50 hover:shadow-xl transition-all cursor-default group"
               >
-                <span className="font-medium text-foreground">{tool}</span>
+                <tool.Logo className="w-12 h-12 group-hover:scale-110 transition-transform" />
+                <span className="font-medium text-foreground text-sm text-center">{tool.name}</span>
               </motion.div>
             ))}
           </div>

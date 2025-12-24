@@ -16,6 +16,7 @@ import {
   Settings
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { AWSLogo, AzureLogo, GCPLogo } from "@/components/logos/TechLogos";
 
 const features = [
   {
@@ -48,6 +49,12 @@ const features = [
     title: "Disaster Recovery",
     description: "Business continuity solutions with automated failover and rapid recovery capabilities."
   },
+];
+
+const cloudProviders = [
+  { name: "Amazon Web Services", Logo: AWSLogo, description: "Comprehensive cloud platform with 200+ services" },
+  { name: "Microsoft Azure", Logo: AzureLogo, description: "Enterprise-grade cloud with hybrid capabilities" },
+  { name: "Google Cloud Platform", Logo: GCPLogo, description: "Data analytics and ML-powered cloud services" },
 ];
 
 const benefits = [
@@ -109,38 +116,37 @@ const CloudServices = () => {
         </div>
       </section>
 
-      {/* Features Grid */}
-      <section className="py-20 bg-card">
+      {/* Cloud Providers Section */}
+      <section className="py-20 bg-background">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center mb-12"
           >
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
-              Our Cloud Capabilities
+              Multi-Cloud Expertise
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              End-to-end cloud solutions designed to optimize performance, reduce costs, and accelerate innovation.
+              We work with all major cloud providers to deliver the best solutions for your business
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {features.map((feature, index) => (
+          <div className="grid md:grid-cols-3 gap-8">
+            {cloudProviders.map((provider, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="p-6 rounded-2xl bg-background border border-border hover:border-primary/30 transition-all group"
+                whileHover={{ scale: 1.02, y: -5 }}
+                className="p-8 rounded-2xl bg-card border border-border hover:border-primary/30 hover:shadow-xl transition-all text-center group"
               >
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <feature.icon className="w-6 h-6 text-white" />
-                </div>
-                <h3 className="font-heading text-xl font-bold mb-2">{feature.title}</h3>
-                <p className="text-muted-foreground">{feature.description}</p>
+                <provider.Logo className="w-16 h-16 mx-auto mb-4 group-hover:scale-110 transition-transform" />
+                <h3 className="font-heading text-xl font-bold mb-2">{provider.name}</h3>
+                <p className="text-muted-foreground text-sm">{provider.description}</p>
               </motion.div>
             ))}
           </div>
@@ -148,7 +154,7 @@ const CloudServices = () => {
       </section>
 
       {/* Benefits Section */}
-      <section className="py-20 bg-background">
+      <section className="py-20 bg-card">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div

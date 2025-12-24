@@ -1,18 +1,36 @@
 import { motion } from "framer-motion";
+import { 
+  AWSLogo, 
+  AzureLogo, 
+  GCPLogo, 
+  KubernetesLogo, 
+  DockerLogo, 
+  TerraformLogo, 
+  JenkinsLogo, 
+  GitLabLogo, 
+  PrometheusLogo, 
+  GrafanaLogo,
+  PythonLogo,
+  ReactLogo,
+  GitHubActionsLogo,
+  AnsibleLogo
+} from "@/components/logos/TechLogos";
 
 const technologies = [
-  { name: "AWS", category: "Cloud" },
-  { name: "Azure", category: "Cloud" },
-  { name: "GCP", category: "Cloud" },
-  { name: "Kubernetes", category: "DevOps" },
-  { name: "Docker", category: "DevOps" },
-  { name: "Terraform", category: "IaC" },
-  { name: "Jenkins", category: "CI/CD" },
-  { name: "GitLab", category: "CI/CD" },
-  { name: "Prometheus", category: "Monitoring" },
-  { name: "Grafana", category: "Monitoring" },
-  { name: "Python", category: "Language" },
-  { name: "React", category: "Frontend" },
+  { name: "AWS", Logo: AWSLogo, category: "Cloud" },
+  { name: "Azure", Logo: AzureLogo, category: "Cloud" },
+  { name: "GCP", Logo: GCPLogo, category: "Cloud" },
+  { name: "Kubernetes", Logo: KubernetesLogo, category: "DevOps" },
+  { name: "Docker", Logo: DockerLogo, category: "DevOps" },
+  { name: "Terraform", Logo: TerraformLogo, category: "IaC" },
+  { name: "Ansible", Logo: AnsibleLogo, category: "IaC" },
+  { name: "Jenkins", Logo: JenkinsLogo, category: "CI/CD" },
+  { name: "GitLab", Logo: GitLabLogo, category: "CI/CD" },
+  { name: "GitHub Actions", Logo: GitHubActionsLogo, category: "CI/CD" },
+  { name: "Prometheus", Logo: PrometheusLogo, category: "Monitoring" },
+  { name: "Grafana", Logo: GrafanaLogo, category: "Monitoring" },
+  { name: "Python", Logo: PythonLogo, category: "Language" },
+  { name: "React", Logo: ReactLogo, category: "Frontend" },
 ];
 
 export const TechStack = () => {
@@ -41,13 +59,14 @@ export const TechStack = () => {
               repeat: Infinity,
               ease: "linear",
             }}
-            className="flex gap-12 items-center"
+            className="flex gap-8 items-center"
           >
             {[...technologies, ...technologies].map((tech, index) => (
               <div
                 key={index}
-                className="flex-shrink-0 px-6 py-3 rounded-lg bg-card border border-border hover:border-coral/30 transition-colors"
+                className="flex-shrink-0 flex items-center gap-3 px-6 py-4 rounded-xl bg-card border border-border hover:border-coral/30 transition-all hover:shadow-lg group"
               >
+                <tech.Logo className="w-10 h-10 group-hover:scale-110 transition-transform" />
                 <span className="font-semibold text-foreground whitespace-nowrap">
                   {tech.name}
                 </span>
