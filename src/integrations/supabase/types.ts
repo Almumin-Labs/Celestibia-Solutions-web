@@ -14,6 +14,100 @@ export type Database = {
   }
   public: {
     Tables: {
+      ab_conversions: {
+        Row: {
+          conversion_type: string
+          created_at: string | null
+          experiment_id: string
+          id: string
+          session_id: string
+          variant: string
+        }
+        Insert: {
+          conversion_type: string
+          created_at?: string | null
+          experiment_id: string
+          id?: string
+          session_id: string
+          variant: string
+        }
+        Update: {
+          conversion_type?: string
+          created_at?: string | null
+          experiment_id?: string
+          id?: string
+          session_id?: string
+          variant?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ab_conversions_experiment_id_fkey"
+            columns: ["experiment_id"]
+            isOneToOne: false
+            referencedRelation: "ab_experiments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      ab_experiments: {
+        Row: {
+          created_at: string | null
+          id: string
+          is_active: boolean | null
+          name: string
+          variant_a_name: string
+          variant_b_name: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          is_active?: boolean | null
+          name: string
+          variant_a_name?: string
+          variant_b_name?: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          is_active?: boolean | null
+          name?: string
+          variant_a_name?: string
+          variant_b_name?: string
+        }
+        Relationships: []
+      }
+      ab_impressions: {
+        Row: {
+          created_at: string | null
+          experiment_id: string
+          id: string
+          session_id: string
+          variant: string
+        }
+        Insert: {
+          created_at?: string | null
+          experiment_id: string
+          id?: string
+          session_id: string
+          variant: string
+        }
+        Update: {
+          created_at?: string | null
+          experiment_id?: string
+          id?: string
+          session_id?: string
+          variant?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ab_impressions_experiment_id_fkey"
+            columns: ["experiment_id"]
+            isOneToOne: false
+            referencedRelation: "ab_experiments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       blogs: {
         Row: {
           author: string

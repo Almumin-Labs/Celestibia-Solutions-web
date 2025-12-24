@@ -1,3 +1,4 @@
+import { forwardRef } from "react";
 import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin, Linkedin, Twitter, Github } from "lucide-react";
 import logo from "@/assets/logo.jpeg";
@@ -24,9 +25,9 @@ const footerLinks = {
   ],
 };
 
-export const Footer = () => {
+export const Footer = forwardRef<HTMLElement>((_, ref) => {
   return (
-    <footer className="bg-gradient-footer text-primary-foreground relative overflow-hidden">
+    <footer ref={ref} className="bg-gradient-footer text-primary-foreground relative overflow-hidden">
       {/* Decorative glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-px bg-gradient-to-r from-transparent via-coral/40 to-transparent" />
       
@@ -150,4 +151,6 @@ export const Footer = () => {
       </div>
     </footer>
   );
-};
+});
+
+Footer.displayName = 'Footer';
