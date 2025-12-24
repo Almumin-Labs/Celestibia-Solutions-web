@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown, LogIn, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useAdminAuth } from "@/contexts/AdminAuthContext";
 import logo from "@/assets/logo.jpeg";
 
 const navItems = [
@@ -30,6 +31,7 @@ export const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const location = useLocation();
+  const { isAdmin, logout } = useAdminAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -109,7 +111,25 @@ export const Header = () => {
           </nav>
 
           {/* CTA Button */}
-          <div className="hidden lg:flex items-center gap-4">
+          <div className="hidden lg:flex items-center gap-3">
+            {isAdmin ? (
+              <>
+                <Button variant="outline" size="sm" asChild>
+                  <Link to="/admin/dashboard">Dashboard</Link>
+                </Button>
+                <Button variant="ghost" size="sm" onClick={logout}>
+                  <LogOut className="w-4 h-4 mr-1" />
+                  Logout
+                </Button>
+              </>
+            ) : (
+              <Button variant="outline" size="sm" asChild>
+                <Link to="/admin">
+                  <LogIn className="w-4 h-4 mr-1" />
+                  Login
+                </Link>
+              </Button>
+            )}
             <Button variant="gradient" size="lg" asChild>
               <Link to="/contact">Get Started</Link>
             </Button>
@@ -162,7 +182,24 @@ export const Header = () => {
                   )}
                 </div>
               ))}
-              <Button variant="gradient" size="lg" className="w-full mt-4" asChild>
+              {isAdmin ? (
+                <div className="flex gap-2 mt-4">
+                  <Button variant="outline" className="flex-1" asChild>
+                    <Link to="/admin/dashboard">Dashboard</Link>
+                  </Button>
+                  <Button variant="ghost" onClick={logout}>
+                    <LogOut className="w-4 h-4" />
+                  </Button>
+                </div>
+              ) : (
+                <Button variant="outline" className="w-full mt-4" asChild>
+                  <Link to="/admin">
+                    <LogIn className="w-4 h-4 mr-2" />
+                    Admin Login
+                  </Link>
+                </Button>
+              )}
+              <Button variant="gradient" size="lg" className="w-full mt-2" asChild>
                 <Link to="/contact">Get Started</Link>
               </Button>
             </nav>
