@@ -9,6 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { saveContact } from "@/lib/storage";
 import { useABTest } from "@/hooks/useABTest";
+import { useEmailJS } from "@/hooks/useEmailJS";
 
 const contactInfo = [
   {
@@ -49,6 +50,7 @@ const Contact = () => {
   });
 
   const contactButton = useABTest('contact_button');
+  const { sendBothEmails } = useEmailJS();
 
   // Track page view for contact form experiment
   useEffect(() => {
@@ -67,11 +69,26 @@ const Contact = () => {
     // Save to database
     const result = await saveContact(formData);
 
+    // Send emails via EmailJS (both visitor confirmation and admin notification)
+    const emailResults = await sendBothEmails(formData);
+
     if (result) {
-      toast({
-        title: "Message Sent!",
-        description: "We'll get back to you within 24 hours.",
-      });
+      if (emailResults.visitor.success && emailResults.admin.success) {
+        toast({
+          title: "Message Sent!",
+          description: "We've sent you a confirmation email and will get back to you within 24 hours.",
+        });
+      } else if (emailResults.visitor.success || emailResults.admin.success) {
+        toast({
+          title: "Message Sent!",
+          description: "We'll get back to you within 24 hours.",
+        });
+      } else {
+        toast({
+          title: "Message Received!",
+          description: "We'll get back to you within 24 hours.",
+        });
+      }
 
       setFormData({
         name: "",
