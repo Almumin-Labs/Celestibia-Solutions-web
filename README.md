@@ -30,6 +30,7 @@ Celestibia is a modern, enterprise-grade cloud solutions platform offering compr
 - 🏢 **Industry Solutions** - Tailored solutions for Healthcare, Finance, Retail, and more
 - 📝 **Blog System** - Dynamic blog with CMS, individual post pages, and SEO meta tags
 - 📞 **Contact Form** - Professional contact page with database storage
+- 📧 **Automated Emails** - EmailJS integration for visitor confirmations & admin notifications
 - 🔐 **Secure Admin Authentication** - Role-based admin access with Supabase Auth
 - 📱 **Fully Responsive** - Optimized for all devices and screen sizes
 - 🎨 **Dark/Light Mode Ready** - Theme-aware design system
@@ -75,6 +76,7 @@ Celestibia is a modern, enterprise-grade cloud solutions platform offering compr
 | **date-fns** | Date Manipulation |
 | **Sonner** | Toast Notifications |
 | **Embla Carousel** | Touch-Friendly Carousels |
+| **EmailJS** | Client-Side Email Sending |
 
 ## 📁 Project Structure
 
@@ -177,6 +179,48 @@ npm run preview
 ```
 
 The build output will be in the `dist/` folder, ready for deployment.
+
+## 📧 EmailJS Configuration
+
+The contact form uses EmailJS for sending automated emails. To configure:
+
+### 1. Create EmailJS Account
+
+Go to [EmailJS Dashboard](https://www.emailjs.com/) and create a free account.
+
+### 2. Get Your Credentials
+
+Update `src/hooks/useEmailJS.ts` with your credentials:
+
+```typescript
+const EMAILJS_SERVICE_ID = 'YOUR_SERVICE_ID';      // From Email Services
+const EMAILJS_PUBLIC_KEY = 'YOUR_PUBLIC_KEY';      // From Account → API Keys
+const VISITOR_TEMPLATE_ID = 'YOUR_VISITOR_TEMPLATE_ID';  // Template for visitor confirmation
+const ADMIN_TEMPLATE_ID = 'YOUR_ADMIN_TEMPLATE_ID';      // Template for admin notification
+```
+
+### 3. Create Email Templates
+
+**Visitor Confirmation Template** (sent to the person who submitted the form):
+
+| Variable | Description |
+|----------|-------------|
+| `{{to_name}}` | Visitor's name |
+| `{{to_email}}` | Visitor's email |
+| `{{from_name}}` | Company name (Celestibia Technologies) |
+| `{{company}}` | Visitor's company |
+| `{{message}}` | Their message |
+
+**Admin Notification Template** (sent to your team):
+
+| Variable | Description |
+|----------|-------------|
+| `{{from_name}}` | Visitor's name |
+| `{{from_email}}` | Visitor's email |
+| `{{company}}` | Visitor's company |
+| `{{phone}}` | Visitor's phone |
+| `{{message}}` | Their message |
+| `{{reply_to}}` | Reply-to email address |
 
 ## 🔒 Admin Setup
 
