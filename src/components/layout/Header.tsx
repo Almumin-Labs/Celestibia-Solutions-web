@@ -128,7 +128,7 @@ export const Header = () => {
 
           {/* CTA Button */}
           <div className="hidden lg:flex items-center gap-3">
-            {isAdmin && (
+            {isAdmin ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <button className="flex items-center gap-2 p-1 rounded-full hover:bg-secondary transition-colors">
@@ -173,6 +173,13 @@ export const Header = () => {
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
+            ) : (
+              <Link 
+                to="/admin" 
+                className="text-xs text-muted-foreground/50 hover:text-muted-foreground transition-colors"
+              >
+                Admin
+              </Link>
             )}
             <Button variant="gradient" size="lg" asChild>
               <Link to="/contact">Get Started</Link>
