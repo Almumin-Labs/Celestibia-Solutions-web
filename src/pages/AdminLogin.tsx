@@ -49,11 +49,6 @@ const AdminLogin = () => {
   };
 
 
-  const fillDemoCredentials = () => {
-    setEmail("demo@celestibia.com");
-    setPassword("Demo@123456");
-  };
-
   if (authLoading) {
     return (
       <main className="min-h-screen flex items-center justify-center">
@@ -94,24 +89,6 @@ const AdminLogin = () => {
                 </p>
               </div>
 
-              {/* Demo Credentials Info */}
-              <Alert className="mb-6 border-coral/30 bg-coral/5">
-                <Info className="h-4 w-4 text-coral" />
-                <AlertDescription className="text-sm">
-                  <strong>Demo Admin Credentials:</strong>
-                  <br />
-                  Email: <code className="text-coral">demo@celestibia.com</code>
-                  <br />
-                  Password: <code className="text-coral">Demo@123456</code>
-                  <br />
-                  <button 
-                    onClick={fillDemoCredentials}
-                    className="text-coral hover:underline font-medium mt-1"
-                  >
-                    Click to auto-fill
-                  </button>
-                </AlertDescription>
-              </Alert>
 
 
               <form onSubmit={handleSubmit} className="space-y-4">
