@@ -55,7 +55,7 @@ export const Partners = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-8 lg:gap-10 place-items-center">
+        <div className="flex flex-wrap justify-center items-center gap-8 lg:gap-12 max-w-4xl mx-auto">
           {partners.map((partner, index) => (
             <motion.div
               key={partner.name}
