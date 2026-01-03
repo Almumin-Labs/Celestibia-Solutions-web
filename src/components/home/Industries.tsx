@@ -13,14 +13,14 @@ import { useABTest } from "@/hooks/useABTest";
 import { CircuitBoard, WaveGradient } from "@/components/graphics/InfraCloudStyle";
 
 const industries = [
-  { icon: Building2, name: "Banking & Finance", color: "bg-coral/20 text-coral-light" },
-  { icon: Stethoscope, name: "Healthcare", color: "bg-coral/20 text-coral-light" },
-  { icon: ShoppingCart, name: "E-Commerce & Retail", color: "bg-coral/20 text-coral-light" },
-  { icon: Factory, name: "Manufacturing", color: "bg-coral/20 text-coral-light" },
-  { icon: Truck, name: "Logistics", color: "bg-coral/20 text-coral-light" },
-  { icon: GraduationCap, name: "EdTech", color: "bg-coral/20 text-coral-light" },
-  { icon: Landmark, name: "Government", color: "bg-coral/20 text-coral-light" },
-  { icon: Plane, name: "Travel & Hospitality", color: "bg-coral/20 text-coral-light" },
+  { icon: Building2, name: "Banking & Finance", gradient: "from-blue-500 to-cyan-500" },
+  { icon: Stethoscope, name: "Healthcare", gradient: "from-green-500 to-emerald-500" },
+  { icon: ShoppingCart, name: "E-Commerce & Retail", gradient: "from-orange-500 to-yellow-500" },
+  { icon: Factory, name: "Manufacturing", gradient: "from-slate-500 to-zinc-500" },
+  { icon: Truck, name: "Logistics", gradient: "from-purple-500 to-pink-500" },
+  { icon: GraduationCap, name: "EdTech", gradient: "from-violet-500 to-purple-500" },
+  { icon: Landmark, name: "Government", gradient: "from-red-500 to-orange-500" },
+  { icon: Plane, name: "Travel & Hospitality", gradient: "from-cyan-500 to-blue-500" },
 ];
 
 export const Industries = () => {
@@ -94,8 +94,8 @@ export const Industries = () => {
               whileHover={{ scale: 1.05, y: -5 }}
               className="group p-6 md:p-8 rounded-2xl bg-primary-foreground/5 border border-primary-foreground/10 hover:bg-primary-foreground/10 hover:border-coral/30 transition-all duration-300 cursor-pointer"
             >
-              <div className={`w-14 h-14 rounded-xl ${industry.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                <industry.icon className="w-7 h-7" />
+              <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${industry.gradient} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
+                <industry.icon className="w-7 h-7 text-white drop-shadow-md" />
               </div>
               <h3 className="font-heading font-bold text-lg">{industry.name}</h3>
             </motion.div>

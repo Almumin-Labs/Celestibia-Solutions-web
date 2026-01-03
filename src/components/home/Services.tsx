@@ -151,8 +151,8 @@ export const Services = () => {
                 className="block h-full p-8 rounded-2xl bg-background border border-border hover:border-coral/30 hover:shadow-xl transition-all duration-300"
               >
                 {/* Icon */}
-                <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${service.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                  <service.icon className="w-7 h-7 text-primary-foreground" />
+                <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${service.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
+                  <service.icon className="w-7 h-7 text-white" />
                 </div>
 
                 {/* Content */}

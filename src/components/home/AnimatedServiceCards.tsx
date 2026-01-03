@@ -113,9 +113,9 @@ export const AnimatedServiceCards = () => {
                   <motion.div 
                     whileHover={{ rotate: 360, scale: 1.1 }}
                     transition={{ duration: 0.5 }}
-                    className={`w-14 h-14 rounded-xl bg-gradient-to-br ${service.gradient} flex items-center justify-center mb-4`}
+                    className={`w-14 h-14 rounded-xl bg-gradient-to-br ${service.gradient} flex items-center justify-center mb-4 shadow-lg`}
                   >
-                    <service.icon className="w-7 h-7 text-white" />
+                    <service.icon className="w-7 h-7 text-white drop-shadow-md" />
                   </motion.div>
                   
                   <h3 className="font-heading text-xl font-bold mb-2 group-hover:text-coral transition-colors">
