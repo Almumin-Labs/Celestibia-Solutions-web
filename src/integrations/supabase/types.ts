@@ -117,6 +117,7 @@ export type Database = {
           date: string
           excerpt: string
           id: string
+          image_url: string | null
           meta_description: string | null
           meta_title: string | null
           read_time: string
@@ -132,6 +133,7 @@ export type Database = {
           date: string
           excerpt: string
           id?: string
+          image_url?: string | null
           meta_description?: string | null
           meta_title?: string | null
           read_time: string
@@ -147,6 +149,7 @@ export type Database = {
           date?: string
           excerpt?: string
           id?: string
+          image_url?: string | null
           meta_description?: string | null
           meta_title?: string | null
           read_time?: string

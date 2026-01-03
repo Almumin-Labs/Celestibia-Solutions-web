@@ -2,9 +2,10 @@ import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { Calendar, User, ArrowRight, Clock, Loader2 } from "lucide-react";
+import { Calendar, User, ArrowRight, Clock, Loader2, Image as ImageIcon } from "lucide-react";
 import { Link } from "react-router-dom";
 import { getBlogs, BlogPost } from "@/lib/storage";
+import { HexagonPattern, IsometricIcons } from "@/components/graphics/InfraCloudStyle";
 
 const categories = ["All", "Cloud", "DevOps", "Security", "Data", "AI"];
 
@@ -31,8 +32,17 @@ const Blog = () => {
       <Header />
       
       {/* Hero Section */}
-      <section className="pt-32 pb-20 bg-gradient-hero">
-        <div className="container mx-auto px-4">
+      <section className="pt-32 pb-20 bg-gradient-hero relative overflow-hidden">
+        <HexagonPattern />
+        <IsometricIcons className="opacity-30" />
+        
+        <motion.div 
+          animate={{ scale: [1, 1.2, 1], opacity: [0.15, 0.25, 0.15] }}
+          transition={{ duration: 10, repeat: Infinity }}
+          className="absolute -top-32 -right-32 w-[400px] h-[400px] bg-gradient-to-br from-[#F97316]/20 to-[#8B5CF6]/10 rounded-full blur-[100px]" 
+        />
+        
+        <div className="container mx-auto px-4 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -99,12 +109,24 @@ const Blog = () => {
                   transition={{ duration: 0.5, delay: index * 0.05 }}
                   className="bg-background rounded-2xl border border-border overflow-hidden hover:shadow-xl hover:border-coral/30 transition-all duration-300 group"
                 >
-                  {/* Category Badge */}
-                  <div className="p-6 pb-0">
-                    <span className="inline-block px-3 py-1 rounded-full bg-secondary text-xs font-medium text-foreground">
+                  {/* Featured Image */}
+                  <Link to={`/blog/${post.slug}`} className="block relative overflow-hidden aspect-video">
+                    {post.image_url ? (
+                      <img 
+                        src={post.image_url} 
+                        alt={post.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-gradient-to-br from-primary/20 to-coral/20 flex items-center justify-center">
+                        <ImageIcon className="w-12 h-12 text-muted-foreground/50" />
+                      </div>
+                    )}
+                    {/* Category overlay */}
+                    <span className="absolute top-4 left-4 px-3 py-1 rounded-full bg-background/90 backdrop-blur-sm text-xs font-medium text-foreground">
                       {post.category}
                     </span>
-                  </div>
+                  </Link>
 
                   {/* Content */}
                   <div className="p-6">

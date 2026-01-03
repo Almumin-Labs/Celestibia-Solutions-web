@@ -20,6 +20,7 @@ export interface BlogPost {
   read_time: string;
   category: string;
   slug: string;
+  image_url: string | null;
   meta_title: string | null;
   meta_description: string | null;
   created_at: string;
@@ -120,6 +121,7 @@ export const saveBlog = async (blog: {
   date: string;
   read_time: string;
   category: string;
+  image_url?: string;
   meta_title?: string;
   meta_description?: string;
 }): Promise<BlogPost | null> => {
@@ -139,6 +141,7 @@ export const saveBlog = async (blog: {
       read_time: blog.read_time,
       category: blog.category,
       slug,
+      image_url: blog.image_url || null,
       meta_title: blog.meta_title || null,
       meta_description: blog.meta_description || null,
     })
@@ -161,6 +164,7 @@ export const updateBlog = async (id: string, blog: Partial<{
   date: string;
   read_time: string;
   category: string;
+  image_url: string;
   meta_title: string;
   meta_description: string;
 }>): Promise<BlogPost | null> => {
