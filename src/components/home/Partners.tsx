@@ -4,16 +4,9 @@ import veeamLogo from "@/assets/veeam-logo.jpg";
 import { useABTest } from "@/hooks/useABTest";
 
 // Import original logos
-import gitlabLogo from "@/assets/logos/gitlab.png";
 import awsSvg from "@/assets/logos/aws.svg";
 import gcpLogo from "@/assets/logos/google-cloud.png";
-import jenkinsLogo from "@/assets/logos/jenkins.png";
-import githubSvg from "@/assets/logos/github.svg";
-import argocdLogo from "@/assets/logos/argocd.png";
-import grafanaLogo from "@/assets/logos/grafana.png";
-import prometheusLogo from "@/assets/logos/prometheus.png";
 import azureSvg from "@/assets/logos/azure.svg";
-
 const partners = [
   {
     name: "AWS",
@@ -29,36 +22,6 @@ const partners = [
     name: "Google Cloud",
     certification: "Certified Partner",
     logo: gcpLogo,
-  },
-  {
-    name: "GitLab",
-    certification: "Select Partner",
-    logo: gitlabLogo,
-  },
-  {
-    name: "Jenkins",
-    certification: "Integration Partner",
-    logo: jenkinsLogo,
-  },
-  {
-    name: "GitHub Actions",
-    certification: "Certified Partner",
-    logo: githubSvg,
-  },
-  {
-    name: "ArgoCD",
-    certification: "Technology Partner",
-    logo: argocdLogo,
-  },
-  {
-    name: "Grafana",
-    certification: "Partner",
-    logo: grafanaLogo,
-  },
-  {
-    name: "Prometheus",
-    certification: "Partner",
-    logo: prometheusLogo,
   },
   {
     name: "Veeam",
