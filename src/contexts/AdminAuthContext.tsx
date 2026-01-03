@@ -7,6 +7,7 @@ interface AdminAuthContextType {
   isLoading: boolean;
   user: User | null;
   login: (email: string, password: string) => Promise<{ error: string | null }>;
+  loginWithGoogle: () => Promise<{ error: string | null }>;
   signup: (email: string, password: string) => Promise<{ error: string | null }>;
   logout: () => Promise<void>;
 }
@@ -95,6 +96,23 @@ export const AdminAuthProvider = ({ children }: { children: ReactNode }) => {
     return { error: null };
   };
 
+  const loginWithGoogle = async () => {
+    const redirectUrl = `${window.location.origin}/admin/dashboard`;
+    
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        redirectTo: redirectUrl,
+      },
+    });
+
+    if (error) {
+      return { error: error.message };
+    }
+
+    return { error: null };
+  };
+
   const signup = async (email: string, password: string) => {
     const redirectUrl = `${window.location.origin}/admin/dashboard`;
     
@@ -144,7 +162,7 @@ export const AdminAuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <AdminAuthContext.Provider value={{ isAdmin, isLoading, user, login, signup, logout }}>
+    <AdminAuthContext.Provider value={{ isAdmin, isLoading, user, login, loginWithGoogle, signup, logout }}>
       {children}
     </AdminAuthContext.Provider>
   );

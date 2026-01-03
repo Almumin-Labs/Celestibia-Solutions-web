@@ -128,7 +128,7 @@ export const Header = () => {
 
           {/* CTA Button */}
           <div className="hidden lg:flex items-center gap-3">
-            {isAdmin ? (
+            {isAdmin && (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <button className="flex items-center gap-2 p-1 rounded-full hover:bg-secondary transition-colors">
@@ -173,13 +173,6 @@ export const Header = () => {
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
-            ) : (
-              <Button variant="ghost" size="sm" asChild>
-                <Link to="/admin">
-                  <Settings className="w-4 h-4 mr-1" />
-                  Admin
-                </Link>
-              </Button>
             )}
             <Button variant="gradient" size="lg" asChild>
               <Link to="/contact">Get Started</Link>
@@ -233,7 +226,7 @@ export const Header = () => {
                   )}
                 </div>
               ))}
-              {isAdmin ? (
+              {isAdmin && (
                 <div className="mt-4 p-4 rounded-lg bg-secondary/50">
                   <div className="flex items-center gap-3 mb-4">
                     <Avatar className="h-10 w-10 border-2 border-coral">
@@ -258,15 +251,6 @@ export const Header = () => {
                       Logout
                     </Button>
                   </div>
-                </div>
-              ) : (
-                <div className="mt-4 space-y-2">
-                  <Button variant="ghost" className="w-full" asChild>
-                    <Link to="/admin">
-                      <Settings className="w-4 h-4 mr-2" />
-                      Admin Login
-                    </Link>
-                  </Button>
                 </div>
               )}
               <Button variant="gradient" size="lg" className="w-full mt-2" asChild>
