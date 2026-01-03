@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AdminAuthProvider } from "@/contexts/AdminAuthContext";
 import { UserAuthProvider } from "@/contexts/UserAuthContext";
+import RequireAdmin from "@/components/admin/RequireAdmin";
 import Index from "./pages/Index";
 import About from "./pages/About";
 import Services from "./pages/Services";
@@ -57,7 +58,14 @@ const App = () => (
               <Route path="/admin" element={<AdminLogin />} />
               <Route path="/admin/signup" element={<AdminSignup />} />
               <Route path="/admin/forgot-password" element={<AdminForgotPassword />} />
-              <Route path="/admin/dashboard" element={<AdminDashboard />} />
+              <Route
+                path="/admin/dashboard"
+                element={
+                  <RequireAdmin>
+                    <AdminDashboard />
+                  </RequireAdmin>
+                }
+              />
               <Route path="/terms" element={<TermsAndConditions />} />
               <Route path="/privacy" element={<PrivacyPolicy />} />
               <Route path="*" element={<NotFound />} />

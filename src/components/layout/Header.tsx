@@ -173,14 +173,7 @@ export const Header = () => {
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
-            ) : (
-              <Link 
-                to="/admin" 
-                className="text-xs text-muted-foreground/50 hover:text-muted-foreground transition-colors"
-              >
-                Admin
-              </Link>
-            )}
+            ) : null}
             <Button variant="gradient" size="lg" asChild>
               <Link to="/contact">Get Started</Link>
             </Button>
