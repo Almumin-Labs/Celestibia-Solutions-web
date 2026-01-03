@@ -49,7 +49,7 @@ const industries = [
       "Personalization Engines",
       "Supply Chain Optimization",
     ],
-    color: "from-orange-600 to-amber-400",
+    color: "from-orange to-coral",
   },
   {
     icon: Factory,
@@ -85,7 +85,7 @@ const industries = [
       "Assessment & Analytics",
       "Content Delivery Networks",
     ],
-    color: "from-purple-600 to-violet-400",
+    color: "from-purple to-purple",
   },
   {
     icon: Landmark,
@@ -155,7 +155,7 @@ const IndustriesPage = () => {
                 transition={{ duration: 0.5, delay: index * 0.05 }}
                 className="bg-background rounded-2xl border border-border p-8 hover:shadow-xl hover:border-coral/30 transition-all duration-300"
               >
-                <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${industry.color} flex items-center justify-center mb-6`}>
+                <div className={`w-16 h-16 rounded-2xl bg-primary bg-gradient-to-br ${industry.color} flex items-center justify-center mb-6`}>
                   <industry.icon className="w-8 h-8 text-primary-foreground" />
                 </div>
                 <h2 className="font-heading text-2xl font-bold mb-3">{industry.name}</h2>
