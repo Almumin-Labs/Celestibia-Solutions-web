@@ -10,6 +10,7 @@ import {
   ArrowUpRight
 } from "lucide-react";
 import { useABTest } from "@/hooks/useABTest";
+import { HexagonPattern, IsometricIcons } from "@/components/graphics/InfraCloudStyle";
 
 const services = [
   {
@@ -80,8 +81,24 @@ export const Services = () => {
   const headline = getVariantValue() || 'End-to-End Cloud & DevOps Solutions';
 
   return (
-    <section className="py-24 bg-card">
-      <div className="container mx-auto px-4">
+    <section className="py-24 bg-card relative overflow-hidden">
+      {/* InfraCloud-style backgrounds */}
+      <HexagonPattern />
+      <IsometricIcons className="opacity-30" />
+      
+      {/* Gradient orbs */}
+      <motion.div 
+        animate={{ scale: [1, 1.2, 1], opacity: [0.15, 0.25, 0.15] }}
+        transition={{ duration: 10, repeat: Infinity }}
+        className="absolute -top-32 -right-32 w-[500px] h-[500px] bg-gradient-to-br from-[#F97316]/20 to-[#8B5CF6]/10 rounded-full blur-[100px]" 
+      />
+      <motion.div 
+        animate={{ scale: [1.2, 1, 1.2], opacity: [0.15, 0.25, 0.15] }}
+        transition={{ duration: 12, repeat: Infinity }}
+        className="absolute -bottom-32 -left-32 w-[500px] h-[500px] bg-gradient-to-br from-[#8B5CF6]/20 to-[#06B6D4]/10 rounded-full blur-[100px]" 
+      />
+      
+      <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}

@@ -10,6 +10,7 @@ import {
   Plane
 } from "lucide-react";
 import { useABTest } from "@/hooks/useABTest";
+import { CircuitBoard, WaveGradient } from "@/components/graphics/InfraCloudStyle";
 
 const industries = [
   { icon: Building2, name: "Banking & Finance", color: "bg-blue-500/10 text-blue-600" },
@@ -28,11 +29,21 @@ export const Industries = () => {
 
   return (
     <section className="py-24 bg-gradient-warm text-primary-foreground overflow-hidden relative">
+      {/* InfraCloud-style backgrounds */}
+      <CircuitBoard />
+      <WaveGradient />
+      
       {/* Decorative Elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-coral/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-purple/10 rounded-full blur-3xl" />
-      </div>
+      <motion.div 
+        animate={{ scale: [1, 1.3, 1], opacity: [0.1, 0.2, 0.1] }}
+        transition={{ duration: 8, repeat: Infinity }}
+        className="absolute top-0 left-1/4 w-[400px] h-[400px] bg-[#F97316]/20 rounded-full blur-[100px]" 
+      />
+      <motion.div 
+        animate={{ scale: [1.2, 1, 1.2], opacity: [0.1, 0.2, 0.1] }}
+        transition={{ duration: 10, repeat: Infinity }}
+        className="absolute bottom-0 right-1/4 w-[350px] h-[350px] bg-[#8B5CF6]/20 rounded-full blur-[100px]" 
+      />
       
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}

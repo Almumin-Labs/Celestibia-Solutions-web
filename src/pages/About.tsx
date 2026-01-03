@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { CheckCircle, Target, Eye, Heart, Lightbulb, TrendingUp, Award, Users } from "lucide-react";
+import { IsometricIcons, HexagonPattern, WaveGradient, ConnectedNetwork, CircuitBoard } from "@/components/graphics/InfraCloudStyle";
 
 const values = [
   {
@@ -50,24 +51,28 @@ const About = () => {
       
       {/* Hero Section */}
       <section className="pt-32 pb-20 bg-gradient-hero relative overflow-hidden">
-        <div className="absolute inset-0">
-          <motion.div
-            animate={{ 
-              scale: [1, 1.2, 1],
-              opacity: [0.1, 0.2, 0.1]
-            }}
-            transition={{ duration: 10, repeat: Infinity }}
-            className="absolute top-20 right-20 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl"
-          />
-          <motion.div
-            animate={{ 
-              scale: [1.2, 1, 1.2],
-              opacity: [0.1, 0.15, 0.1]
-            }}
-            transition={{ duration: 12, repeat: Infinity }}
-            className="absolute bottom-20 left-20 w-80 h-80 bg-coral/20 rounded-full blur-3xl"
-          />
-        </div>
+        {/* InfraCloud-style backgrounds */}
+        <HexagonPattern />
+        <IsometricIcons />
+        
+        {/* Animated orbs */}
+        <motion.div
+          animate={{ 
+            scale: [1, 1.3, 1],
+            opacity: [0.15, 0.3, 0.15]
+          }}
+          transition={{ duration: 10, repeat: Infinity }}
+          className="absolute top-20 right-20 w-[400px] h-[400px] bg-gradient-to-br from-[#F97316]/30 to-[#8B5CF6]/20 rounded-full blur-[100px]"
+        />
+        <motion.div
+          animate={{ 
+            scale: [1.2, 1, 1.2],
+            opacity: [0.15, 0.25, 0.15]
+          }}
+          transition={{ duration: 12, repeat: Infinity }}
+          className="absolute bottom-20 left-20 w-[350px] h-[350px] bg-gradient-to-br from-[#8B5CF6]/30 to-[#06B6D4]/20 rounded-full blur-[100px]"
+        />
+        
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -219,13 +224,18 @@ const About = () => {
 
       {/* Tagline Section */}
       <section className="py-20 bg-gradient-hero relative overflow-hidden">
-        <div className="absolute inset-0">
-          <motion.div
-            animate={{ x: [0, 50, 0], y: [0, -30, 0] }}
-            transition={{ duration: 10, repeat: Infinity }}
-            className="absolute top-10 left-10 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl"
-          />
-        </div>
+        <CircuitBoard />
+        <WaveGradient />
+        
+        <motion.div
+          animate={{ 
+            scale: [1, 1.2, 1],
+            opacity: [0.2, 0.35, 0.2]
+          }}
+          transition={{ duration: 8, repeat: Infinity }}
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gradient-to-br from-[#F97316]/30 to-[#8B5CF6]/20 rounded-full blur-[120px]"
+        />
+        
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}

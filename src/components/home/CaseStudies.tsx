@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight, Building2, Stethoscope, ShoppingCart, Factory } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { HexagonPattern, IsometricIcons } from "@/components/graphics/InfraCloudStyle";
 
 const caseStudies = [
   {
@@ -40,8 +41,19 @@ const caseStudies = [
 
 export const CaseStudies = () => {
   return (
-    <section className="py-24 bg-card">
-      <div className="container mx-auto px-4">
+    <section className="py-24 bg-card relative overflow-hidden">
+      {/* InfraCloud-style backgrounds */}
+      <HexagonPattern />
+      <IsometricIcons className="opacity-20" />
+      
+      {/* Gradient orbs */}
+      <motion.div 
+        animate={{ scale: [1, 1.2, 1], opacity: [0.15, 0.25, 0.15] }}
+        transition={{ duration: 10, repeat: Infinity }}
+        className="absolute -top-32 -left-32 w-[400px] h-[400px] bg-gradient-to-br from-[#F97316]/20 to-[#8B5CF6]/10 rounded-full blur-[100px]" 
+      />
+      
+      <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}

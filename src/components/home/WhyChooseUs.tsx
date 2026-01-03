@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { CheckCircle, Rocket, Users, Award, Clock, HeartHandshake } from "lucide-react";
 import { useABTest } from "@/hooks/useABTest";
+import { ConnectedNetwork, CircuitBoard } from "@/components/graphics/InfraCloudStyle";
 
 const reasons = [
   {
@@ -41,8 +42,18 @@ export const WhyChooseUs = () => {
 
   return (
     <section className="py-24 bg-background relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-secondary/50 to-transparent" />
+      {/* InfraCloud-style backgrounds */}
+      <CircuitBoard />
+      <div className="hidden lg:block">
+        <ConnectedNetwork className="opacity-40" />
+      </div>
+      
+      {/* Gradient orbs */}
+      <motion.div 
+        animate={{ scale: [1, 1.2, 1], opacity: [0.15, 0.25, 0.15] }}
+        transition={{ duration: 10, repeat: Infinity }}
+        className="absolute top-0 right-0 w-[400px] h-[400px] bg-gradient-to-br from-[#F97316]/20 to-[#8B5CF6]/10 rounded-full blur-[100px]" 
+      />
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid lg:grid-cols-2 gap-16 items-center">

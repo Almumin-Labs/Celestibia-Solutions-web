@@ -4,6 +4,7 @@ import { ArrowRight, Mail, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useABTest } from "@/hooks/useABTest";
 import { forwardRef } from "react";
+import { CircuitBoard, WaveGradient, OrbitRings } from "@/components/graphics/InfraCloudStyle";
 
 export const CTA = forwardRef<HTMLElement>((_, ref) => {
   const ctaButton = useABTest('cta_button');
@@ -19,17 +20,22 @@ export const CTA = forwardRef<HTMLElement>((_, ref) => {
 
   return (
     <section ref={ref} className="py-24 bg-card relative overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `radial-gradient(circle at 1px 1px, hsl(var(--primary)) 1px, transparent 0)`,
-          backgroundSize: '40px 40px'
-        }} />
-      </div>
+      {/* InfraCloud-style backgrounds */}
+      <CircuitBoard />
+      <OrbitRings />
+      <WaveGradient />
 
-      {/* Gradient Orbs */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple/20 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-coral/20 rounded-full blur-3xl" />
+      {/* Gradient Orbs - InfraCloud orange/purple style */}
+      <motion.div 
+        animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.35, 0.2] }}
+        transition={{ duration: 8, repeat: Infinity }}
+        className="absolute top-0 left-1/4 w-[400px] h-[400px] bg-gradient-to-br from-[#F97316]/30 to-[#8B5CF6]/20 rounded-full blur-[100px]" 
+      />
+      <motion.div 
+        animate={{ scale: [1.2, 1, 1.2], opacity: [0.2, 0.35, 0.2] }}
+        transition={{ duration: 10, repeat: Infinity }}
+        className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-gradient-to-br from-[#8B5CF6]/30 to-[#06B6D4]/20 rounded-full blur-[100px]" 
+      />
 
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
