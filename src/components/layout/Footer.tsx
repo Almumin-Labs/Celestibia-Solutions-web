@@ -130,9 +130,14 @@ export const Footer = forwardRef<HTMLElement>((_, ref) => {
           <p className="text-primary-foreground/60 text-sm">
             © 2026 Celestibia Solutions Pvt. Ltd. All rights reserved.
           </p>
-          <p className="text-primary-foreground/60 text-sm">
-            Shaping the future, one solution at a time.
-          </p>
+          <div className="flex items-center gap-4">
+            <Link to="/admin" className="text-primary-foreground/40 hover:text-primary-foreground/60 text-xs transition-colors">
+              Admin
+            </Link>
+            <p className="text-primary-foreground/60 text-sm">
+              Shaping the future, one solution at a time.
+            </p>
+          </div>
         </div>
       </div>
     </footer>;
