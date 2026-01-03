@@ -203,9 +203,9 @@ const Services = () => {
                 <div className={index % 2 === 1 ? "lg:col-start-2" : ""}>
                   <motion.div 
                     whileHover={{ scale: 1.05 }}
-                    className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${service.color} flex items-center justify-center mb-6`}
+                    className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${service.color} flex items-center justify-center mb-6 shadow-lg`}
                   >
-                    <service.icon className="w-8 h-8 text-primary-foreground" />
+                    <service.icon className="w-8 h-8 text-white drop-shadow-md" />
                   </motion.div>
                   <h2 className="font-heading text-3xl font-bold mb-4">{service.title}</h2>
                   <p className="text-muted-foreground text-lg mb-6">{service.description}</p>

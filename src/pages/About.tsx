@@ -185,8 +185,8 @@ const About = () => {
                 whileHover={{ y: -8 }}
                 className="p-6 rounded-2xl bg-card border border-border text-center group hover:border-coral/30 transition-all"
               >
-                <div className="w-14 h-14 rounded-full bg-gradient-primary flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                  <belief.icon className="w-7 h-7 text-primary-foreground" />
+                <div className="w-14 h-14 rounded-full bg-gradient-to-r from-coral to-orange flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform shadow-lg">
+                  <belief.icon className="w-7 h-7 text-white drop-shadow-md" />
                 </div>
                 <p className="font-medium text-foreground">{belief.text}</p>
               </motion.div>
@@ -209,8 +209,8 @@ const About = () => {
                 whileHover={{ y: -10 }}
                 className="p-8 rounded-2xl bg-background border border-border text-center hover:shadow-xl transition-all"
               >
-                <div className="w-16 h-16 rounded-full bg-gradient-primary flex items-center justify-center mx-auto mb-6">
-                  <value.icon className="w-8 h-8 text-primary-foreground" />
+                <div className="w-16 h-16 rounded-full bg-gradient-to-r from-coral to-orange flex items-center justify-center mx-auto mb-6 shadow-lg">
+                  <value.icon className="w-8 h-8 text-white drop-shadow-md" />
                 </div>
                 <h3 className="font-heading text-2xl font-bold mb-4">{value.title}</h3>
                 <p className="text-muted-foreground leading-relaxed">

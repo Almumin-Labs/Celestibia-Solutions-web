@@ -1,17 +1,17 @@
 import { motion } from "framer-motion";
 import { Link2 } from "lucide-react";
-import veeamLogo from "@/assets/veeam-logo.jpg";
 import { useABTest } from "@/hooks/useABTest";
 
 // Import original logos
 import awsSvg from "@/assets/logos/aws.svg";
 import gcpLogo from "@/assets/logos/google-cloud.png";
 import azureSvg from "@/assets/logos/azure.svg";
+
 const partners = [
   {
-    name: "AWS",
-    certification: "Select Consulting Partner",
-    logo: awsSvg,
+    name: "Google Cloud",
+    certification: "Certified Partner",
+    logo: gcpLogo,
   },
   {
     name: "Microsoft Azure",
@@ -19,14 +19,9 @@ const partners = [
     logo: azureSvg,
   },
   {
-    name: "Google Cloud",
-    certification: "Certified Partner",
-    logo: gcpLogo,
-  },
-  {
-    name: "Veeam",
-    certification: "ProPartner",
-    logo: veeamLogo,
+    name: "AWS",
+    certification: "Select Consulting Partner",
+    logo: awsSvg,
   },
 ];
 
