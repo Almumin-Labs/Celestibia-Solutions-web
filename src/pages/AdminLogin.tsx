@@ -7,9 +7,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useAdminAuth } from "@/contexts/AdminAuthContext";
 import { useToast } from "@/hooks/use-toast";
-import { Lock, LogIn, Mail, Loader2, Info } from "lucide-react";
+import { Lock, LogIn, Mail, Loader2 } from "lucide-react";
 import { HexagonPattern, IsometricIcons } from "@/components/graphics/InfraCloudStyle";
-import { Alert, AlertDescription } from "@/components/ui/alert";
 
 const AdminLogin = () => {
   const [email, setEmail] = useState("");
