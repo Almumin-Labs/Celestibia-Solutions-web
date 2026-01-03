@@ -3,10 +3,11 @@ import { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { Calendar, User, Clock, ArrowLeft, Tag, Loader2 } from "lucide-react";
+import { Calendar, User, Clock, ArrowLeft, Tag, Loader2, Image as ImageIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { getBlogBySlug, getBlogs, BlogPost as BlogPostType } from "@/lib/storage";
+import { HexagonPattern, IsometricIcons } from "@/components/graphics/InfraCloudStyle";
 
 const BlogPostPage = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -70,8 +71,17 @@ const BlogPostPage = () => {
       <Header />
 
       {/* Hero Section */}
-      <section className="pt-32 pb-16 bg-gradient-hero">
-        <div className="container mx-auto px-4">
+      <section className="pt-32 pb-16 bg-gradient-hero relative overflow-hidden">
+        <HexagonPattern />
+        <IsometricIcons className="opacity-20" />
+        
+        <motion.div 
+          animate={{ scale: [1, 1.2, 1], opacity: [0.15, 0.25, 0.15] }}
+          transition={{ duration: 10, repeat: Infinity }}
+          className="absolute -top-32 -right-32 w-[400px] h-[400px] bg-gradient-to-br from-[#F97316]/20 to-[#8B5CF6]/10 rounded-full blur-[100px]" 
+        />
+        
+        <div className="container mx-auto px-4 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -118,6 +128,28 @@ const BlogPostPage = () => {
           </motion.div>
         </div>
       </section>
+
+      {/* Featured Image */}
+      {post.image_url && (
+        <section className="bg-card -mt-8 relative z-20">
+          <div className="container mx-auto px-4">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="max-w-4xl mx-auto"
+            >
+              <div className="rounded-2xl overflow-hidden shadow-2xl border border-border">
+                <img 
+                  src={post.image_url} 
+                  alt={post.title}
+                  className="w-full h-auto aspect-video object-cover"
+                />
+              </div>
+            </motion.div>
+          </div>
+        </section>
+      )}
 
       {/* Content Section */}
       <section className="py-16 bg-card">
