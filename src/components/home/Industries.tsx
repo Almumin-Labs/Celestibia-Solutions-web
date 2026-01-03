@@ -13,14 +13,14 @@ import { useABTest } from "@/hooks/useABTest";
 import { CircuitBoard, WaveGradient } from "@/components/graphics/InfraCloudStyle";
 
 const industries = [
-  { icon: Building2, name: "Banking & Finance", color: "bg-blue-500/10 text-blue-600" },
-  { icon: Stethoscope, name: "Healthcare", color: "bg-green-500/10 text-green-600" },
-  { icon: ShoppingCart, name: "E-Commerce & Retail", color: "bg-orange-500/10 text-orange-600" },
-  { icon: Factory, name: "Manufacturing", color: "bg-slate-500/10 text-slate-600" },
-  { icon: Truck, name: "Logistics", color: "bg-amber-500/10 text-amber-600" },
-  { icon: GraduationCap, name: "EdTech", color: "bg-purple-500/10 text-purple-600" },
-  { icon: Landmark, name: "Government", color: "bg-red-500/10 text-red-600" },
-  { icon: Plane, name: "Travel & Hospitality", color: "bg-cyan-500/10 text-cyan-600" },
+  { icon: Building2, name: "Banking & Finance", color: "bg-primary-foreground/10 text-coral" },
+  { icon: Stethoscope, name: "Healthcare", color: "bg-primary-foreground/10 text-coral" },
+  { icon: ShoppingCart, name: "E-Commerce & Retail", color: "bg-primary-foreground/10 text-coral" },
+  { icon: Factory, name: "Manufacturing", color: "bg-primary-foreground/10 text-coral" },
+  { icon: Truck, name: "Logistics", color: "bg-primary-foreground/10 text-coral" },
+  { icon: GraduationCap, name: "EdTech", color: "bg-primary-foreground/10 text-coral" },
+  { icon: Landmark, name: "Government", color: "bg-primary-foreground/10 text-coral" },
+  { icon: Plane, name: "Travel & Hospitality", color: "bg-primary-foreground/10 text-coral" },
 ];
 
 export const Industries = () => {
