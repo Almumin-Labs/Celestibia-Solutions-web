@@ -13,6 +13,7 @@ import { CICDPipeline } from "@/components/home/CICDPipeline";
 import { AnimatedFeatures } from "@/components/home/AnimatedFeatures";
 import { ValueProposition } from "@/components/home/ValueProposition";
 import { AnimatedServiceCards } from "@/components/home/AnimatedServiceCards";
+import { MLPlatformShowcase } from "@/components/home/MLPlatformShowcase";
 
 const Index = () => {
   return (
@@ -23,6 +24,7 @@ const Index = () => {
       <AnimatedServiceCards />
       <Partners />
       <Services />
+      <MLPlatformShowcase />
       <AnimatedFeatures />
       <CICDPipeline />
       <ValueProposition />

@@ -26,6 +26,9 @@ import grafanaLogo from "@/assets/logos/grafana.png";
 import prometheusLogo from "@/assets/logos/prometheus.png";
 import azureSvg from "@/assets/logos/azure.svg";
 
+// Import illustrations
+import sourceCodeCICD from "@/assets/illustrations/source-code-repo-ci-cd.svg";
+
 import {
   KubernetesLogo,
   DockerLogo,
@@ -140,6 +143,47 @@ const DevOpsServices = () => {
               </Button>
             </div>
           </motion.div>
+        </div>
+      </section>
+
+      {/* CI/CD Illustration Section */}
+      <section className="py-20 bg-background">
+        <div className="container mx-auto px-4">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              <span className="inline-block px-4 py-1.5 rounded-full bg-secondary text-sm font-medium text-foreground mb-4">
+                CI/CD Infrastructure
+              </span>
+              <h2 className="font-heading text-3xl md:text-4xl font-bold mb-6">
+                Source Code Repository{" "}
+                <span className="text-gradient">& CI/CD</span>
+              </h2>
+              <p className="text-muted-foreground mb-6 leading-relaxed">
+                End-to-end automation from code commit to production deployment. 
+                Our CI/CD pipelines ensure fast, reliable, and secure software delivery.
+              </p>
+              <ul className="space-y-3">
+                {["Automated testing & quality gates", "Multi-environment deployments", "Rollback & disaster recovery", "Security scanning integrated"].map((item, idx) => (
+                  <li key={idx} className="flex items-center gap-3">
+                    <CheckCircle className="w-5 h-5 text-coral" />
+                    <span className="text-foreground">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="bg-card rounded-2xl border border-border p-8"
+            >
+              <img src={sourceCodeCICD} alt="Source Code Repository & CI/CD" className="w-full h-auto object-contain" />
+            </motion.div>
+          </div>
         </div>
       </section>
 

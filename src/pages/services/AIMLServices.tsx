@@ -20,6 +20,12 @@ import { FloatingIcons, GradientOrbs, CircuitLines } from "@/components/graphics
 import { TechIllustration } from "@/components/graphics/TechIllustration";
 import { AnimatedBackground } from "@/components/graphics/AnimatedBackground";
 
+// Import illustrations
+import modelServing from "@/assets/illustrations/model-serving.svg";
+import modelTraining from "@/assets/illustrations/model-training-infrastructure.svg";
+import modelObservability from "@/assets/illustrations/model-observability-feedback-loops.svg";
+import modelRegistry from "@/assets/illustrations/model-registry-metadata-stores.svg";
+
 const features = [
   {
     icon: MessageSquare,
@@ -130,6 +136,47 @@ const AIMLServices = () => {
               </Button>
             </div>
           </motion.div>
+        </div>
+      </section>
+
+      {/* AI/ML Illustrations Section */}
+      <section className="py-20 bg-background">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
+              ML Infrastructure Stack
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              End-to-end machine learning infrastructure for production-grade AI systems
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
+            {[
+              { img: modelTraining, title: "Model Training Infrastructure", desc: "Scalable training pipelines with GPU clusters" },
+              { img: modelServing, title: "Model Serving", desc: "Low-latency inference at scale" },
+              { img: modelRegistry, title: "Model Registry & Metadata", desc: "Version control and experiment tracking" },
+              { img: modelObservability, title: "Observability & Feedback Loops", desc: "Monitor model performance and drift" },
+            ].map((item, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="bg-card rounded-2xl border border-border p-6 hover:border-primary/30 hover:shadow-xl transition-all"
+              >
+                <img src={item.img} alt={item.title} className="w-full h-48 object-contain mb-4" />
+                <h3 className="font-heading text-lg font-bold mb-2">{item.title}</h3>
+                <p className="text-muted-foreground text-sm">{item.desc}</p>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 

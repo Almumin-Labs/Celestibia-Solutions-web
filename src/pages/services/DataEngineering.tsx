@@ -20,6 +20,10 @@ import { FloatingIcons, GradientOrbs, GridPattern } from "@/components/graphics/
 import { DataFlowIllustration } from "@/components/graphics/TechIllustration";
 import { AnimatedBackground } from "@/components/graphics/AnimatedBackground";
 
+// Import illustrations
+import dataPrepWorkflow from "@/assets/illustrations/data-prep-workflow-orchestration.svg";
+import featureStores from "@/assets/illustrations/feature-stores.svg";
+
 const dataEngineeringFeatures = [
   {
     icon: Workflow,
@@ -130,11 +134,31 @@ const DataEngineering = () => {
         </div>
       </section>
 
-      {/* Data Flow Illustration */}
-      <section className="py-12 bg-card relative overflow-hidden">
-        <AnimatedBackground variant="mesh" />
+      {/* Data Platform Illustrations */}
+      <section className="py-16 bg-card relative overflow-hidden">
         <div className="container mx-auto px-4 relative z-10">
-          <DataFlowIllustration className="max-w-4xl mx-auto" />
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="bg-background rounded-2xl border border-border p-6"
+            >
+              <img src={dataPrepWorkflow} alt="Data Prep & Workflow Orchestration" className="w-full h-64 object-contain" />
+              <h3 className="font-heading text-xl font-bold mt-4 mb-2">Data Prep & Workflow Orchestration</h3>
+              <p className="text-muted-foreground">Automated data pipelines with intelligent orchestration</p>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="bg-background rounded-2xl border border-border p-6"
+            >
+              <img src={featureStores} alt="Feature Stores" className="w-full h-64 object-contain" />
+              <h3 className="font-heading text-xl font-bold mt-4 mb-2">Feature Stores</h3>
+              <p className="text-muted-foreground">Centralized feature management for ML pipelines</p>
+            </motion.div>
+          </div>
         </div>
       </section>
 
