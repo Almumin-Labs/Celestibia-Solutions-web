@@ -16,6 +16,9 @@ import {
   Settings
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { FloatingIcons, GradientOrbs, CircuitLines } from "@/components/graphics/FloatingIcons";
+import { TechIllustration } from "@/components/graphics/TechIllustration";
+import { AnimatedBackground } from "@/components/graphics/AnimatedBackground";
 
 const features = [
   {
@@ -74,6 +77,9 @@ const AIMLServices = () => {
       
       {/* Hero Section */}
       <section className="pt-32 pb-20 bg-gradient-hero relative overflow-hidden">
+        <GradientOrbs />
+        <FloatingIcons count={12} />
+        <CircuitLines />
         <div className="absolute inset-0 opacity-10">
           <motion.div
             animate={{ 

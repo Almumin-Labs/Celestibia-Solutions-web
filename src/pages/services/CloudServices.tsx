@@ -18,6 +18,9 @@ import {
   HardDrive
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { FloatingIcons, GradientOrbs, AnimatedNodes } from "@/components/graphics/FloatingIcons";
+import { TechIllustration } from "@/components/graphics/TechIllustration";
+import { AnimatedBackground } from "@/components/graphics/AnimatedBackground";
 
 // Import original logos
 import awsSvg from "@/assets/logos/aws.svg";
@@ -84,6 +87,9 @@ const CloudServices = () => {
       
       {/* Hero Section */}
       <section className="pt-32 pb-20 bg-gradient-hero relative overflow-hidden">
+        <GradientOrbs />
+        <FloatingIcons count={10} />
+        <AnimatedNodes />
         <div className="absolute inset-0 opacity-10">
           <motion.div
             animate={{ 

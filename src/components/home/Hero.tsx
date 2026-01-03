@@ -1,13 +1,17 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowRight, Cloud, Shield, Zap } from "lucide-react";
+import { ArrowRight, Cloud, Shield, Zap, Server, Database, GitBranch, Code } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useABTest } from "@/hooks/useABTest";
 
 const floatingIcons = [
-  { Icon: Cloud, delay: 0, position: "top-20 left-[10%]" },
-  { Icon: Shield, delay: 1, position: "top-40 right-[15%]" },
-  { Icon: Zap, delay: 2, position: "bottom-32 left-[20%]" },
+  { Icon: Cloud, delay: 0, position: "top-20 left-[10%]", color: "text-blue-500" },
+  { Icon: Shield, delay: 1, position: "top-40 right-[15%]", color: "text-red-500" },
+  { Icon: Zap, delay: 2, position: "bottom-32 left-[20%]", color: "text-yellow-500" },
+  { Icon: Server, delay: 0.5, position: "top-32 left-[25%]", color: "text-purple-500" },
+  { Icon: Database, delay: 1.5, position: "bottom-40 right-[25%]", color: "text-green-500" },
+  { Icon: GitBranch, delay: 2.5, position: "top-60 right-[10%]", color: "text-orange-500" },
+  { Icon: Code, delay: 3, position: "bottom-48 left-[8%]", color: "text-cyan-500" },
 ];
 
 export const Hero = () => {
@@ -27,24 +31,55 @@ export const Hero = () => {
         }} />
       </div>
 
+      {/* Animated Grid Lines */}
+      <svg className="absolute inset-0 w-full h-full opacity-[0.03]">
+        <defs>
+          <pattern id="heroGrid" width="60" height="60" patternUnits="userSpaceOnUse">
+            <path d="M 60 0 L 0 0 0 60" fill="none" stroke="currentColor" strokeWidth="0.5" />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#heroGrid)" />
+      </svg>
+
       {/* Floating Icons */}
-      {floatingIcons.map(({ Icon, delay, position }, index) => (
+      {floatingIcons.map(({ Icon, delay, position, color }, index) => (
         <motion.div
           key={index}
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 0.2, y: 0 }}
-          transition={{ delay: delay * 0.3, duration: 0.8 }}
+          animate={{ 
+            opacity: 0.25, 
+            y: [0, -15, 0],
+            x: [0, 10, -10, 0],
+          }}
+          transition={{ 
+            opacity: { delay: delay * 0.3, duration: 0.8 },
+            y: { duration: 4 + delay, repeat: Infinity, ease: "easeInOut" },
+            x: { duration: 5 + delay, repeat: Infinity, ease: "easeInOut" },
+          }}
           className={`absolute ${position} hidden lg:block`}
         >
-          <div className="animate-float" style={{ animationDelay: `${delay}s` }}>
-            <Icon className="w-12 h-12 text-primary" />
+          <div className={`${color} drop-shadow-lg`}>
+            <Icon className="w-10 h-10" />
           </div>
         </motion.div>
       ))}
 
       {/* Gradient Orbs */}
-      <div className="absolute top-1/4 -left-32 w-96 h-96 bg-purple/20 rounded-full blur-3xl" />
-      <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-coral/20 rounded-full blur-3xl" />
+      <motion.div 
+        animate={{ scale: [1, 1.2, 1], opacity: [0.15, 0.25, 0.15] }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute top-1/4 -left-32 w-96 h-96 bg-purple/20 rounded-full blur-3xl" 
+      />
+      <motion.div 
+        animate={{ scale: [1.2, 1, 1.2], opacity: [0.2, 0.3, 0.2] }}
+        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute bottom-1/4 -right-32 w-96 h-96 bg-coral/20 rounded-full blur-3xl" 
+      />
+      <motion.div 
+        animate={{ scale: [1, 1.15, 1], opacity: [0.1, 0.2, 0.1] }}
+        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/10 rounded-full blur-3xl" 
+      />
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
