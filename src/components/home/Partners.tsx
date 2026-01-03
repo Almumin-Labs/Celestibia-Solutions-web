@@ -1,35 +1,69 @@
 import { motion } from "framer-motion";
 import { Link2 } from "lucide-react";
 import veeamLogo from "@/assets/veeam-logo.jpg";
-import { AWSLogo, AzureLogo, GCPLogo, GitLabLogo } from "@/components/logos/TechLogos";
 import { useABTest } from "@/hooks/useABTest";
+
+// Import original logos
+import gitlabLogo from "@/assets/logos/gitlab.png";
+import awsSvg from "@/assets/logos/aws.svg";
+import gcpLogo from "@/assets/logos/google-cloud.png";
+import jenkinsLogo from "@/assets/logos/jenkins.png";
+import githubSvg from "@/assets/logos/github.svg";
+import argocdLogo from "@/assets/logos/argocd.png";
+import grafanaLogo from "@/assets/logos/grafana.png";
+import prometheusLogo from "@/assets/logos/prometheus.png";
+import azureSvg from "@/assets/logos/azure.svg";
 
 const partners = [
   {
     name: "AWS",
     certification: "Select Consulting Partner",
-    Logo: AWSLogo,
+    logo: awsSvg,
   },
   {
     name: "Microsoft Azure",
     certification: "Solutions Partner",
-    Logo: AzureLogo,
+    logo: azureSvg,
   },
   {
     name: "Google Cloud",
     certification: "Certified Partner",
-    Logo: GCPLogo,
+    logo: gcpLogo,
   },
   {
     name: "GitLab",
     certification: "Select Partner",
-    Logo: GitLabLogo,
+    logo: gitlabLogo,
+  },
+  {
+    name: "Jenkins",
+    certification: "Integration Partner",
+    logo: jenkinsLogo,
+  },
+  {
+    name: "GitHub Actions",
+    certification: "Certified Partner",
+    logo: githubSvg,
+  },
+  {
+    name: "ArgoCD",
+    certification: "Technology Partner",
+    logo: argocdLogo,
+  },
+  {
+    name: "Grafana",
+    certification: "Partner",
+    logo: grafanaLogo,
+  },
+  {
+    name: "Prometheus",
+    certification: "Partner",
+    logo: prometheusLogo,
   },
   {
     name: "Veeam",
     certification: "ProPartner",
-    Logo: null,
-    image: veeamLogo,
+    logo: veeamLogo,
   },
 ];
 
@@ -58,32 +92,28 @@ export const Partners = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 lg:gap-12">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 lg:gap-10">
           {partners.map((partner, index) => (
             <motion.div
               key={partner.name}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              transition={{ duration: 0.5, delay: index * 0.05 }}
               className="flex flex-col items-center text-center group"
             >
               <motion.div 
-                whileHover={{ scale: 1.05, y: -5 }}
-                className="w-28 h-28 md:w-32 md:h-32 rounded-2xl border-2 border-border/50 bg-card flex items-center justify-center mb-4 transition-all duration-300 group-hover:border-primary/50 group-hover:shadow-xl"
+                whileHover={{ scale: 1.08, y: -8 }}
+                className="w-24 h-24 md:w-28 md:h-28 rounded-2xl border-2 border-border/50 bg-card flex items-center justify-center mb-4 transition-all duration-300 group-hover:border-primary/50 group-hover:shadow-xl"
               >
-                {partner.Logo ? (
-                  <partner.Logo className="w-16 h-16 md:w-20 md:h-20" />
-                ) : partner.image ? (
-                  <img 
-                    src={partner.image} 
-                    alt={partner.name} 
-                    className="w-20 h-12 object-contain"
-                  />
-                ) : null}
+                <img 
+                  src={partner.logo} 
+                  alt={partner.name} 
+                  className="w-14 h-14 md:w-16 md:h-16 object-contain"
+                />
               </motion.div>
-              <h3 className="font-semibold text-foreground mb-1">{partner.name}</h3>
-              <p className="text-sm text-muted-foreground">{partner.certification}</p>
+              <h3 className="font-semibold text-foreground mb-1 text-sm">{partner.name}</h3>
+              <p className="text-xs text-muted-foreground">{partner.certification}</p>
             </motion.div>
           ))}
         </div>

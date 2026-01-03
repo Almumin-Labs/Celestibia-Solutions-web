@@ -1,36 +1,45 @@
 import { motion } from "framer-motion";
+
+// Import original logos
+import gitlabLogo from "@/assets/logos/gitlab.png";
+import awsSvg from "@/assets/logos/aws.svg";
+import gcpLogo from "@/assets/logos/google-cloud.png";
+import jenkinsLogo from "@/assets/logos/jenkins.png";
+import githubSvg from "@/assets/logos/github.svg";
+import argocdLogo from "@/assets/logos/argocd.png";
+import grafanaLogo from "@/assets/logos/grafana.png";
+import prometheusLogo from "@/assets/logos/prometheus.png";
+import azureSvg from "@/assets/logos/azure.svg";
+
 import { 
-  AWSLogo, 
-  AzureLogo, 
-  GCPLogo, 
   KubernetesLogo, 
   DockerLogo, 
   TerraformLogo, 
-  JenkinsLogo, 
-  GitLabLogo, 
-  PrometheusLogo, 
-  GrafanaLogo,
+  AnsibleLogo,
+  HelmLogo,
   PythonLogo,
   ReactLogo,
-  GitHubActionsLogo,
-  AnsibleLogo
+  ELKLogo
 } from "@/components/logos/TechLogos";
 
 const technologies = [
-  { name: "AWS", Logo: AWSLogo, category: "Cloud" },
-  { name: "Azure", Logo: AzureLogo, category: "Cloud" },
-  { name: "GCP", Logo: GCPLogo, category: "Cloud" },
-  { name: "Kubernetes", Logo: KubernetesLogo, category: "DevOps" },
-  { name: "Docker", Logo: DockerLogo, category: "DevOps" },
-  { name: "Terraform", Logo: TerraformLogo, category: "IaC" },
-  { name: "Ansible", Logo: AnsibleLogo, category: "IaC" },
-  { name: "Jenkins", Logo: JenkinsLogo, category: "CI/CD" },
-  { name: "GitLab", Logo: GitLabLogo, category: "CI/CD" },
-  { name: "GitHub Actions", Logo: GitHubActionsLogo, category: "CI/CD" },
-  { name: "Prometheus", Logo: PrometheusLogo, category: "Monitoring" },
-  { name: "Grafana", Logo: GrafanaLogo, category: "Monitoring" },
-  { name: "Python", Logo: PythonLogo, category: "Language" },
-  { name: "React", Logo: ReactLogo, category: "Frontend" },
+  { name: "AWS", logo: awsSvg, isImage: true },
+  { name: "Azure", logo: azureSvg, isImage: true },
+  { name: "Google Cloud", logo: gcpLogo, isImage: true },
+  { name: "GitLab", logo: gitlabLogo, isImage: true },
+  { name: "GitHub Actions", logo: githubSvg, isImage: true },
+  { name: "Jenkins", logo: jenkinsLogo, isImage: true },
+  { name: "ArgoCD", logo: argocdLogo, isImage: true },
+  { name: "Grafana", logo: grafanaLogo, isImage: true },
+  { name: "Prometheus", logo: prometheusLogo, isImage: true },
+  { name: "Kubernetes", Logo: KubernetesLogo, isImage: false },
+  { name: "Docker", Logo: DockerLogo, isImage: false },
+  { name: "Terraform", Logo: TerraformLogo, isImage: false },
+  { name: "Ansible", Logo: AnsibleLogo, isImage: false },
+  { name: "Helm", Logo: HelmLogo, isImage: false },
+  { name: "Python", Logo: PythonLogo, isImage: false },
+  { name: "React", Logo: ReactLogo, isImage: false },
+  { name: "ELK Stack", Logo: ELKLogo, isImage: false },
 ];
 
 export const TechStack = () => {
@@ -55,22 +64,31 @@ export const TechStack = () => {
             initial={{ x: 0 }}
             animate={{ x: "-50%" }}
             transition={{
-              duration: 30,
+              duration: 35,
               repeat: Infinity,
               ease: "linear",
             }}
-            className="flex gap-8 items-center"
+            className="flex gap-6 items-center"
           >
             {[...technologies, ...technologies].map((tech, index) => (
-              <div
+              <motion.div
                 key={index}
-                className="flex-shrink-0 flex items-center gap-3 px-6 py-4 rounded-xl bg-card border border-border hover:border-coral/30 transition-all hover:shadow-lg group"
+                whileHover={{ scale: 1.05, y: -3 }}
+                className="flex-shrink-0 flex items-center gap-3 px-5 py-3 rounded-xl bg-card border border-border hover:border-coral/30 transition-all hover:shadow-lg group"
               >
-                <tech.Logo className="w-10 h-10 group-hover:scale-110 transition-transform" />
-                <span className="font-semibold text-foreground whitespace-nowrap">
+                {tech.isImage ? (
+                  <img 
+                    src={tech.logo as string} 
+                    alt={tech.name} 
+                    className="w-8 h-8 object-contain group-hover:scale-110 transition-transform"
+                  />
+                ) : (
+                  <tech.Logo className="w-8 h-8 group-hover:scale-110 transition-transform" />
+                )}
+                <span className="font-semibold text-foreground whitespace-nowrap text-sm">
                   {tech.name}
                 </span>
-              </div>
+              </motion.div>
             ))}
           </motion.div>
         </div>
