@@ -12,61 +12,40 @@ import {
   AlertTriangle,
   FileCheck,
   Search,
-  ShieldCheck,
-  UserCheck,
-  Key,
-  Network,
-  Bug,
-  Radio
+  ShieldCheck
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { FloatingIcons, GradientOrbs, HexagonGrid } from "@/components/graphics/FloatingIcons";
-import { TechIllustration } from "@/components/graphics/TechIllustration";
-import { AnimatedBackground } from "@/components/graphics/AnimatedBackground";
 
-const cloudSecurityFeatures = [
+const features = [
   {
     icon: Search,
     title: "Cloud Security Posture Assessment",
-    description: "Identify misconfigurations in AWS, Azure, GCP. CIS Benchmarks & compliance mapping."
-  },
-  {
-    icon: ShieldCheck,
-    title: "Security Architecture Design",
-    description: "Zero Trust Architecture, Identity and Access Management (IAM), Network segmentation and firewall policies."
-  },
-  {
-    icon: Key,
-    title: "Identity and Access Management (IAM)",
-    description: "RBAC, ABAC policy design. SSO, MFA integration. Identity lifecycle management."
+    description: "Comprehensive assessment of your cloud security posture with actionable remediation guidance."
   },
   {
     icon: Lock,
-    title: "DevSecOps Integration",
-    description: "Static and dynamic code analysis (SAST/DAST). Shift-left security in CI/CD pipelines. Container security (Trivy, Aqua, Prisma Cloud)."
+    title: "Zero Trust Architecture",
+    description: "Design and implement zero trust security models for modern hybrid environments."
   },
-];
-
-const cybersecurityFeatures = [
   {
-    icon: Bug,
-    title: "Vulnerability Assessment & Penetration Testing (VAPT)",
-    description: "Infrastructure, application, and cloud VAPT. Black-box, white-box, and grey-box testing."
+    icon: ShieldCheck,
+    title: "Identity & Access Management",
+    description: "SSO, MFA, RBAC, and privileged access management across all platforms."
+  },
+  {
+    icon: AlertTriangle,
+    title: "DevSecOps Integration",
+    description: "Shift-left security with automated scanning, SAST, DAST, and SCA in CI/CD pipelines."
   },
   {
     icon: Eye,
-    title: "Security Monitoring & Incident Response",
-    description: "SIEM implementation (Splunk, ELK, AWS GuardDuty). 24/7 monitoring and threat detection. Incident handling and forensic analysis."
+    title: "VAPT Services",
+    description: "Vulnerability assessment and penetration testing for applications, networks, and cloud."
   },
   {
-    icon: Radio,
-    title: "Managed Detection and Response (MDR)",
-    description: "Outsourced SOC for continuous monitoring. Threat hunting and response."
-  },
-  {
-    icon: Network,
-    title: "Third-Party Risk Management",
-    description: "Vendor security assessments. Supply chain security audits."
+    icon: FileCheck,
+    title: "Compliance Automation",
+    description: "Automated compliance for SOC 2, HIPAA, PCI-DSS, GDPR, and ISO 27001."
   },
 ];
 
@@ -81,9 +60,6 @@ const SecurityServices = () => {
       
       {/* Hero Section */}
       <section className="pt-32 pb-20 bg-gradient-hero relative overflow-hidden">
-        <GradientOrbs />
-        <FloatingIcons count={10} />
-        <HexagonGrid />
         <div className="absolute inset-0 opacity-10">
           <motion.div
             animate={{ 
@@ -109,8 +85,8 @@ const SecurityServices = () => {
               <span className="text-gradient">Services</span>
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
-              Security is at the core of everything we do. We provide comprehensive security solutions 
-              covering both cloud and on-premise environments.
+              Comprehensive security solutions to protect your cloud infrastructure, 
+              applications, and data from evolving threats.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Button variant="gradient" size="lg" asChild>
@@ -127,7 +103,7 @@ const SecurityServices = () => {
         </div>
       </section>
 
-      {/* Cloud Security Section */}
+      {/* Features Grid */}
       <section className="py-20 bg-card">
         <div className="container mx-auto px-4">
           <motion.div
@@ -137,15 +113,15 @@ const SecurityServices = () => {
             className="text-center mb-16"
           >
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
-              ☁️ Cloud Security
+              Security Capabilities
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Identity and access management, data encryption, threat detection, and incident response
+              End-to-end security solutions for cloud-native and hybrid environments
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            {cloudSecurityFeatures.map((feature, index) => (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {features.map((feature, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 30 }}
@@ -165,46 +141,8 @@ const SecurityServices = () => {
         </div>
       </section>
 
-      {/* Cybersecurity Section */}
-      <section className="py-20 bg-background">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
-              🔐 Cybersecurity
-            </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Network security, endpoint protection, threat intelligence, and security posture management
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            {cybersecurityFeatures.map((feature, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="p-6 rounded-2xl bg-card border border-border hover:border-primary/30 transition-all group"
-              >
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <feature.icon className="w-6 h-6 text-white" />
-                </div>
-                <h3 className="font-heading text-xl font-bold mb-2">{feature.title}</h3>
-                <p className="text-muted-foreground">{feature.description}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Compliance Frameworks */}
-      <section className="py-20 bg-card">
+      <section className="py-20 bg-background">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -229,7 +167,7 @@ const SecurityServices = () => {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.05 }}
                 whileHover={{ scale: 1.05 }}
-                className="px-6 py-3 rounded-full bg-background border border-border hover:border-primary/50 transition-all cursor-default"
+                className="px-6 py-3 rounded-full bg-card border border-border hover:border-primary/50 transition-all cursor-default"
               >
                 <span className="font-medium text-foreground">{framework}</span>
               </motion.div>
@@ -239,7 +177,7 @@ const SecurityServices = () => {
       </section>
 
       {/* Security Approach */}
-      <section className="py-20 bg-background">
+      <section className="py-20 bg-card">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -291,7 +229,7 @@ const SecurityServices = () => {
               ].map((stat, index) => (
                 <div
                   key={index}
-                  className="text-center p-6 rounded-xl bg-card border border-border"
+                  className="text-center p-6 rounded-xl bg-background border border-border"
                 >
                   <div className="text-3xl font-bold text-gradient mb-2">{stat.value}</div>
                   <div className="text-sm text-muted-foreground">{stat.label}</div>

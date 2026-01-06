@@ -11,9 +11,8 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 [![Vite](https://img.shields.io/badge/Vite-5.0-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
-[![Supabase](https://img.shields.io/badge/Supabase-Backend-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)](https://supabase.com/)
 
-[🌐 Live Demo](https://id-preview--37fd4039-aaf9-467d-bc1f-9ecb2b75b1b4.lovable.app/) • [📖 Documentation](#features) • [🚀 Getting Started](#getting-started)
+[🌐 Live Demo](https://celestibia.lovable.app) • [📖 Documentation](#features) • [🚀 Getting Started](#getting-started)
 
 </div>
 
@@ -28,13 +27,11 @@ Celestibia is a modern, enterprise-grade cloud solutions platform offering compr
 - 🏠 **Beautiful Landing Page** - Engaging hero section with animated gradients
 - 📊 **Services Showcase** - Detailed service pages for Cloud, DevOps, AI/ML, Security & more
 - 🏢 **Industry Solutions** - Tailored solutions for Healthcare, Finance, Retail, and more
-- 📝 **Blog System** - Dynamic blog with CMS, individual post pages, and SEO meta tags
-- 📞 **Contact Form** - Professional contact page with database storage
-- 📧 **Automated Emails** - EmailJS integration for visitor confirmations & admin notifications
-- 🔐 **Secure Admin Authentication** - Role-based admin access with Supabase Auth
+- 📝 **Blog System** - Dynamic blog with individual post pages
+- 📞 **Contact Form** - Professional contact page with form validation
+- 🔐 **Dual Authentication** - Separate User and Admin login systems
 - 📱 **Fully Responsive** - Optimized for all devices and screen sizes
 - 🎨 **Dark/Light Mode Ready** - Theme-aware design system
-- 🗄️ **Persistent Database** - All data stored securely in cloud database
 
 ## 🛠️ Tech Stack
 
@@ -44,14 +41,6 @@ Celestibia is a modern, enterprise-grade cloud solutions platform offering compr
 | **React** | 18.3.1 | UI Component Library |
 | **TypeScript** | 5.0+ | Type-Safe Development |
 | **Vite** | 5.0+ | Build Tool & Dev Server |
-
-### Backend & Database
-| Technology | Purpose |
-|------------|---------|
-| **Supabase** | Backend-as-a-Service |
-| **PostgreSQL** | Relational Database |
-| **Row Level Security** | Data Protection |
-| **Supabase Auth** | Secure Authentication |
 
 ### Styling & UI
 | Technology | Purpose |
@@ -76,7 +65,6 @@ Celestibia is a modern, enterprise-grade cloud solutions platform offering compr
 | **date-fns** | Date Manipulation |
 | **Sonner** | Toast Notifications |
 | **Embla Carousel** | Touch-Friendly Carousels |
-| **EmailJS** | Client-Side Email Sending |
 
 ## 📁 Project Structure
 
@@ -98,9 +86,7 @@ src/
 │   ├── AdminAuthContext.tsx
 │   └── UserAuthContext.tsx
 ├── hooks/              # Custom React hooks
-├── integrations/       # Supabase client & types
-│   └── supabase/
-├── lib/                # Utility functions & storage
+├── lib/                # Utility functions
 ├── pages/              # Page components
 │   ├── services/       # Service detail pages
 │   ├── Index.tsx
@@ -114,9 +100,8 @@ src/
 
 ### Prerequisites
 
-- Node.js 18+ (recommended: Node.js 20+)
-- npm, yarn, or bun package manager
-- Git
+- Node.js 18+ 
+- npm or bun
 
 ### Installation
 
@@ -129,125 +114,22 @@ cd celestibia
 
 # Install dependencies
 npm install
-# or with yarn
-yarn install
-# or with bun
-bun install
-```
-
-### Environment Setup
-
-Create a `.env` file in the root directory (or copy from `.env.example` if available):
-
-```env
-VITE_SUPABASE_URL=your_supabase_project_url
-VITE_SUPABASE_PUBLISHABLE_KEY=your_supabase_anon_key
-```
-
-> **Note:** If you're using Lovable Cloud, these environment variables are automatically configured for you.
-
-### Running Locally
-
-```bash
-# Start the development server
-npm run dev
 # or
-yarn dev
+bun install
+
+# Start development server
+npm run dev
 # or
 bun dev
 ```
 
-The app will be available at **http://localhost:5173** (or the next available port).
-
-### Available Scripts
-
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Start development server with hot reload |
-| `npm run build` | Build for production |
-| `npm run preview` | Preview production build locally |
-| `npm run lint` | Run ESLint for code quality |
-
 ### Build for Production
 
 ```bash
-# Create optimized production build
 npm run build
-
-# Preview the production build
-npm run preview
+# or
+bun run build
 ```
-
-The build output will be in the `dist/` folder, ready for deployment.
-
-## 📧 EmailJS Configuration
-
-The contact form uses EmailJS for sending automated emails. To configure:
-
-### 1. Create EmailJS Account
-
-Go to [EmailJS Dashboard](https://www.emailjs.com/) and create a free account.
-
-### 2. Get Your Credentials
-
-Update `src/hooks/useEmailJS.ts` with your credentials:
-
-```typescript
-const EMAILJS_SERVICE_ID = 'YOUR_SERVICE_ID';      // From Email Services
-const EMAILJS_PUBLIC_KEY = 'YOUR_PUBLIC_KEY';      // From Account → API Keys
-const VISITOR_TEMPLATE_ID = 'YOUR_VISITOR_TEMPLATE_ID';  // Template for visitor confirmation
-const ADMIN_TEMPLATE_ID = 'YOUR_ADMIN_TEMPLATE_ID';      // Template for admin notification
-```
-
-### 3. Create Email Templates
-
-**Visitor Confirmation Template** (sent to the person who submitted the form):
-
-| Variable | Description |
-|----------|-------------|
-| `{{to_name}}` | Visitor's name |
-| `{{to_email}}` | Visitor's email |
-| `{{from_name}}` | Company name (Celestibia Technologies) |
-| `{{company}}` | Visitor's company |
-| `{{message}}` | Their message |
-
-**Admin Notification Template** (sent to your team):
-
-| Variable | Description |
-|----------|-------------|
-| `{{from_name}}` | Visitor's name |
-| `{{from_email}}` | Visitor's email |
-| `{{company}}` | Visitor's company |
-| `{{phone}}` | Visitor's phone |
-| `{{message}}` | Their message |
-| `{{reply_to}}` | Reply-to email address |
-
-## 🔒 Admin Setup
-
-1. Navigate to `/admin/signup` to create your first admin account
-2. The first user to sign up will automatically be granted admin privileges
-3. Login at `/admin` to access the admin dashboard
-4. From the dashboard you can:
-   - View and manage contact form submissions
-   - Create, edit, and delete blog posts
-   - Manage SEO meta tags for blog content
-
-## 🗄️ Database Schema
-
-### Tables
-
-| Table | Purpose |
-|-------|---------|
-| `blogs` | Blog posts with SEO metadata |
-| `contacts` | Contact form submissions |
-| `user_roles` | Admin role assignments |
-
-### Security
-
-- **Row Level Security (RLS)** enabled on all tables
-- **Public read access** for blogs (for website visitors)
-- **Admin-only access** for contacts and blog management
-- **Secure authentication** via Supabase Auth
 
 ## 🎨 Design System
 
@@ -280,14 +162,12 @@ Visit the live application: **[celestibia.lovable.app](https://celestibia.lovabl
 | Contact | `/contact` | Contact form and information |
 | Case Studies | `/case-studies` | Client success stories |
 
-### Admin Routes
+## 🔒 Authentication
 
-| Page | Route | Description |
-|------|-------|-------------|
-| Admin Login | `/admin` | Admin authentication |
-| Admin Signup | `/admin/signup` | Create admin account |
-| Admin Dashboard | `/admin/dashboard` | Manage blogs & contacts |
-| Forgot Password | `/admin/forgot-password` | Password reset |
+The platform features dual authentication:
+
+- **User Login** (`/login`) - For regular users
+- **Admin Login** (`/admin/login`) - For administrators with dashboard access
 
 ## 📦 Key Dependencies
 
@@ -297,7 +177,6 @@ Visit the live application: **[celestibia.lovable.app](https://celestibia.lovabl
   "react-router-dom": "^6.30.1",
   "framer-motion": "^12.23.26",
   "@tanstack/react-query": "^5.83.0",
-  "@supabase/supabase-js": "^2.x",
   "tailwindcss": "latest",
   "lucide-react": "^0.462.0"
 }

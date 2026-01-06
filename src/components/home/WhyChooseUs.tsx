@@ -1,7 +1,5 @@
 import { motion } from "framer-motion";
 import { CheckCircle, Rocket, Users, Award, Clock, HeartHandshake } from "lucide-react";
-import { useABTest } from "@/hooks/useABTest";
-import { ConnectedNetwork, CircuitBoard } from "@/components/graphics/InfraCloudStyle";
 
 const reasons = [
   {
@@ -37,23 +35,10 @@ const reasons = [
 ];
 
 export const WhyChooseUs = () => {
-  const { getVariantValue } = useABTest('why_choose_headline');
-  const headline = getVariantValue() || 'Technology Should Simplify Business';
-
   return (
     <section className="py-24 bg-background relative overflow-hidden">
-      {/* InfraCloud-style backgrounds */}
-      <CircuitBoard />
-      <div className="hidden lg:block">
-        <ConnectedNetwork className="opacity-40" />
-      </div>
-      
-      {/* Gradient orbs */}
-      <motion.div 
-        animate={{ scale: [1, 1.2, 1], opacity: [0.15, 0.25, 0.15] }}
-        transition={{ duration: 10, repeat: Infinity }}
-        className="absolute top-0 right-0 w-[400px] h-[400px] bg-gradient-to-br from-[#F97316]/20 to-[#8B5CF6]/10 rounded-full blur-[100px]" 
-      />
+      {/* Background Elements */}
+      <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-secondary/50 to-transparent" />
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -68,19 +53,9 @@ export const WhyChooseUs = () => {
               Why Choose Us
             </span>
             <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
-              {headline.includes('Simplify') ? (
-                <>
-                  Technology Should{" "}
-                  <span className="text-gradient">Simplify</span>{" "}
-                  Business
-                </>
-              ) : (
-                <>
-                  Why{" "}
-                  <span className="text-gradient">Partner</span>{" "}
-                  With Us?
-                </>
-              )}
+              Technology Should{" "}
+              <span className="text-gradient">Simplify</span>{" "}
+              Business
             </h2>
             <p className="text-lg text-muted-foreground mb-8">
               At Celestibia Solutions, we believe in solutions that scale with growth, 
@@ -103,8 +78,8 @@ export const WhyChooseUs = () => {
                   transition={{ duration: 0.4, delay: index * 0.1 }}
                   className="flex items-center gap-3"
                 >
-                  <div className="w-6 h-6 rounded-full bg-gradient-to-r from-coral to-orange flex items-center justify-center flex-shrink-0 shadow-md">
-                    <CheckCircle className="w-4 h-4 text-white drop-shadow-sm" />
+                  <div className="w-6 h-6 rounded-full bg-gradient-accent flex items-center justify-center flex-shrink-0">
+                    <CheckCircle className="w-4 h-4 text-primary-foreground" />
                   </div>
                   <span className="font-medium text-foreground">{belief}</span>
                 </motion.div>
@@ -129,8 +104,8 @@ export const WhyChooseUs = () => {
                 transition={{ duration: 0.4, delay: index * 0.1 }}
                 className="p-6 rounded-xl bg-card border border-border hover:border-coral/30 hover:shadow-lg transition-all duration-300"
               >
-                <div className="w-12 h-12 rounded-lg bg-gradient-to-r from-coral to-orange flex items-center justify-center mb-4 shadow-lg">
-                  <reason.icon className="w-6 h-6 text-white drop-shadow-md" />
+                <div className="w-12 h-12 rounded-lg bg-gradient-primary flex items-center justify-center mb-4">
+                  <reason.icon className="w-6 h-6 text-primary-foreground" />
                 </div>
                 <h3 className="font-heading font-bold text-lg mb-2">{reason.title}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">

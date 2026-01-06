@@ -32,19 +32,15 @@ import {
   Edit,
   Eye,
   X,
-  Loader2,
-  BarChart3,
 } from "lucide-react";
-import { ABTestingDashboard } from "@/components/admin/ABTestingDashboard";
 
 const AdminDashboard = () => {
-  const { isAdmin, isLoading: authLoading, logout } = useAdminAuth();
+  const { isAdmin, logout } = useAdminAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
 
   const [contacts, setContacts] = useState<ContactSubmission[]>([]);
   const [blogs, setBlogs] = useState<BlogPost[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
   const [showBlogForm, setShowBlogForm] = useState(false);
   const [editingBlog, setEditingBlog] = useState<BlogPost | null>(null);
   const [viewingBlog, setViewingBlog] = useState<BlogPost | null>(null);
@@ -54,9 +50,9 @@ const AdminDashboard = () => {
     content: "",
     author: "",
     category: "Cloud",
-    read_time: "5 min read",
-    meta_title: "",
-    meta_description: "",
+    readTime: "5 min read",
+    metaTitle: "",
+    metaDescription: "",
     date: new Date().toLocaleDateString("en-US", {
       month: "short",
       day: "numeric",
@@ -65,65 +61,51 @@ const AdminDashboard = () => {
   });
 
   useEffect(() => {
-    if (!authLoading && !isAdmin) {
+    if (!isAdmin) {
       navigate("/admin");
       return;
     }
-    if (!authLoading && isAdmin) {
-      loadData();
-    }
-  }, [isAdmin, authLoading, navigate]);
+    loadData();
+  }, [isAdmin, navigate]);
 
-  const loadData = async () => {
-    setIsLoading(true);
-    const [contactsData, blogsData] = await Promise.all([
-      getContacts(),
-      getBlogs(),
-    ]);
-    setContacts(contactsData);
-    setBlogs(blogsData);
-    setIsLoading(false);
+  const loadData = () => {
+    setContacts(getContacts());
+    setBlogs(getBlogs());
   };
 
-  const handleLogout = async () => {
-    await logout();
+  const handleLogout = () => {
+    logout();
     navigate("/");
   };
 
-  const handleDeleteContact = async (id: string) => {
-    const success = await deleteContact(id);
-    if (success) {
-      setContacts(contacts.filter((c) => c.id !== id));
-      toast({
-        title: "Contact Deleted",
-        description: "The contact submission has been removed.",
-      });
-    }
+  const handleDeleteContact = (id: string) => {
+    deleteContact(id);
+    setContacts(getContacts());
+    toast({
+      title: "Contact Deleted",
+      description: "The contact submission has been removed.",
+    });
   };
 
-  const handleDeleteBlog = async (id: string) => {
-    const success = await deleteBlog(id);
-    if (success) {
-      setBlogs(blogs.filter((b) => b.id !== id));
-      toast({
-        title: "Blog Deleted",
-        description: "The blog post has been removed.",
-      });
-    }
+  const handleDeleteBlog = (id: string) => {
+    deleteBlog(id);
+    setBlogs(getBlogs());
+    toast({
+      title: "Blog Deleted",
+      description: "The blog post has been removed.",
+    });
   };
 
-  const handleCreateBlog = async (e: React.FormEvent) => {
+  const handleCreateBlog = (e: React.FormEvent) => {
     e.preventDefault();
-    const newBlog = await saveBlog(blogForm);
-    if (newBlog) {
-      setBlogs([newBlog, ...blogs]);
-      resetBlogForm();
-      setShowBlogForm(false);
-      toast({
-        title: "Blog Created!",
-        description: "Your blog post has been published.",
-      });
-    }
+    saveBlog(blogForm);
+    setBlogs(getBlogs());
+    resetBlogForm();
+    setShowBlogForm(false);
+    toast({
+      title: "Blog Created!",
+      description: "Your blog post has been published.",
+    });
   };
 
   const handleEditBlog = (blog: BlogPost) => {
@@ -134,28 +116,26 @@ const AdminDashboard = () => {
       content: blog.content,
       author: blog.author,
       category: blog.category,
-      read_time: blog.read_time,
-      meta_title: blog.meta_title || "",
-      meta_description: blog.meta_description || "",
+      readTime: blog.readTime,
+      metaTitle: blog.metaTitle || "",
+      metaDescription: blog.metaDescription || "",
       date: blog.date,
     });
     setShowBlogForm(true);
   };
 
-  const handleUpdateBlog = async (e: React.FormEvent) => {
+  const handleUpdateBlog = (e: React.FormEvent) => {
     e.preventDefault();
     if (editingBlog) {
-      const updatedBlog = await updateBlog(editingBlog.id, blogForm);
-      if (updatedBlog) {
-        setBlogs(blogs.map((b) => (b.id === editingBlog.id ? updatedBlog : b)));
-        resetBlogForm();
-        setEditingBlog(null);
-        setShowBlogForm(false);
-        toast({
-          title: "Blog Updated!",
-          description: "Your blog post has been updated.",
-        });
-      }
+      updateBlog(editingBlog.id, blogForm);
+      setBlogs(getBlogs());
+      resetBlogForm();
+      setEditingBlog(null);
+      setShowBlogForm(false);
+      toast({
+        title: "Blog Updated!",
+        description: "Your blog post has been updated.",
+      });
     }
   };
 
@@ -166,9 +146,9 @@ const AdminDashboard = () => {
       content: "",
       author: "",
       category: "Cloud",
-      read_time: "5 min read",
-      meta_title: "",
-      meta_description: "",
+      readTime: "5 min read",
+      metaTitle: "",
+      metaDescription: "",
       date: new Date().toLocaleDateString("en-US", {
         month: "short",
         day: "numeric",
@@ -183,12 +163,8 @@ const AdminDashboard = () => {
     resetBlogForm();
   };
 
-  if (authLoading || !isAdmin) {
-    return (
-      <main className="min-h-screen flex items-center justify-center">
-        <Loader2 className="w-8 h-8 animate-spin text-coral" />
-      </main>
-    );
+  if (!isAdmin) {
+    return null;
   }
 
   return (
@@ -266,20 +242,12 @@ const AdminDashboard = () => {
                 <FileText className="w-4 h-4" />
                 Blog Posts
               </TabsTrigger>
-              <TabsTrigger value="ab-testing" className="gap-2">
-                <BarChart3 className="w-4 h-4" />
-                A/B Testing
-              </TabsTrigger>
             </TabsList>
 
             {/* Contacts Tab */}
             <TabsContent value="contacts">
               <div className="bg-card rounded-xl border border-border overflow-hidden">
-                {isLoading ? (
-                  <div className="p-12 flex items-center justify-center">
-                    <Loader2 className="w-6 h-6 animate-spin text-muted-foreground" />
-                  </div>
-                ) : contacts.length === 0 ? (
+                {contacts.length === 0 ? (
                   <div className="p-12 text-center text-muted-foreground">
                     No contact submissions yet.
                   </div>
@@ -314,7 +282,7 @@ const AdminDashboard = () => {
                               )}
                               <span className="flex items-center gap-1">
                                 <Calendar className="w-4 h-4" />
-                                {new Date(contact.created_at).toLocaleDateString()}
+                                {new Date(contact.createdAt).toLocaleDateString()}
                               </span>
                             </div>
                             <p className="mt-3 text-foreground">
@@ -430,9 +398,9 @@ const AdminDashboard = () => {
                           Read Time
                         </label>
                         <Input
-                          value={blogForm.read_time}
+                          value={blogForm.readTime}
                           onChange={(e) =>
-                            setBlogForm({ ...blogForm, read_time: e.target.value })
+                            setBlogForm({ ...blogForm, readTime: e.target.value })
                           }
                           placeholder="e.g., 5 min read"
                         />
@@ -450,15 +418,15 @@ const AdminDashboard = () => {
                             Meta Title
                           </label>
                           <Input
-                            value={blogForm.meta_title}
+                            value={blogForm.metaTitle}
                             onChange={(e) =>
-                              setBlogForm({ ...blogForm, meta_title: e.target.value })
+                              setBlogForm({ ...blogForm, metaTitle: e.target.value })
                             }
                             placeholder="SEO title (defaults to blog title)"
                             maxLength={60}
                           />
                           <p className="text-xs text-muted-foreground mt-1">
-                            {blogForm.meta_title.length}/60 characters
+                            {blogForm.metaTitle.length}/60 characters
                           </p>
                         </div>
                         <div>
@@ -466,18 +434,18 @@ const AdminDashboard = () => {
                             Meta Description
                           </label>
                           <Input
-                            value={blogForm.meta_description}
+                            value={blogForm.metaDescription}
                             onChange={(e) =>
                               setBlogForm({
                                 ...blogForm,
-                                meta_description: e.target.value,
+                                metaDescription: e.target.value,
                               })
                             }
                             placeholder="SEO description (defaults to excerpt)"
                             maxLength={160}
                           />
                           <p className="text-xs text-muted-foreground mt-1">
-                            {blogForm.meta_description.length}/160 characters
+                            {blogForm.metaDescription.length}/160 characters
                           </p>
                         </div>
                       </div>
@@ -556,17 +524,17 @@ const AdminDashboard = () => {
                     </h2>
                     <p className="text-muted-foreground text-sm mb-4">
                       By {viewingBlog.author} · {viewingBlog.date} ·{" "}
-                      {viewingBlog.read_time}
+                      {viewingBlog.readTime}
                     </p>
-                    {viewingBlog.meta_title && (
+                    {viewingBlog.metaTitle && (
                       <div className="mb-2 p-2 bg-muted rounded text-sm">
-                        <strong>Meta Title:</strong> {viewingBlog.meta_title}
+                        <strong>Meta Title:</strong> {viewingBlog.metaTitle}
                       </div>
                     )}
-                    {viewingBlog.meta_description && (
+                    {viewingBlog.metaDescription && (
                       <div className="mb-4 p-2 bg-muted rounded text-sm">
                         <strong>Meta Description:</strong>{" "}
-                        {viewingBlog.meta_description}
+                        {viewingBlog.metaDescription}
                       </div>
                     )}
                     <p className="text-muted-foreground italic mb-4">
@@ -598,11 +566,7 @@ const AdminDashboard = () => {
 
               {/* Blog List */}
               <div className="bg-card rounded-xl border border-border overflow-hidden">
-                {isLoading ? (
-                  <div className="p-12 flex items-center justify-center">
-                    <Loader2 className="w-6 h-6 animate-spin text-muted-foreground" />
-                  </div>
-                ) : blogs.length === 0 ? (
+                {blogs.length === 0 ? (
                   <div className="p-12 text-center text-muted-foreground">
                     No blog posts yet.
                   </div>
@@ -628,7 +592,7 @@ const AdminDashboard = () => {
                               {blog.excerpt}
                             </p>
                             <p className="text-sm text-muted-foreground mt-2">
-                              By {blog.author} · {blog.read_time}
+                              By {blog.author} · {blog.readTime}
                             </p>
                           </div>
                           <div className="flex items-center gap-2">
@@ -663,11 +627,6 @@ const AdminDashboard = () => {
                   </div>
                 )}
               </div>
-            </TabsContent>
-
-            {/* A/B Testing Tab */}
-            <TabsContent value="ab-testing">
-              <ABTestingDashboard />
             </TabsContent>
           </Tabs>
         </div>

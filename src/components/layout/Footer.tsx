@@ -1,66 +1,33 @@
-import { forwardRef } from "react";
 import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin, Linkedin, Twitter, Github } from "lucide-react";
 import logo from "@/assets/logo.jpeg";
+
 const footerLinks = {
   services: [
-    {
-      name: "Cloud Services",
-      href: "/services/cloud",
-    },
-    {
-      name: "DevOps",
-      href: "/services/devops",
-    },
-    {
-      name: "Data Engineering",
-      href: "/services/data-engineering",
-    },
-    {
-      name: "Security Services",
-      href: "/services/security",
-    },
-    {
-      name: "AI & ML",
-      href: "/services/ai-ml",
-    },
+    { name: "Cloud Services", href: "/services/cloud" },
+    { name: "DevOps", href: "/services/devops" },
+    { name: "Data Engineering", href: "/services/data-engineering" },
+    { name: "Security Services", href: "/services/security" },
+    { name: "AI & ML", href: "/services/ai-ml" },
   ],
   company: [
-    {
-      name: "About Us",
-      href: "/about",
-    },
-    {
-      name: "Case Studies",
-      href: "/case-studies",
-    },
-    {
-      name: "Blog",
-      href: "/blog",
-    },
-    {
-      name: "Contact",
-      href: "/contact",
-    },
+    { name: "About Us", href: "/about" },
+    { name: "Case Studies", href: "/case-studies" },
+    { name: "Blog", href: "/blog" },
+    { name: "Careers", href: "/careers" },
+    { name: "Contact", href: "/contact" },
   ],
   resources: [
-    {
-      name: "Privacy Policy",
-      href: "/privacy",
-    },
-    {
-      name: "Terms of Service",
-      href: "/terms",
-    },
+    { name: "Documentation", href: "#" },
+    { name: "Privacy Policy", href: "/privacy" },
+    { name: "Terms of Service", href: "/terms" },
   ],
 };
-export const Footer = forwardRef<HTMLElement>((_, ref) => {
-  return (
-    <footer ref={ref} className="bg-gradient-footer text-primary-foreground relative overflow-hidden">
-      {/* Decorative glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-px bg-gradient-to-r from-transparent via-coral/40 to-transparent" />
 
-      <div className="container mx-auto px-4 py-16 relative z-10">
+export const Footer = () => {
+  return (
+    <footer className="bg-gradient-dark text-primary-foreground">
+      <div className="container mx-auto px-4 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
           {/* Brand Section */}
           <div className="lg:col-span-2">
@@ -68,7 +35,7 @@ export const Footer = forwardRef<HTMLElement>((_, ref) => {
               <img src={logo} alt="Celestibia Solutions" className="h-14 w-auto rounded-lg bg-primary-foreground p-1" />
             </Link>
             <p className="text-primary-foreground/80 mb-6 max-w-sm">
-              Innovative cloud solutions for a connected world. Empowering businesses .
+              Innovative cloud solutions for a connected world. Empowering businesses through smart technology and scalable engineering.
             </p>
             <div className="space-y-3">
               <a
@@ -98,7 +65,10 @@ export const Footer = forwardRef<HTMLElement>((_, ref) => {
             <ul className="space-y-3">
               {footerLinks.services.map((link) => (
                 <li key={link.name}>
-                  <Link to={link.href} className="text-primary-foreground/70 hover:text-coral transition-colors">
+                  <Link
+                    to={link.href}
+                    className="text-primary-foreground/70 hover:text-coral transition-colors"
+                  >
                     {link.name}
                   </Link>
                 </li>
@@ -112,7 +82,10 @@ export const Footer = forwardRef<HTMLElement>((_, ref) => {
             <ul className="space-y-3">
               {footerLinks.company.map((link) => (
                 <li key={link.name}>
-                  <Link to={link.href} className="text-primary-foreground/70 hover:text-coral transition-colors">
+                  <Link
+                    to={link.href}
+                    className="text-primary-foreground/70 hover:text-coral transition-colors"
+                  >
                     {link.name}
                   </Link>
                 </li>
@@ -126,7 +99,10 @@ export const Footer = forwardRef<HTMLElement>((_, ref) => {
             <ul className="space-y-3">
               {footerLinks.resources.map((link) => (
                 <li key={link.name}>
-                  <Link to={link.href} className="text-primary-foreground/70 hover:text-coral transition-colors">
+                  <Link
+                    to={link.href}
+                    className="text-primary-foreground/70 hover:text-coral transition-colors"
+                  >
                     {link.name}
                   </Link>
                 </li>
@@ -164,18 +140,11 @@ export const Footer = forwardRef<HTMLElement>((_, ref) => {
           <p className="text-primary-foreground/60 text-sm">
             © 2026 Celestibia Solutions Pvt. Ltd. All rights reserved.
           </p>
-          <div className="flex items-center gap-4">
-            <Link
-              to="/admin"
-              className="text-primary-foreground/40 hover:text-primary-foreground/60 text-xs transition-colors"
-            >
-              Admin
-            </Link>
-            <p className="text-primary-foreground/60 text-sm">Shaping the future, one solution at a time.</p>
-          </div>
+          <p className="text-primary-foreground/60 text-sm">
+            Shaping the future, one solution at a time.
+          </p>
         </div>
       </div>
     </footer>
   );
-});
-Footer.displayName = "Footer";
+};

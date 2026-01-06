@@ -1,45 +1,18 @@
 import { motion } from "framer-motion";
 
-// Import original logos
-import gitlabLogo from "@/assets/logos/gitlab.png";
-import awsSvg from "@/assets/logos/aws.svg";
-import gcpLogo from "@/assets/logos/google-cloud.png";
-import jenkinsLogo from "@/assets/logos/jenkins.png";
-import githubSvg from "@/assets/logos/github.svg";
-import argocdLogo from "@/assets/logos/argocd.png";
-import grafanaLogo from "@/assets/logos/grafana.png";
-import prometheusLogo from "@/assets/logos/prometheus.png";
-import azureSvg from "@/assets/logos/azure.svg";
-
-import { 
-  KubernetesLogo, 
-  DockerLogo, 
-  TerraformLogo, 
-  AnsibleLogo,
-  HelmLogo,
-  PythonLogo,
-  ReactLogo,
-  ELKLogo
-} from "@/components/logos/TechLogos";
-
 const technologies = [
-  { name: "AWS", logo: awsSvg, isImage: true },
-  { name: "Azure", logo: azureSvg, isImage: true },
-  { name: "Google Cloud", logo: gcpLogo, isImage: true },
-  { name: "GitLab", logo: gitlabLogo, isImage: true },
-  { name: "GitHub Actions", logo: githubSvg, isImage: true },
-  { name: "Jenkins", logo: jenkinsLogo, isImage: true },
-  { name: "ArgoCD", logo: argocdLogo, isImage: true },
-  { name: "Grafana", logo: grafanaLogo, isImage: true },
-  { name: "Prometheus", logo: prometheusLogo, isImage: true },
-  { name: "Kubernetes", Logo: KubernetesLogo, isImage: false },
-  { name: "Docker", Logo: DockerLogo, isImage: false },
-  { name: "Terraform", Logo: TerraformLogo, isImage: false },
-  { name: "Ansible", Logo: AnsibleLogo, isImage: false },
-  { name: "Helm", Logo: HelmLogo, isImage: false },
-  { name: "Python", Logo: PythonLogo, isImage: false },
-  { name: "React", Logo: ReactLogo, isImage: false },
-  { name: "ELK Stack", Logo: ELKLogo, isImage: false },
+  { name: "AWS", category: "Cloud" },
+  { name: "Azure", category: "Cloud" },
+  { name: "GCP", category: "Cloud" },
+  { name: "Kubernetes", category: "DevOps" },
+  { name: "Docker", category: "DevOps" },
+  { name: "Terraform", category: "IaC" },
+  { name: "Jenkins", category: "CI/CD" },
+  { name: "GitLab", category: "CI/CD" },
+  { name: "Prometheus", category: "Monitoring" },
+  { name: "Grafana", category: "Monitoring" },
+  { name: "Python", category: "Language" },
+  { name: "React", category: "Frontend" },
 ];
 
 export const TechStack = () => {
@@ -64,31 +37,21 @@ export const TechStack = () => {
             initial={{ x: 0 }}
             animate={{ x: "-50%" }}
             transition={{
-              duration: 35,
+              duration: 30,
               repeat: Infinity,
               ease: "linear",
             }}
-            className="flex gap-6 items-center"
+            className="flex gap-12 items-center"
           >
             {[...technologies, ...technologies].map((tech, index) => (
-              <motion.div
+              <div
                 key={index}
-                whileHover={{ scale: 1.05, y: -3 }}
-                className="flex-shrink-0 flex items-center gap-3 px-5 py-3 rounded-xl bg-card border border-border hover:border-coral/30 transition-all hover:shadow-lg group"
+                className="flex-shrink-0 px-6 py-3 rounded-lg bg-card border border-border hover:border-coral/30 transition-colors"
               >
-                {tech.isImage ? (
-                  <img 
-                    src={tech.logo as string} 
-                    alt={tech.name} 
-                    className="w-8 h-8 object-contain group-hover:scale-110 transition-transform"
-                  />
-                ) : (
-                  <tech.Logo className="w-8 h-8 group-hover:scale-110 transition-transform" />
-                )}
-                <span className="font-semibold text-foreground whitespace-nowrap text-sm">
+                <span className="font-semibold text-foreground whitespace-nowrap">
                   {tech.name}
                 </span>
-              </motion.div>
+              </div>
             ))}
           </motion.div>
         </div>

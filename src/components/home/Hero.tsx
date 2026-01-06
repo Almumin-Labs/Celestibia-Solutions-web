@@ -1,93 +1,43 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowRight, Cloud, Shield, Zap, Server, Database, GitBranch, Code, Cpu, Container, Network, Terminal } from "lucide-react";
+import { ArrowRight, Cloud, Shield, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useABTest } from "@/hooks/useABTest";
-import { IsometricIcons, CircuitBoard, OrbitRings, WaveGradient } from "@/components/graphics/InfraCloudStyle";
 
-// InfraCloud-style floating icons with colors
 const floatingIcons = [
-  { Icon: Cloud, x: 5, y: 20, size: 36, color: "#F97316", delay: 0 },
-  { Icon: Server, x: 92, y: 15, size: 32, color: "#8B5CF6", delay: 0.5 },
-  { Icon: Database, x: 8, y: 65, size: 30, color: "#10B981", delay: 1 },
-  { Icon: Shield, x: 88, y: 70, size: 28, color: "#EF4444", delay: 1.5 },
-  { Icon: Cpu, x: 15, y: 40, size: 26, color: "#6366F1", delay: 2 },
-  { Icon: GitBranch, x: 85, y: 45, size: 30, color: "#F59E0B", delay: 2.5 },
-  { Icon: Code, x: 20, y: 80, size: 28, color: "#06B6D4", delay: 3 },
-  { Icon: Container, x: 80, y: 25, size: 26, color: "#EC4899", delay: 3.5 },
-  { Icon: Network, x: 75, y: 82, size: 32, color: "#8B5CF6", delay: 4 },
-  { Icon: Terminal, x: 25, y: 28, size: 24, color: "#14B8A6", delay: 4.5 },
-  { Icon: Zap, x: 70, y: 55, size: 24, color: "#FBBF24", delay: 5 },
+  { Icon: Cloud, delay: 0, position: "top-20 left-[10%]" },
+  { Icon: Shield, delay: 1, position: "top-40 right-[15%]" },
+  { Icon: Zap, delay: 2, position: "bottom-32 left-[20%]" },
 ];
 
 export const Hero = () => {
-  const { getVariantValue: getHeadline, trackConversion: trackHeadlineView } = useABTest('hero_headline');
-  const { getVariantValue: getCtaText, trackConversion: trackCtaClick } = useABTest('hero_cta');
-
-  const headlineText = getHeadline() || 'Innovative Cloud Solutions for a Connected World';
-  const ctaText = getCtaText() || 'Get Started';
-
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-hero pt-20">
-      {/* Circuit Board Background */}
-      <CircuitBoard />
-      
-      {/* Orbit Rings - centered decoration */}
-      <OrbitRings />
-      
-      {/* Wave Gradient at bottom */}
-      <WaveGradient />
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `radial-gradient(circle at 1px 1px, hsl(var(--primary)) 1px, transparent 0)`,
+          backgroundSize: '40px 40px'
+        }} />
+      </div>
 
-      {/* InfraCloud-style Floating Icons */}
-      {floatingIcons.map((item, index) => (
+      {/* Floating Icons */}
+      {floatingIcons.map(({ Icon, delay, position }, index) => (
         <motion.div
           key={index}
-          className="absolute hidden lg:block"
-          style={{ 
-            left: `${item.x}%`, 
-            top: `${item.y}%`,
-          }}
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ 
-            opacity: [0.5, 0.8, 0.5],
-            y: [0, -25, 0],
-            rotate: [0, 5, -5, 0],
-          }}
-          transition={{
-            opacity: { duration: 3, repeat: Infinity, delay: item.delay },
-            y: { duration: 4 + index * 0.2, repeat: Infinity, ease: "easeInOut", delay: item.delay },
-            rotate: { duration: 8, repeat: Infinity, delay: item.delay },
-          }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 0.2, y: 0 }}
+          transition={{ delay: delay * 0.3, duration: 0.8 }}
+          className={`absolute ${position} hidden lg:block`}
         >
-          <div 
-            className="p-3 rounded-xl backdrop-blur-sm shadow-lg"
-            style={{ 
-              background: `linear-gradient(135deg, ${item.color}20, ${item.color}40)`,
-              border: `1px solid ${item.color}50`,
-              boxShadow: `0 8px 32px ${item.color}30`,
-            }}
-          >
-            <item.Icon size={item.size} style={{ color: item.color }} strokeWidth={1.5} />
+          <div className="animate-float" style={{ animationDelay: `${delay}s` }}>
+            <Icon className="w-12 h-12 text-primary" />
           </div>
         </motion.div>
       ))}
 
-      {/* Gradient Orbs - InfraCloud style with orange/purple */}
-      <motion.div 
-        animate={{ scale: [1, 1.3, 1], opacity: [0.2, 0.4, 0.2] }}
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-1/4 -left-32 w-[500px] h-[500px] bg-gradient-to-br from-[#F97316]/30 to-[#8B5CF6]/20 rounded-full blur-[100px]" 
-      />
-      <motion.div 
-        animate={{ scale: [1.2, 1, 1.2], opacity: [0.25, 0.4, 0.25] }}
-        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute bottom-1/4 -right-32 w-[500px] h-[500px] bg-gradient-to-br from-[#8B5CF6]/30 to-[#06B6D4]/20 rounded-full blur-[100px]" 
-      />
-      <motion.div 
-        animate={{ scale: [1, 1.2, 1], opacity: [0.15, 0.3, 0.15] }}
-        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-gradient-to-br from-[#F97316]/20 to-[#EC4899]/10 rounded-full blur-[120px]" 
-      />
+      {/* Gradient Orbs */}
+      <div className="absolute top-1/4 -left-32 w-96 h-96 bg-purple/20 rounded-full blur-3xl" />
+      <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-coral/20 rounded-full blur-3xl" />
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
@@ -112,22 +62,11 @@ export const Hero = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            onAnimationComplete={() => trackHeadlineView('view')}
             className="font-heading text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 leading-tight"
           >
-            {headlineText.includes('Cloud Solutions') ? (
-              <>
-                Innovative{" "}
-                <span className="text-gradient">Cloud Solutions</span>{" "}
-                for a Connected World
-              </>
-            ) : (
-              <>
-                Transform Your Business with{" "}
-                <span className="text-gradient">Enterprise Cloud</span>{" "}
-                Solutions
-              </>
-            )}
+            Innovative{" "}
+            <span className="text-gradient">Cloud Solutions</span>{" "}
+            for a Connected World
           </motion.h1>
 
           {/* Subheading */}
@@ -149,9 +88,9 @@ export const Hero = () => {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
-            <Button variant="hero" size="xl" asChild onClick={() => trackCtaClick('click')}>
+            <Button variant="hero" size="xl" asChild>
               <Link to="/contact" className="flex items-center gap-2">
-                {ctaText}
+                Get Started
                 <ArrowRight className="w-5 h-5" />
               </Link>
             </Button>

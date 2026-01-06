@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Mail, Phone, MapPin, Send, Clock, Globe } from "lucide-react";
@@ -8,8 +8,6 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { saveContact } from "@/lib/storage";
-import { useABTest } from "@/hooks/useABTest";
-import { useEmailJS } from "@/hooks/useEmailJS";
 
 const contactInfo = [
   {
@@ -49,62 +47,28 @@ const Contact = () => {
     message: "",
   });
 
-  const contactButton = useABTest('contact_button');
-  const { sendBothEmails } = useEmailJS();
-
-  // Track page view for contact form experiment
-  useEffect(() => {
-    if (contactButton.experiment) {
-      contactButton.trackConversion('page_view');
-    }
-  }, [contactButton.experiment]);
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Track form submission as conversion
-    await contactButton.trackConversion('form_submit');
+    // Save to localStorage
+    saveContact(formData);
 
-    // Save to database
-    const result = await saveContact(formData);
+    // Simulate form submission
+    await new Promise((resolve) => setTimeout(resolve, 500));
 
-    // Send emails via EmailJS (both visitor confirmation and admin notification)
-    const emailResults = await sendBothEmails(formData);
+    toast({
+      title: "Message Sent!",
+      description: "We'll get back to you within 24 hours.",
+    });
 
-    if (result) {
-      if (emailResults.visitor.success && emailResults.admin.success) {
-        toast({
-          title: "Message Sent!",
-          description: "We've sent you a confirmation email and will get back to you within 24 hours.",
-        });
-      } else if (emailResults.visitor.success || emailResults.admin.success) {
-        toast({
-          title: "Message Sent!",
-          description: "We'll get back to you within 24 hours.",
-        });
-      } else {
-        toast({
-          title: "Message Received!",
-          description: "We'll get back to you within 24 hours.",
-        });
-      }
-
-      setFormData({
-        name: "",
-        email: "",
-        company: "",
-        phone: "",
-        message: "",
-      });
-    } else {
-      toast({
-        title: "Error",
-        description: "Failed to send message. Please try again.",
-        variant: "destructive",
-      });
-    }
-
+    setFormData({
+      name: "",
+      email: "",
+      company: "",
+      phone: "",
+      message: "",
+    });
     setIsSubmitting(false);
   };
 
@@ -215,20 +179,11 @@ const Contact = () => {
                     "Sending..."
                   ) : (
                     <>
-                      {contactButton.isLoading 
-                        ? "Send Message" 
-                        : contactButton.getVariantValue()}
+                      Send Message
                       <Send className="w-4 h-4 ml-2" />
                     </>
                   )}
                 </Button>
-
-                {/* A/B Test Indicator (only in dev) */}
-                {import.meta.env.DEV && (
-                  <p className="text-xs text-muted-foreground/50">
-                    A/B Test: Button={contactButton.variant || 'loading'}
-                  </p>
-                )}
               </form>
             </motion.div>
 

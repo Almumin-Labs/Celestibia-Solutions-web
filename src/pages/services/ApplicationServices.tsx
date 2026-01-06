@@ -11,77 +11,40 @@ import {
   Activity,
   RefreshCw,
   Layers,
-  Zap,
-  Eye,
-  Bell,
-  BarChart3,
-  Database,
-  Cloud,
-  Timer
+  Zap
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { FloatingIcons, GradientOrbs, DataFlowLines } from "@/components/graphics/FloatingIcons";
-import { PipelineIllustration } from "@/components/graphics/TechIllustration";
-import { AnimatedBackground } from "@/components/graphics/AnimatedBackground";
 
-const modernizationFeatures = [
+const features = [
   {
     icon: Boxes,
-    title: "Application Security and Compliance",
-    description: "Protect your applications with advanced security practices and ensure compliance with industry standards."
+    title: "Monolith to Microservices",
+    description: "Decompose monolithic applications into scalable, maintainable microservices architecture."
   },
   {
     icon: RefreshCw,
-    title: "Monolith to Microservices Adoption & Migration",
-    description: "Break down monolithic applications into scalable, independent microservices."
-  },
-  {
-    icon: Layers,
     title: "Application Replatforming",
-    description: "Replatform legacy applications to modern architectures for improved performance and cost efficiency."
+    description: "Migrate legacy applications to modern platforms with minimal code changes."
   },
-];
-
-const monitoringFeatures = [
   {
     icon: Activity,
-    title: "Real-Time Monitoring",
-    description: "Continuous tracking of application metrics, server health, API responsiveness, and user experience with minimal lag."
-  },
-  {
-    icon: Eye,
-    title: "End-to-End Observability",
-    description: "Full-stack visibility into infrastructure, applications, containers, and services using tools like Prometheus, Grafana, ELK Stack, and OpenTelemetry."
-  },
-  {
-    icon: Bell,
-    title: "Intelligent Alerting & Incident Response",
-    description: "Smart thresholding, anomaly detection, and automated alerts integrated with Slack, Opsgenie, or PagerDuty for rapid resolution."
+    title: "Performance Monitoring",
+    description: "Real-time APM with Datadog, New Relic, and Dynatrace for deep application insights."
   },
   {
     icon: Gauge,
-    title: "User Experience Monitoring (APM)",
-    description: "Deep insights into frontend/backend performance, load times, and error rates using APM (New Relic, Datadog, Dynatrace)."
+    title: "Performance Optimization",
+    description: "Identify and eliminate bottlenecks for faster response times and better user experience."
   },
   {
-    icon: Database,
-    title: "Log Aggregation & Analysis",
-    description: "Centralized log management to troubleshoot faster, correlate events, and uncover hidden performance bottlenecks."
+    icon: Layers,
+    title: "Container Modernization",
+    description: "Containerize applications with Docker and orchestrate with Kubernetes."
   },
   {
-    icon: Cloud,
-    title: "Cloud Cost & Resource Optimization",
-    description: "Monitor resource utilization and optimize cloud spend by identifying idle or underperforming instances and workloads."
-  },
-  {
-    icon: Boxes,
-    title: "Kubernetes & Container Monitoring",
-    description: "Track pod health, CPU/memory usage, network I/O, and auto-healing triggers for containerized environments."
-  },
-  {
-    icon: Timer,
-    title: "SLA & SLO Tracking",
-    description: "Define and monitor Service Level Objectives (SLOs) to ensure you're meeting customer expectations and compliance standards."
+    icon: Zap,
+    title: "Intelligent Alerting",
+    description: "ML-powered alerting and incident response to minimize MTTR."
   },
 ];
 
@@ -100,9 +63,6 @@ const ApplicationServices = () => {
       
       {/* Hero Section */}
       <section className="pt-32 pb-20 bg-gradient-hero relative overflow-hidden">
-        <GradientOrbs />
-        <FloatingIcons count={10} />
-        <DataFlowLines />
         <div className="absolute inset-0 opacity-10">
           <motion.div
             animate={{ 
@@ -124,12 +84,12 @@ const ApplicationServices = () => {
               <Monitor className="w-10 h-10 text-white" />
             </div>
             <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-              Application Modernization{" "}
-              <span className="text-gradient">& Monitoring</span>
+              Application{" "}
+              <span className="text-gradient">Services</span>
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
-              From legacy systems to cloud-native applications, we help you modernize your technology stack 
-              for better scalability, performance, and agility.
+              Modernize your applications for the cloud era. From legacy transformation 
+              to performance optimization, we've got you covered.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Button variant="gradient" size="lg" asChild>
@@ -146,7 +106,7 @@ const ApplicationServices = () => {
         </div>
       </section>
 
-      {/* Application Modernization Section */}
+      {/* Features Grid */}
       <section className="py-20 bg-card">
         <div className="container mx-auto px-4">
           <motion.div
@@ -156,15 +116,15 @@ const ApplicationServices = () => {
             className="text-center mb-16"
           >
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
-              Application Modernization Services
+              Application Modernization Capabilities
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
               Transform legacy systems into modern, cloud-native applications
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {modernizationFeatures.map((feature, index) => (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {features.map((feature, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 30 }}
@@ -184,46 +144,8 @@ const ApplicationServices = () => {
         </div>
       </section>
 
-      {/* Performance Monitoring Section */}
-      <section className="py-20 bg-background">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
-              Performance Monitoring
-            </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Ensure optimal application performance and uptime with our proactive monitoring and performance optimization services
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {monitoringFeatures.map((feature, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.08 }}
-                className="p-5 rounded-2xl bg-card border border-border hover:border-primary/30 transition-all group"
-              >
-                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                  <feature.icon className="w-5 h-5 text-white" />
-                </div>
-                <h3 className="font-heading text-lg font-bold mb-2">{feature.title}</h3>
-                <p className="text-muted-foreground text-sm">{feature.description}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Modernization Journey */}
-      <section className="py-20 bg-card">
+      <section className="py-20 bg-background">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -265,7 +187,7 @@ const ApplicationServices = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="py-20 bg-background">
+      <section className="py-20 bg-card">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
@@ -287,30 +209,6 @@ const ApplicationServices = () => {
               </motion.div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* CTA for Contact */}
-      <section className="py-16 bg-card">
-        <div className="container mx-auto px-4 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="font-heading text-2xl md:text-3xl font-bold mb-4">
-              Ready to elevate your cloud journey?
-            </h2>
-            <p className="text-muted-foreground mb-6">
-              Contact us to learn how we can empower your business.
-            </p>
-            <Button variant="gradient" size="lg" asChild>
-              <Link to="/contact" className="flex items-center gap-2">
-                Contact Us
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            </Button>
-          </motion.div>
         </div>
       </section>
 

@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { Quote, Star } from "lucide-react";
-import { useABTest } from "@/hooks/useABTest";
 
 const testimonials = [
   {
@@ -24,9 +23,6 @@ const testimonials = [
 ];
 
 export const Testimonials = () => {
-  const { getVariantValue } = useABTest('testimonials_headline');
-  const headline = getVariantValue() || 'Trusted by Industry Leaders';
-
   return (
     <section className="py-24 bg-background">
       <div className="container mx-auto px-4">
@@ -42,17 +38,8 @@ export const Testimonials = () => {
             Client Testimonials
           </span>
           <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
-            {headline.includes('Trusted') ? (
-              <>
-                Trusted by{" "}
-                <span className="text-gradient">Industry Leaders</span>
-              </>
-            ) : (
-              <>
-                What Our{" "}
-                <span className="text-gradient">Clients Say</span>
-              </>
-            )}
+            Trusted by{" "}
+            <span className="text-gradient">Industry Leaders</span>
           </h2>
           <p className="text-lg text-muted-foreground">
             Don't just take our word for it — hear from the enterprises we've helped transform.
