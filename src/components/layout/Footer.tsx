@@ -68,7 +68,7 @@ export const Footer = forwardRef<HTMLElement>((_, ref) => {
               <img src={logo} alt="Celestibia Solutions" className="h-14 w-auto rounded-lg bg-primary-foreground p-1" />
             </Link>
             <p className="text-primary-foreground/80 mb-6 max-w-sm">
-              Innovative cloud solutions for a connected world. Empowering businesses .
+              Innovative cloud solutions for a connected world.
             </p>
             <div className="space-y-3">
               <a
