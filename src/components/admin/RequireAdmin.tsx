@@ -1,27 +1,22 @@
-import { Navigate } from "react-router-dom";
-import { useAdminAuth } from "@/contexts/AdminAuthContext";
+import { ReactNode } from "react";
+import { Navigate, useLocation } from "react-router-dom";
 import { Loader2 } from "lucide-react";
-
-interface RequireAdminProps {
-  children: React.ReactNode;
-}
-
-const RequireAdmin = ({ children }: RequireAdminProps) => {
+import { useAdminAuth } from "@/contexts/AdminAuthContext";
+type RequireAdminProps = {
+  children: ReactNode;
+};
+export default function RequireAdmin({ children }: RequireAdminProps) {
   const { isAdmin, isLoading } = useAdminAuth();
-
+  const location = useLocation();
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <Loader2 className="w-8 h-8 animate-spin text-coral" />
-      </div>
+      <main className="min-h-screen flex items-center justify-center">
+        <Loader2 className="w-8 h-8 animate-spin text-muted-foreground" />
+      </main>
     );
   }
-
   if (!isAdmin) {
-    return <Navigate to="/admin" replace />;
+    return <Navigate to="/admin" replace state={{ from: location.pathname }} />;
   }
-
   return <>{children}</>;
-};
-
-export default RequireAdmin;
+}
