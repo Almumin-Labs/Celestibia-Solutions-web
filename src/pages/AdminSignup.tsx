@@ -17,7 +17,7 @@ const AdminSignup = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  const handleSignup = async (e: React.FormEvent) => {
+  const handleSignup = async (e: any) => {
     e.preventDefault();
 
     if (password !== confirmPassword) {
@@ -58,7 +58,8 @@ const AdminSignup = () => {
 
     toast({
       title: "Signup successful",
-      description: "Your account has been created. Admin access will be granted after approval.",
+      description:
+        "Your account has been created. Admin access will be granted after approval.",
     });
 
     navigate("/admin");
@@ -71,8 +72,12 @@ const AdminSignup = () => {
       <section className="pt-32 pb-20 min-h-[80vh] flex items-center">
         <div className="container mx-auto px-4 max-w-md">
           <div className="bg-card p-8 rounded-xl border shadow">
-            <h1 className="text-2xl font-bold text-center mb-2">Admin Signup</h1>
-            <p className="text-center text-muted-foreground mb-6">Create an account. Admin access requires approval.</p>
+            <h1 className="text-2xl font-bold text-center mb-2">
+              Admin Signup
+            </h1>
+            <p className="text-center text-muted-foreground mb-6">
+              Create an account. Admin access requires approval.
+            </p>
 
             <form onSubmit={handleSignup} className="space-y-4">
               <Input
