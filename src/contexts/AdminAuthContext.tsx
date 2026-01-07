@@ -4,6 +4,7 @@ import { User, Session } from "@supabase/supabase-js";
 
 interface AdminAuthContextType {
   isAdmin: boolean;
+  isSuperAdmin: boolean;
   isLoading: boolean;
   user: User | null;
   login: (email: string, password: string) => Promise<{ error: string | null }>;
@@ -17,6 +18,7 @@ export const AdminAuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [isSuperAdmin, setIsSuperAdmin] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
   const checkAdminRole = async (userId: string) => {
@@ -24,15 +26,22 @@ export const AdminAuthProvider = ({ children }: { children: ReactNode }) => {
       .from("user_roles")
       .select("role")
       .eq("user_id", userId)
-      .eq("role", "admin")
       .maybeSingle();
     
     if (error) {
       console.error("Error checking admin role:", error);
-      return false;
+      return { isAdmin: false, isSuperAdmin: false };
     }
     
-    return !!data;
+    if (!data) {
+      return { isAdmin: false, isSuperAdmin: false };
+    }
+
+    const role = data.role;
+    return {
+      isAdmin: role === "admin" || role === "super_admin",
+      isSuperAdmin: role === "super_admin"
+    };
   };
 
   useEffect(() => {
@@ -45,10 +54,14 @@ export const AdminAuthProvider = ({ children }: { children: ReactNode }) => {
         // Defer the admin check with setTimeout to avoid deadlock
         if (session?.user) {
           setTimeout(() => {
-            checkAdminRole(session.user.id).then(setIsAdmin);
+            checkAdminRole(session.user.id).then(({ isAdmin, isSuperAdmin }) => {
+              setIsAdmin(isAdmin);
+              setIsSuperAdmin(isSuperAdmin);
+            });
           }, 0);
         } else {
           setIsAdmin(false);
+          setIsSuperAdmin(false);
         }
         
         setIsLoading(false);
@@ -61,8 +74,9 @@ export const AdminAuthProvider = ({ children }: { children: ReactNode }) => {
       setUser(session?.user ?? null);
       
       if (session?.user) {
-        checkAdminRole(session.user.id).then((isAdminUser) => {
-          setIsAdmin(isAdminUser);
+        checkAdminRole(session.user.id).then(({ isAdmin, isSuperAdmin }) => {
+          setIsAdmin(isAdmin);
+          setIsSuperAdmin(isSuperAdmin);
           setIsLoading(false);
         });
       } else {
@@ -84,12 +98,13 @@ export const AdminAuthProvider = ({ children }: { children: ReactNode }) => {
     }
 
     if (data.user) {
-      const hasAdminRole = await checkAdminRole(data.user.id);
+      const { isAdmin: hasAdminRole, isSuperAdmin: hasSuperAdminRole } = await checkAdminRole(data.user.id);
       if (!hasAdminRole) {
         await supabase.auth.signOut();
         return { error: "You don't have admin access. Contact the administrator." };
       }
       setIsAdmin(true);
+      setIsSuperAdmin(hasSuperAdminRole);
     }
 
     return { error: null };
@@ -117,20 +132,20 @@ export const AdminAuthProvider = ({ children }: { children: ReactNode }) => {
       // Check if there are any admins yet
       const { count } = await supabase
         .from("user_roles")
-        .select("*", { count: "exact", head: true })
-        .eq("role", "admin");
+        .select("*", { count: "exact", head: true });
       
-      // If no admins exist, make this user an admin
+      // If no admins exist, make this user a super_admin
       if (count === 0) {
         const { error: roleError } = await supabase
           .from("user_roles")
-          .insert({ user_id: data.user.id, role: "admin" });
+          .insert({ user_id: data.user.id, role: "super_admin" });
         
         if (roleError) {
           console.error("Error assigning admin role:", roleError);
           return { error: "Account created but could not assign admin role." };
         }
         setIsAdmin(true);
+        setIsSuperAdmin(true);
       }
     }
 
@@ -140,12 +155,13 @@ export const AdminAuthProvider = ({ children }: { children: ReactNode }) => {
   const logout = async () => {
     await supabase.auth.signOut();
     setIsAdmin(false);
+    setIsSuperAdmin(false);
     setUser(null);
     setSession(null);
   };
 
   return (
-    <AdminAuthContext.Provider value={{ isAdmin, isLoading, user, login, signup, logout }}>
+    <AdminAuthContext.Provider value={{ isAdmin, isSuperAdmin, isLoading, user, login, signup, logout }}>
       {children}
     </AdminAuthContext.Provider>
   );

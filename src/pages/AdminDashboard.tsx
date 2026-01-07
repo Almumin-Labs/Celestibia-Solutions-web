@@ -33,12 +33,12 @@ import {
   Eye,
   X,
   Loader2,
-  BarChart3,
+  Shield,
 } from "lucide-react";
-import { ABTestingDashboard } from "@/components/admin/ABTestingDashboard";
+import { AdminManagement } from "@/components/admin/AdminManagement";
 
 const AdminDashboard = () => {
-  const { isAdmin, isLoading: authLoading, logout } = useAdminAuth();
+  const { isAdmin, isSuperAdmin, isLoading: authLoading, logout } = useAdminAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
 
@@ -266,10 +266,12 @@ const AdminDashboard = () => {
                 <FileText className="w-4 h-4" />
                 Blog Posts
               </TabsTrigger>
-              <TabsTrigger value="ab-testing" className="gap-2">
-                <BarChart3 className="w-4 h-4" />
-                A/B Testing
-              </TabsTrigger>
+              {isSuperAdmin && (
+                <TabsTrigger value="admin-management" className="gap-2">
+                  <Shield className="w-4 h-4" />
+                  Admin Management
+                </TabsTrigger>
+              )}
             </TabsList>
 
             {/* Contacts Tab */}
@@ -665,10 +667,12 @@ const AdminDashboard = () => {
               </div>
             </TabsContent>
 
-            {/* A/B Testing Tab */}
-            <TabsContent value="ab-testing">
-              <ABTestingDashboard />
-            </TabsContent>
+            {/* Admin Management Tab */}
+            {isSuperAdmin && (
+              <TabsContent value="admin-management">
+                <AdminManagement />
+              </TabsContent>
+            )}
           </Tabs>
         </div>
       </section>
