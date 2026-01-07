@@ -14,11 +14,12 @@ const AdminSignup = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
   const { signup, isAdmin, isLoading: authLoading } = useAdminAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  // Redirect if already logged in
+  // Redirect if already logged in as admin
   if (!authLoading && isAdmin) {
     navigate("/admin/dashboard");
     return null;
@@ -30,7 +31,7 @@ const AdminSignup = () => {
     if (password !== confirmPassword) {
       toast({
         title: "Password Mismatch",
-        description: "Passwords do not match. Please try again.",
+        description: "Passwords do not match.",
         variant: "destructive",
       });
       return;
@@ -38,8 +39,8 @@ const AdminSignup = () => {
 
     if (password.length < 6) {
       toast({
-        title: "Password Too Short",
-        description: "Password must be at least 6 characters.",
+        title: "Weak Password",
+        description: "Password must be at least 6 characters long.",
         variant: "destructive",
       });
       return;
@@ -57,8 +58,8 @@ const AdminSignup = () => {
       });
     } else {
       toast({
-        title: "Account Created!",
-        description: "You can now sign in to your admin account.",
+        title: "Signup Successful",
+        description: "Your account has been created. Admin access will be enabled after approval.",
       });
       navigate("/admin");
     }
@@ -92,21 +93,19 @@ const AdminSignup = () => {
                   <UserPlus className="w-8 h-8 text-primary-foreground" />
                 </div>
                 <h1 className="font-heading text-2xl font-bold">Admin Registration</h1>
-                <p className="text-muted-foreground mt-2">
-                  Create a new admin account
-                </p>
+                <p className="text-muted-foreground mt-2">Register an admin account (access requires approval)</p>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium mb-2">Email</label>
+                  <label className="block text-sm font-medium mb-2">Email Address</label>
                   <div className="relative">
                     <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
                     <Input
                       type="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      placeholder="Enter your email"
+                      placeholder="admin@company.com"
                       className="h-12 pl-10"
                       required
                     />
@@ -130,9 +129,7 @@ const AdminSignup = () => {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-2">
-                    Confirm Password
-                  </label>
+                  <label className="block text-sm font-medium mb-2">Confirm Password</label>
                   <div className="relative">
                     <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
                     <Input
@@ -147,20 +144,14 @@ const AdminSignup = () => {
                   </div>
                 </div>
 
-                <Button
-                  type="submit"
-                  variant="gradient"
-                  size="lg"
-                  className="w-full"
-                  disabled={isLoading}
-                >
+                <Button type="submit" variant="gradient" size="lg" className="w-full" disabled={isLoading}>
                   {isLoading ? (
                     <>
                       <Loader2 className="w-4 h-4 mr-2 animate-spin" />
                       Creating Account...
                     </>
                   ) : (
-                    "Create Admin Account"
+                    "Request Admin Account"
                   )}
                 </Button>
               </form>
