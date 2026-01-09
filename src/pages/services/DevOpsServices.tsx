@@ -3,16 +3,7 @@ import { Link } from "react-router-dom";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { CTA } from "@/components/home/CTA";
-import { 
-  ArrowRight, 
-  CheckCircle,
-  Container,
-  Workflow,
-  Settings,
-  Repeat,
-  Wrench,
-  Cog
-} from "lucide-react";
+import { ArrowRight, CheckCircle, Container, Workflow, Settings, Repeat, Wrench, Cog } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 // Import original logos
@@ -38,68 +29,58 @@ const features = [
   {
     icon: Container,
     title: "Managed Kubernetes",
-    description: "Seamless deployment, scaling, and management of Kubernetes clusters to ensure secure, high-availability containerized applications."
+    description:
+      "Seamless deployment, scaling, and management of Kubernetes clusters to ensure secure, high-availability containerized applications.",
   },
   {
     icon: Workflow,
     title: "DevOps as a Service",
-    description: "Comprehensive DevOps lifecycle support — from CI/CD implementation and infrastructure automation to monitoring and optimization."
+    description:
+      "Comprehensive DevOps lifecycle support — from CI/CD implementation and infrastructure automation to monitoring and optimization.",
   },
   {
     icon: Settings,
     title: "Managed CI/CD Pipelines",
-    description: "Design, implementation, and maintenance of automated CI/CD pipelines for faster, reliable, and consistent application releases."
+    description:
+      "Design, implementation, and maintenance of automated CI/CD pipelines for faster, reliable, and consistent application releases.",
   },
   {
     icon: Cog,
     title: "Infrastructure Automation & Management",
-    description: "Provisioning, scaling, and monitoring of cloud or hybrid infrastructure using Infrastructure as Code (IaC) for enhanced efficiency and reliability."
+    description:
+      "Provisioning, scaling, and monitoring of cloud or hybrid infrastructure using Infrastructure as Code (IaC) for enhanced efficiency and reliability.",
   },
   {
     icon: Wrench,
     title: "Custom Workflow Automation",
-    description: "Automate repetitive tasks and integrate processes across your DevOps toolchain, tailored to fit your operational needs and reduce manual overhead."
+    description:
+      "Automate repetitive tasks and integrate processes across your DevOps toolchain, tailored to fit your operational needs and reduce manual overhead.",
   },
 ];
 
 // Tools with correct logos
-const tools = [
-  { name: "Kubernetes", logo: kubernetesSvg },
-  { name: "Docker", logo: dockerSvg },
-  { name: "Terraform", logo: terraformSvg },
-  { name: "Ansible", logo: ansibleSvg },
-  { name: "Helm", logo: helmSvg },
-  { name: "ArgoCD", logo: argocdLogo },
-  { name: "GitLab", logo: gitlabLogo },
-  { name: "AWS", logo: awsSvg },
-  { name: "Azure", logo: azureSvg },
-  { name: "Google Cloud", logo: gcpLogo },
-  { name: "Jenkins", logo: jenkinsLogo },
-  { name: "GitHub Actions", logo: githubSvg },
-  { name: "Grafana", logo: grafanaLogo },
-  { name: "Prometheus", logo: prometheusLogo },
-];
+const complianceFrameworks = ["SOC 2", "HIPAA", "PCI-DSS", "GDPR", "ISO 27001", "NIST", "CIS Benchmarks", "FedRAMP"];
 
 const DevOpsServices = () => {
   return (
     <main className="min-h-screen">
       <Header />
-      
+
       {/* Hero Section */}
       <section className="pt-32 pb-20 bg-gradient-hero relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <motion.div
-            animate={{ 
+            animate={{
               scale: [1, 1.2, 1],
-              rotate: [0, 180, 360]
+              rotate: [0, 180, 360],
             }}
             transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
             className="absolute top-20 right-20 w-64 h-64 bg-purple-500/20 rounded-full blur-3xl"
           />
           <motion.div
-            animate={{ 
+            animate={{
               scale: [1.2, 1, 1.2],
-              rotate: [360, 180, 0]
+              rotate: [360, 180, 0],
             }}
             transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
             className="absolute bottom-20 left-20 w-96 h-96 bg-coral/20 rounded-full blur-3xl"
@@ -112,7 +93,7 @@ const DevOpsServices = () => {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto text-center"
           >
-            <motion.div 
+            <motion.div
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.5 }}
@@ -121,12 +102,11 @@ const DevOpsServices = () => {
               <Workflow className="w-10 h-10 text-white" />
             </motion.div>
             <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-              DevOps{" "}
-              <span className="text-gradient">Services</span>
+              DevOps <span className="text-gradient">Services</span>
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
-              We offer end-to-end DevOps solutions, supporting all major tools and platforms. 
-              Accelerate software delivery with automated CI/CD, Kubernetes management, and infrastructure automation.
+              We offer end-to-end DevOps solutions, supporting all major tools and platforms. Accelerate software
+              delivery with automated CI/CD, Kubernetes management, and infrastructure automation.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Button variant="gradient" size="lg" asChild>
@@ -147,24 +127,24 @@ const DevOpsServices = () => {
       <section className="py-20 bg-background">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-            >
+            <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
               <span className="inline-block px-4 py-1.5 rounded-full bg-secondary text-sm font-medium text-foreground mb-4">
                 CI/CD Infrastructure
               </span>
               <h2 className="font-heading text-3xl md:text-4xl font-bold mb-6">
-                Source Code Repository{" "}
-                <span className="text-gradient">& CI/CD</span>
+                Source Code Repository <span className="text-gradient">& CI/CD</span>
               </h2>
               <p className="text-muted-foreground mb-6 leading-relaxed">
-                End-to-end automation from code commit to production deployment. 
-                Our CI/CD pipelines ensure fast, reliable, and secure software delivery.
+                End-to-end automation from code commit to production deployment. Our CI/CD pipelines ensure fast,
+                reliable, and secure software delivery.
               </p>
               <ul className="space-y-3">
-                {["Automated testing & quality gates", "Multi-environment deployments", "Rollback & disaster recovery", "Security scanning integrated"].map((item, idx) => (
+                {[
+                  "Automated testing & quality gates",
+                  "Multi-environment deployments",
+                  "Rollback & disaster recovery",
+                  "Security scanning integrated",
+                ].map((item, idx) => (
                   <li key={idx} className="flex items-center gap-3">
                     <CheckCircle className="w-5 h-5 text-coral" />
                     <span className="text-foreground">{item}</span>
@@ -193,9 +173,7 @@ const DevOpsServices = () => {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
-              Tools & Technologies We Use
-            </h2>
+            <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">Tools & Technologies We Use</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
               We work with the best DevOps tools in the industry to deliver reliable, scalable solutions
             </p>
@@ -210,11 +188,7 @@ const DevOpsServices = () => {
                   whileHover={{ scale: 1.1, y: -5 }}
                   className="flex-shrink-0 flex flex-col items-center gap-3 p-6 rounded-xl bg-background border border-border hover:border-primary/50 hover:shadow-xl transition-all cursor-default min-w-[140px]"
                 >
-                  <img 
-                    src={tool.logo} 
-                    alt={tool.name} 
-                    className="w-12 h-12 object-contain"
-                  />
+                  <img src={tool.logo} alt={tool.name} className="w-12 h-12 object-contain" />
                   <span className="font-medium text-foreground text-sm text-center whitespace-nowrap">{tool.name}</span>
                 </motion.div>
               ))}
@@ -232,9 +206,7 @@ const DevOpsServices = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
-              Our DevOps Capabilities
-            </h2>
+            <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">Our DevOps Capabilities</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
               Comprehensive DevOps solutions to streamline your development lifecycle and accelerate delivery.
             </p>
@@ -253,7 +225,7 @@ const DevOpsServices = () => {
               >
                 {/* Animated background gradient */}
                 <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
-                
+
                 <div className="relative z-10">
                   <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                     <feature.icon className="w-7 h-7 text-white" />
@@ -276,12 +248,8 @@ const DevOpsServices = () => {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
-              DevOps Toolchain
-            </h2>
-            <p className="text-muted-foreground">
-              Industry-leading tools for every stage of your DevOps journey
-            </p>
+            <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">DevOps Toolchain</h2>
+            <p className="text-muted-foreground">Industry-leading tools for every stage of your DevOps journey</p>
           </motion.div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-6">
@@ -295,9 +263,9 @@ const DevOpsServices = () => {
                 whileHover={{ scale: 1.1, y: -8, rotate: 5 }}
                 className="flex flex-col items-center gap-3 p-6 rounded-xl bg-background border border-border hover:border-primary/50 hover:shadow-2xl transition-all cursor-default group"
               >
-                <img 
-                  src={tool.logo} 
-                  alt={tool.name} 
+                <img
+                  src={tool.logo}
+                  alt={tool.name}
                   className="w-14 h-14 object-contain group-hover:scale-110 transition-transform"
                 />
                 <span className="font-medium text-foreground text-sm text-center">{tool.name}</span>
@@ -311,7 +279,7 @@ const DevOpsServices = () => {
       <section className="py-20 bg-gradient-hero relative overflow-hidden">
         <div className="absolute inset-0">
           <motion.div
-            animate={{ 
+            animate={{
               x: [0, 100, 0],
               y: [0, -50, 0],
             }}
@@ -319,7 +287,7 @@ const DevOpsServices = () => {
             className="absolute top-20 left-20 w-72 h-72 bg-purple-500/10 rounded-full blur-3xl"
           />
           <motion.div
-            animate={{ 
+            animate={{
               x: [0, -80, 0],
               y: [0, 80, 0],
             }}
@@ -327,7 +295,7 @@ const DevOpsServices = () => {
             className="absolute bottom-20 right-20 w-96 h-96 bg-coral/10 rounded-full blur-3xl"
           />
         </div>
-        
+
         <div className="container mx-auto px-4 relative z-10">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
@@ -344,7 +312,7 @@ const DevOpsServices = () => {
                 transition={{ delay: index * 0.15, type: "spring" }}
                 className="text-center p-6 rounded-2xl bg-card/50 backdrop-blur-sm border border-border/50"
               >
-                <motion.div 
+                <motion.div
                   initial={{ scale: 0.5 }}
                   whileInView={{ scale: 1 }}
                   viewport={{ once: true }}
@@ -369,19 +337,27 @@ const DevOpsServices = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
-              Our DevOps Approach
-            </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              A proven methodology for DevOps transformation
-            </p>
+            <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">Our DevOps Approach</h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">A proven methodology for DevOps transformation</p>
           </motion.div>
 
           <div className="grid md:grid-cols-4 gap-6">
             {[
-              { step: "01", title: "Assess", description: "Evaluate current infrastructure and identify optimization opportunities" },
-              { step: "02", title: "Design", description: "Create scalable CI/CD pipelines and infrastructure as code" },
-              { step: "03", title: "Implement", description: "Deploy automated solutions with monitoring and security" },
+              {
+                step: "01",
+                title: "Assess",
+                description: "Evaluate current infrastructure and identify optimization opportunities",
+              },
+              {
+                step: "02",
+                title: "Design",
+                description: "Create scalable CI/CD pipelines and infrastructure as code",
+              },
+              {
+                step: "03",
+                title: "Implement",
+                description: "Deploy automated solutions with monitoring and security",
+              },
               { step: "04", title: "Optimize", description: "Continuous improvement and performance tuning" },
             ].map((item, index) => (
               <motion.div
