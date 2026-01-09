@@ -1,50 +1,50 @@
 import { motion } from "framer-motion";
-import { 
-  GitHubLogo, 
-  JenkinsLogo, 
-  DockerLogo, 
-  KubernetesLogo, 
-  SonarQubeLogo,
-  SlackLogo 
-} from "@/components/logos/TechLogos";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ShieldCheck } from "lucide-react";
+
+// Import logos as images
+import githubSvg from "@/assets/logos/github.svg";
+import jenkinsLogo from "@/assets/logos/jenkins.png";
+import dockerSvg from "@/assets/logos/docker.svg";
+import kubernetesSvg from "@/assets/logos/kubernetes.svg";
+import slackSvg from "@/assets/logos/slack.svg";
 
 const pipelineSteps = [
   {
     id: 1,
     title: "Code Commit",
     description: "Developer pushes code to repository",
-    Logo: GitHubLogo,
+    logo: githubSvg,
   },
   {
     id: 2,
     title: "Build & Test",
     description: "Automated builds and unit tests",
-    Logo: JenkinsLogo,
+    logo: jenkinsLogo,
   },
   {
     id: 3,
     title: "Code Quality",
     description: "Static analysis and security scan",
-    Logo: SonarQubeLogo,
+    logo: null, // Will use icon instead
+    icon: ShieldCheck,
   },
   {
     id: 4,
     title: "Containerize",
     description: "Build Docker image and push to registry",
-    Logo: DockerLogo,
+    logo: dockerSvg,
   },
   {
     id: 5,
     title: "Deploy",
     description: "Deploy to Kubernetes cluster",
-    Logo: KubernetesLogo,
+    logo: kubernetesSvg,
   },
   {
     id: 6,
     title: "Notify",
     description: "Team notification on success/failure",
-    Logo: SlackLogo,
+    logo: slackSvg,
   },
 ];
 
@@ -85,7 +85,15 @@ export const CICDPipeline = () => {
                       whileHover={{ scale: 1.05 }}
                       className="w-20 h-20 rounded-2xl bg-white shadow-lg flex items-center justify-center border border-gray-100"
                     >
-                      <step.Logo className="w-12 h-12" />
+                      {step.logo ? (
+                        <img 
+                          src={step.logo} 
+                          alt={step.title} 
+                          className="w-12 h-12 object-contain"
+                        />
+                      ) : step.icon ? (
+                        <step.icon className="w-12 h-12 text-primary" />
+                      ) : null}
                     </motion.div>
                     
                     {/* Step Number Badge */}
@@ -137,7 +145,15 @@ export const CICDPipeline = () => {
                 {/* Logo Container */}
                 <div className="relative flex-shrink-0">
                   <div className="w-16 h-16 rounded-xl bg-white shadow-md flex items-center justify-center border border-gray-100">
-                    <step.Logo className="w-10 h-10" />
+                    {step.logo ? (
+                      <img 
+                        src={step.logo} 
+                        alt={step.title} 
+                        className="w-10 h-10 object-contain"
+                      />
+                    ) : step.icon ? (
+                      <step.icon className="w-10 h-10 text-primary" />
+                    ) : null}
                   </div>
                   <div className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-bold">
                     {step.id}

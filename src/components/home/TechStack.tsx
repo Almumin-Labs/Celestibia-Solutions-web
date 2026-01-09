@@ -1,45 +1,36 @@
 import { motion } from "framer-motion";
 
-// Import original logos
+// Import all logos as images
 import gitlabLogo from "@/assets/logos/gitlab.png";
 import awsSvg from "@/assets/logos/aws.svg";
 import gcpLogo from "@/assets/logos/google-cloud.png";
 import jenkinsLogo from "@/assets/logos/jenkins.png";
 import githubSvg from "@/assets/logos/github.svg";
-import argocdLogo from "@/assets/logos/argocd.png";
+import argocdLogo from "@/assets/logos/argocd-new.png";
 import grafanaLogo from "@/assets/logos/grafana.png";
 import prometheusLogo from "@/assets/logos/prometheus.png";
 import azureSvg from "@/assets/logos/azure.svg";
-
-import { 
-  KubernetesLogo, 
-  DockerLogo, 
-  TerraformLogo, 
-  AnsibleLogo,
-  HelmLogo,
-  PythonLogo,
-  ReactLogo,
-  ELKLogo
-} from "@/components/logos/TechLogos";
+import kubernetesSvg from "@/assets/logos/kubernetes.svg";
+import terraformSvg from "@/assets/logos/terraform.svg";
+import helmSvg from "@/assets/logos/helm.svg";
+import ansibleSvg from "@/assets/logos/ansible.svg";
+import dockerSvg from "@/assets/logos/docker.svg";
 
 const technologies = [
-  { name: "AWS", logo: awsSvg, isImage: true },
-  { name: "Azure", logo: azureSvg, isImage: true },
-  { name: "Google Cloud", logo: gcpLogo, isImage: true },
-  { name: "GitLab", logo: gitlabLogo, isImage: true },
-  { name: "GitHub Actions", logo: githubSvg, isImage: true },
-  { name: "Jenkins", logo: jenkinsLogo, isImage: true },
-  { name: "ArgoCD", logo: argocdLogo, isImage: true },
-  { name: "Grafana", logo: grafanaLogo, isImage: true },
-  { name: "Prometheus", logo: prometheusLogo, isImage: true },
-  { name: "Kubernetes", Logo: KubernetesLogo, isImage: false },
-  { name: "Docker", Logo: DockerLogo, isImage: false },
-  { name: "Terraform", Logo: TerraformLogo, isImage: false },
-  { name: "Ansible", Logo: AnsibleLogo, isImage: false },
-  { name: "Helm", Logo: HelmLogo, isImage: false },
-  { name: "Python", Logo: PythonLogo, isImage: false },
-  { name: "React", Logo: ReactLogo, isImage: false },
-  { name: "ELK Stack", Logo: ELKLogo, isImage: false },
+  { name: "Kubernetes", logo: kubernetesSvg },
+  { name: "Docker", logo: dockerSvg },
+  { name: "Terraform", logo: terraformSvg },
+  { name: "Ansible", logo: ansibleSvg },
+  { name: "Helm", logo: helmSvg },
+  { name: "ArgoCD", logo: argocdLogo },
+  { name: "AWS", logo: awsSvg },
+  { name: "Azure", logo: azureSvg },
+  { name: "Google Cloud", logo: gcpLogo },
+  { name: "GitLab", logo: gitlabLogo },
+  { name: "GitHub Actions", logo: githubSvg },
+  { name: "Jenkins", logo: jenkinsLogo },
+  { name: "Grafana", logo: grafanaLogo },
+  { name: "Prometheus", logo: prometheusLogo },
 ];
 
 export const TechStack = () => {
@@ -76,15 +67,11 @@ export const TechStack = () => {
                 whileHover={{ scale: 1.05, y: -3 }}
                 className="flex-shrink-0 flex items-center gap-3 px-5 py-3 rounded-xl bg-card border border-border hover:border-coral/30 transition-all hover:shadow-lg group"
               >
-                {tech.isImage ? (
-                  <img 
-                    src={tech.logo as string} 
-                    alt={tech.name} 
-                    className="w-8 h-8 object-contain group-hover:scale-110 transition-transform"
-                  />
-                ) : (
-                  <tech.Logo className="w-8 h-8 group-hover:scale-110 transition-transform" />
-                )}
+                <img 
+                  src={tech.logo} 
+                  alt={tech.name} 
+                  className="w-8 h-8 object-contain group-hover:scale-110 transition-transform"
+                />
                 <span className="font-semibold text-foreground whitespace-nowrap text-sm">
                   {tech.name}
                 </span>

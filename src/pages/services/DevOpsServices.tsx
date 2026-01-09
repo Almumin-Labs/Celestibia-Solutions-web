@@ -21,21 +21,18 @@ import awsSvg from "@/assets/logos/aws.svg";
 import gcpLogo from "@/assets/logos/google-cloud.png";
 import jenkinsLogo from "@/assets/logos/jenkins.png";
 import githubSvg from "@/assets/logos/github.svg";
-import argocdLogo from "@/assets/logos/argocd.png";
+import argocdLogo from "@/assets/logos/argocd-new.png";
 import grafanaLogo from "@/assets/logos/grafana.png";
 import prometheusLogo from "@/assets/logos/prometheus.png";
 import azureSvg from "@/assets/logos/azure.svg";
+import kubernetesSvg from "@/assets/logos/kubernetes.svg";
+import terraformSvg from "@/assets/logos/terraform.svg";
+import helmSvg from "@/assets/logos/helm.svg";
+import ansibleSvg from "@/assets/logos/ansible.svg";
+import dockerSvg from "@/assets/logos/docker.svg";
 
 // Import illustrations
 import sourceCodeCICD from "@/assets/illustrations/source-code-repo-ci-cd.svg";
-
-import {
-  KubernetesLogo,
-  DockerLogo,
-  TerraformLogo,
-  AnsibleLogo,
-  HelmLogo,
-} from "@/components/logos/TechLogos";
 
 const features = [
   {
@@ -65,22 +62,22 @@ const features = [
   },
 ];
 
-// Tools with original logos
+// Tools with correct logos
 const tools = [
-  { name: "GitLab", logo: gitlabLogo, isImage: true },
-  { name: "AWS", logo: awsSvg, isImage: true },
-  { name: "Azure", logo: azureSvg, isImage: true },
-  { name: "Google Cloud", logo: gcpLogo, isImage: true },
-  { name: "Jenkins", logo: jenkinsLogo, isImage: true },
-  { name: "GitHub Actions", logo: githubSvg, isImage: true },
-  { name: "ArgoCD", logo: argocdLogo, isImage: true },
-  { name: "Grafana", logo: grafanaLogo, isImage: true },
-  { name: "Prometheus", logo: prometheusLogo, isImage: true },
-  { name: "Kubernetes", Logo: KubernetesLogo, isImage: false },
-  { name: "Docker", Logo: DockerLogo, isImage: false },
-  { name: "Terraform", Logo: TerraformLogo, isImage: false },
-  { name: "Ansible", Logo: AnsibleLogo, isImage: false },
-  { name: "Helm", Logo: HelmLogo, isImage: false },
+  { name: "Kubernetes", logo: kubernetesSvg },
+  { name: "Docker", logo: dockerSvg },
+  { name: "Terraform", logo: terraformSvg },
+  { name: "Ansible", logo: ansibleSvg },
+  { name: "Helm", logo: helmSvg },
+  { name: "ArgoCD", logo: argocdLogo },
+  { name: "GitLab", logo: gitlabLogo },
+  { name: "AWS", logo: awsSvg },
+  { name: "Azure", logo: azureSvg },
+  { name: "Google Cloud", logo: gcpLogo },
+  { name: "Jenkins", logo: jenkinsLogo },
+  { name: "GitHub Actions", logo: githubSvg },
+  { name: "Grafana", logo: grafanaLogo },
+  { name: "Prometheus", logo: prometheusLogo },
 ];
 
 const DevOpsServices = () => {
@@ -213,15 +210,11 @@ const DevOpsServices = () => {
                   whileHover={{ scale: 1.1, y: -5 }}
                   className="flex-shrink-0 flex flex-col items-center gap-3 p-6 rounded-xl bg-background border border-border hover:border-primary/50 hover:shadow-xl transition-all cursor-default min-w-[140px]"
                 >
-                  {tool.isImage ? (
-                    <img 
-                      src={tool.logo as string} 
-                      alt={tool.name} 
-                      className="w-12 h-12 object-contain"
-                    />
-                  ) : (
-                    <tool.Logo className="w-12 h-12" />
-                  )}
+                  <img 
+                    src={tool.logo} 
+                    alt={tool.name} 
+                    className="w-12 h-12 object-contain"
+                  />
                   <span className="font-medium text-foreground text-sm text-center whitespace-nowrap">{tool.name}</span>
                 </motion.div>
               ))}
@@ -302,15 +295,11 @@ const DevOpsServices = () => {
                 whileHover={{ scale: 1.1, y: -8, rotate: 5 }}
                 className="flex flex-col items-center gap-3 p-6 rounded-xl bg-background border border-border hover:border-primary/50 hover:shadow-2xl transition-all cursor-default group"
               >
-                {tool.isImage ? (
-                  <img 
-                    src={tool.logo as string} 
-                    alt={tool.name} 
-                    className="w-14 h-14 object-contain group-hover:scale-110 transition-transform"
-                  />
-                ) : (
-                  <tool.Logo className="w-14 h-14 group-hover:scale-110 transition-transform" />
-                )}
+                <img 
+                  src={tool.logo} 
+                  alt={tool.name} 
+                  className="w-14 h-14 object-contain group-hover:scale-110 transition-transform"
+                />
                 <span className="font-medium text-foreground text-sm text-center">{tool.name}</span>
               </motion.div>
             ))}
