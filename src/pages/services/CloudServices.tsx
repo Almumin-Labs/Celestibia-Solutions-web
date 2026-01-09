@@ -15,12 +15,17 @@ import {
   RefreshCw,
   Settings,
   Layers,
-  HardDrive
+  HardDrive,
+  Globe,
+  Lock,
+  Cpu,
+  Activity
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { FloatingIcons, GradientOrbs, AnimatedNodes } from "@/components/graphics/FloatingIcons";
+import { FloatingIcons, GradientOrbs, AnimatedNodes, CircuitLines } from "@/components/graphics/FloatingIcons";
 import { TechIllustration } from "@/components/graphics/TechIllustration";
 import { AnimatedBackground } from "@/components/graphics/AnimatedBackground";
+import { FloatingTechOrbs, ServiceGridBackground, AnimatedStatsSection } from "@/components/graphics/ServiceGraphics";
 
 // Import original logos
 import awsSvg from "@/assets/logos/aws.svg";
@@ -34,17 +39,17 @@ const features = [
     description: "Proactive management and monitoring of your cloud infrastructure, ensuring seamless performance and cost efficiency."
   },
   {
-    icon: RefreshCw,
+    icon: Globe,
     title: "Cloud Migration",
     description: "Smooth, secure, and optimized migration of your workloads to the cloud, minimizing downtime and maximizing performance."
   },
   {
-    icon: Settings,
+    icon: Cpu,
     title: "Cloud Architecture and Design",
     description: "Designing scalable, secure, and high-performance cloud architectures tailored to your business needs."
   },
   {
-    icon: Shield,
+    icon: Lock,
     title: "Cloud Security and Governance",
     description: "Robust security and governance frameworks to safeguard your data and maintain compliance."
   },
@@ -54,7 +59,7 @@ const features = [
     description: "Identifying and eliminating inefficiencies to reduce cloud spend without compromising performance."
   },
   {
-    icon: Database,
+    icon: Activity,
     title: "Disaster Recovery (DR) & Business Continuity Planning (BCP)",
     description: "Comprehensive solutions for data backup, disaster recovery, and business continuity on the cloud."
   },
@@ -90,6 +95,9 @@ const CloudServices = () => {
         <GradientOrbs />
         <FloatingIcons count={10} />
         <AnimatedNodes />
+        <CircuitLines className="opacity-30" />
+        <FloatingTechOrbs count={4} />
+        <ServiceGridBackground />
         <div className="absolute inset-0 opacity-10">
           <motion.div
             animate={{ 
@@ -98,6 +106,14 @@ const CloudServices = () => {
             }}
             transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
             className="absolute top-20 right-20 w-64 h-64 bg-primary/20 rounded-full blur-3xl"
+          />
+          <motion.div
+            animate={{ 
+              scale: [1.2, 1, 1.2],
+              x: [0, 50, 0]
+            }}
+            transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute bottom-20 left-20 w-80 h-80 bg-cyan-500/20 rounded-full blur-3xl"
           />
         </div>
         <div className="container mx-auto px-4 relative z-10">

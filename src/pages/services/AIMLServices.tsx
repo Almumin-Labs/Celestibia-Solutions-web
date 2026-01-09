@@ -13,12 +13,18 @@ import {
   Lightbulb,
   Cpu,
   Layers,
-  Settings
+  Settings,
+  Bot,
+  Wand2,
+  Network,
+  ScanEye,
+  Languages
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { FloatingIcons, GradientOrbs, CircuitLines } from "@/components/graphics/FloatingIcons";
+import { FloatingIcons, GradientOrbs, CircuitLines, DataFlowLines } from "@/components/graphics/FloatingIcons";
 import { TechIllustration } from "@/components/graphics/TechIllustration";
 import { AnimatedBackground } from "@/components/graphics/AnimatedBackground";
+import { FloatingTechOrbs, ServiceGridBackground, AnimatedStatsSection } from "@/components/graphics/ServiceGraphics";
 
 // Import illustrations
 import modelServing from "@/assets/illustrations/model-serving.svg";
@@ -28,17 +34,17 @@ import modelRegistry from "@/assets/illustrations/model-registry-metadata-stores
 
 const features = [
   {
-    icon: MessageSquare,
+    icon: Bot,
     title: "AI-Powered Chatbots",
     description: "Custom intelligent virtual assistants for customer support, internal tools, and lead generation — integrated with OpenAI, Dialogflow, or Rasa."
   },
   {
-    icon: Sparkles,
+    icon: Wand2,
     title: "Generative AI Solutions",
     description: "Implementation of models like GPT, DALL·E, and Claude for content generation, summarization, translation, and automation."
   },
   {
-    icon: Cpu,
+    icon: Network,
     title: "Machine Learning Model Development",
     description: "Supervised and unsupervised model training for predictions, classification, recommendation systems, and more."
   },
@@ -48,17 +54,17 @@ const features = [
     description: "Embedding AI into existing applications, CRMs, ERPs, or customer workflows."
   },
   {
-    icon: Eye,
+    icon: ScanEye,
     title: "Computer Vision",
     description: "Image recognition, object detection, and OCR using TensorFlow, OpenCV, and PyTorch."
   },
   {
-    icon: FileText,
+    icon: Languages,
     title: "Natural Language Processing (NLP)",
     description: "Sentiment analysis, named entity recognition, text classification, and summarization."
   },
   {
-    icon: Settings,
+    icon: Cpu,
     title: "Data Engineering & Model Ops",
     description: "Data pipelines, model deployment, and monitoring using MLFlow, Airflow, and SageMaker."
   },
@@ -86,6 +92,9 @@ const AIMLServices = () => {
         <GradientOrbs />
         <FloatingIcons count={12} />
         <CircuitLines />
+        <DataFlowLines className="opacity-40" />
+        <FloatingTechOrbs count={5} />
+        <ServiceGridBackground />
         <div className="absolute inset-0 opacity-10">
           <motion.div
             animate={{ 
@@ -105,6 +114,14 @@ const AIMLServices = () => {
           >
             <Sparkles className="w-16 h-16 text-primary/20" />
           </motion.div>
+          <motion.div
+            animate={{ 
+              scale: [1.1, 1, 1.1],
+              x: [0, 40, 0]
+            }}
+            transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute top-1/2 left-1/4 w-72 h-72 bg-purple-500/15 rounded-full blur-3xl"
+          />
         </div>
         <div className="container mx-auto px-4 relative z-10">
           <motion.div

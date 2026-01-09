@@ -13,9 +13,28 @@ import {
   ArrowRight,
   CheckCircle,
   Users,
-  Code
+  Code,
+  Server,
+  Container,
+  Workflow,
+  Lock,
+  Cpu,
+  Layers,
+  Sparkles,
+  Rocket,
+  Target,
+  Award
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { 
+  FloatingTechOrbs, 
+  ServiceGridBackground, 
+  ServiceCardWrapper,
+  AnimatedServiceIcon,
+  TechStackVisual,
+  AnimatedStatsSection
+} from "@/components/graphics/ServiceGraphics";
+import { AnimatedNodes, CircuitLines } from "@/components/graphics/FloatingIcons";
 
 const services = [
   {
@@ -35,7 +54,7 @@ const services = [
     href: "/services/cloud",
   },
   {
-    icon: GitBranch,
+    icon: Container,
     title: "DevOps Services",
     description: "End-to-end DevOps solutions supporting all major tools and platforms.",
     features: [
@@ -49,7 +68,7 @@ const services = [
     href: "/services/devops",
   },
   {
-    icon: Database,
+    icon: Workflow,
     title: "Data Engineering & Data Science",
     description: "Turn raw data into valuable insights and intelligent actions.",
     features: [
@@ -65,7 +84,7 @@ const services = [
     href: "/services/data-engineering",
   },
   {
-    icon: Monitor,
+    icon: Layers,
     title: "Application Modernization & Performance Monitoring",
     description: "From legacy systems to cloud-native applications with proactive monitoring.",
     features: [
@@ -81,7 +100,7 @@ const services = [
     href: "/services/application",
   },
   {
-    icon: Shield,
+    icon: Lock,
     title: "Security Services",
     description: "Comprehensive security solutions covering cloud and on-premise environments.",
     features: [
@@ -97,7 +116,7 @@ const services = [
     href: "/services/security",
   },
   {
-    icon: Brain,
+    icon: Cpu,
     title: "AI & ML Services",
     description: "Leverage AI to unlock efficiency, agility, and new possibilities.",
     features: [
@@ -150,6 +169,11 @@ const Services = () => {
       
       {/* Hero Section */}
       <section className="pt-32 pb-20 bg-gradient-hero relative overflow-hidden">
+        <FloatingTechOrbs count={6} />
+        <ServiceGridBackground />
+        <AnimatedNodes className="opacity-30" />
+        <CircuitLines className="opacity-20" />
+        
         <div className="absolute inset-0">
           <motion.div
             animate={{ scale: [1, 1.3, 1], opacity: [0.1, 0.2, 0.1] }}
@@ -161,7 +185,13 @@ const Services = () => {
             transition={{ duration: 18, repeat: Infinity }}
             className="absolute bottom-10 left-10 w-80 h-80 bg-coral/20 rounded-full blur-3xl"
           />
+          <motion.div
+            animate={{ scale: [1, 1.2, 1], rotate: [0, 180, 360] }}
+            transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-radial from-primary/5 to-transparent rounded-full"
+          />
         </div>
+        
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -169,6 +199,15 @@ const Services = () => {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto text-center"
           >
+            <motion.div
+              initial={{ scale: 0, rotate: -180 }}
+              animate={{ scale: 1, rotate: 0 }}
+              transition={{ type: "spring", stiffness: 200, delay: 0.2 }}
+              className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-coral to-primary mb-6 shadow-xl"
+            >
+              <Rocket className="w-10 h-10 text-white" />
+            </motion.div>
+            
             <span className="inline-block px-4 py-1.5 rounded-full bg-secondary text-sm font-medium text-foreground mb-4">
               Our Services
             </span>
@@ -177,86 +216,146 @@ const Services = () => {
               <span className="text-gradient">Cloud & DevOps</span>{" "}
               Solutions
             </h1>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
               From cloud migration to AI-powered automation, we deliver comprehensive 
               solutions that drive digital transformation for enterprises worldwide.
             </p>
+            
+            {/* Tech stack visual */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
+              className="flex justify-center gap-4 mt-8"
+            >
+              {[Cloud, Container, Database, Lock, Cpu, Code].map((Icon, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, scale: 0 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.6 + i * 0.1, type: "spring" }}
+                  whileHover={{ scale: 1.2, rotate: 10 }}
+                  className="w-12 h-12 rounded-xl bg-card/80 backdrop-blur-sm border border-border flex items-center justify-center hover:border-coral/50 transition-colors"
+                >
+                  <Icon className="w-6 h-6 text-muted-foreground" />
+                </motion.div>
+              ))}
+            </motion.div>
           </motion.div>
         </div>
       </section>
 
       {/* Services List */}
-      <section className="py-20 bg-card">
-        <div className="container mx-auto px-4">
-          <div className="space-y-20">
+      <section className="py-20 bg-card relative overflow-hidden">
+        <ServiceGridBackground className="opacity-50" />
+        
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="space-y-24">
             {services.map((service, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className={`grid lg:grid-cols-2 gap-12 items-start ${
+              <ServiceCardWrapper key={index} index={index}>
+                <div className={`grid lg:grid-cols-2 gap-12 items-start ${
                   index % 2 === 1 ? "lg:grid-flow-dense" : ""
-                }`}
-              >
-                <div className={index % 2 === 1 ? "lg:col-start-2" : ""}>
-                  <motion.div 
-                    whileHover={{ scale: 1.05 }}
-                    className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${service.color} flex items-center justify-center mb-6 shadow-lg`}
-                  >
-                    <service.icon className="w-8 h-8 text-white drop-shadow-md" />
-                  </motion.div>
-                  <h2 className="font-heading text-3xl font-bold mb-4">{service.title}</h2>
-                  <p className="text-muted-foreground text-lg mb-6">{service.description}</p>
-                  <Button variant="gradient" asChild>
-                    <Link to={service.href} className="flex items-center gap-2">
-                      Learn More
-                      <ArrowRight className="w-4 h-4" />
-                    </Link>
-                  </Button>
-                </div>
-
-                <motion.div 
-                  initial={{ opacity: 0, x: index % 2 === 1 ? -30 : 30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.2 }}
-                  className={`p-8 rounded-2xl bg-background border border-border hover:border-coral/20 transition-colors ${
-                  index % 2 === 1 ? "lg:col-start-1" : ""
                 }`}>
-                  <h3 className="font-semibold text-lg mb-6">Key Offerings</h3>
-                  <div className="space-y-4">
-                    {service.features.map((feature, idx) => (
-                      <motion.div 
-                        key={idx} 
-                        initial={{ opacity: 0, x: -10 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: idx * 0.05 }}
-                        className="flex items-start gap-3"
-                      >
-                        <CheckCircle className="w-5 h-5 text-coral flex-shrink-0 mt-0.5" />
-                        <span className="text-foreground text-sm leading-relaxed">{feature}</span>
-                      </motion.div>
-                    ))}
+                  <div className={index % 2 === 1 ? "lg:col-start-2" : ""}>
+                    <AnimatedServiceIcon 
+                      icon={service.icon} 
+                      gradient={`${service.color}`}
+                      size="lg"
+                    />
+                    <h2 className="font-heading text-3xl font-bold mb-4 mt-6">{service.title}</h2>
+                    <p className="text-muted-foreground text-lg mb-6">{service.description}</p>
+                    <Button variant="gradient" asChild>
+                      <Link to={service.href} className="flex items-center gap-2">
+                        Learn More
+                        <ArrowRight className="w-4 h-4" />
+                      </Link>
+                    </Button>
                   </div>
-                </motion.div>
-              </motion.div>
+
+                  <motion.div 
+                    initial={{ opacity: 0, x: index % 2 === 1 ? -30 : 30 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.2 }}
+                    className={`p-8 rounded-2xl bg-background border border-border hover:border-coral/20 transition-all relative overflow-hidden ${
+                    index % 2 === 1 ? "lg:col-start-1" : ""
+                  }`}>
+                    {/* Decorative gradient */}
+                    <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${service.color} opacity-5 blur-2xl`} />
+                    
+                    <h3 className="font-semibold text-lg mb-6 flex items-center gap-2">
+                      <Target className="w-5 h-5 text-coral" />
+                      Key Offerings
+                    </h3>
+                    <div className="space-y-4">
+                      {service.features.map((feature, idx) => (
+                        <motion.div 
+                          key={idx} 
+                          initial={{ opacity: 0, x: -10 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: idx * 0.05 }}
+                          className="flex items-start gap-3 group"
+                        >
+                          <div className="w-5 h-5 rounded-full bg-gradient-to-br from-coral to-primary flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform">
+                            <CheckCircle className="w-3 h-3 text-white" />
+                          </div>
+                          <span className="text-foreground text-sm leading-relaxed">{feature}</span>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </motion.div>
+                </div>
+              </ServiceCardWrapper>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Why Choose Us Section */}
-      <section className="py-20 bg-background">
-        <div className="container mx-auto px-4">
+      {/* Stats Section */}
+      <section className="py-20 bg-gradient-hero relative overflow-hidden">
+        <FloatingTechOrbs count={4} />
+        <div className="container mx-auto px-4 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="text-center mb-12"
           >
+            <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
+              Trusted by <span className="text-gradient">Industry Leaders</span>
+            </h2>
+          </motion.div>
+          
+          <AnimatedStatsSection stats={[
+            { value: "500+", label: "Projects Delivered" },
+            { value: "99.9%", label: "Uptime SLA" },
+            { value: "50+", label: "Enterprise Clients" },
+            { value: "24/7", label: "Expert Support" },
+          ]} />
+        </div>
+      </section>
+
+      {/* Why Choose Us Section */}
+      <section className="py-20 bg-background relative overflow-hidden">
+        <ServiceGridBackground className="opacity-30" />
+        
+        <div className="container mx-auto px-4 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <motion.div
+              initial={{ scale: 0 }}
+              whileInView={{ scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ type: "spring", stiffness: 200 }}
+              className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-coral to-primary mb-4"
+            >
+              <Award className="w-8 h-8 text-white" />
+            </motion.div>
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
               Why Choose{" "}
               <span className="text-gradient">Celesibia</span>
@@ -265,11 +364,11 @@ const Services = () => {
           
           <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6">
             {[
-              "Certified, client-rated professionals with domain expertise",
-              "Flexible contracts — hourly, monthly, or milestone-based",
-              "Immediate onboarding with knowledge transfer",
-              "Transparent reporting, time tracking, and communications",
-              "Coverage for multiple time zones (IST, GMT, EST)",
+              { icon: Users, text: "Certified, client-rated professionals with domain expertise" },
+              { icon: Sparkles, text: "Flexible contracts — hourly, monthly, or milestone-based" },
+              { icon: Rocket, text: "Immediate onboarding with knowledge transfer" },
+              { icon: Target, text: "Transparent reporting, time tracking, and communications" },
+              { icon: Cloud, text: "Coverage for multiple time zones (IST, GMT, EST)" },
             ].map((item, index) => (
               <motion.div
                 key={index}
@@ -277,11 +376,18 @@ const Services = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -5 }}
-                className="p-6 rounded-xl bg-card border border-border text-center hover:border-coral/30 transition-all"
+                whileHover={{ y: -8, scale: 1.02 }}
+                className="p-6 rounded-xl bg-card border border-border text-center hover:border-coral/30 transition-all group relative overflow-hidden"
               >
-                <CheckCircle className="w-8 h-8 text-coral mx-auto mb-3" />
-                <p className="text-sm text-foreground">{item}</p>
+                {/* Hover gradient */}
+                <div className="absolute inset-0 bg-gradient-to-br from-coral/5 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                
+                <div className="relative z-10">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-coral to-primary flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                    <item.icon className="w-6 h-6 text-white" />
+                  </div>
+                  <p className="text-sm text-foreground">{item.text}</p>
+                </div>
               </motion.div>
             ))}
           </div>

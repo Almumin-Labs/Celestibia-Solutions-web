@@ -17,16 +17,21 @@ import {
   Key,
   Network,
   Bug,
-  Radio
+  Radio,
+  Fingerprint,
+  Scan,
+  AlertCircle,
+  FileWarning
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { FloatingIcons, GradientOrbs, HexagonGrid } from "@/components/graphics/FloatingIcons";
+import { FloatingIcons, GradientOrbs, HexagonGrid, CircuitLines } from "@/components/graphics/FloatingIcons";
 import { TechIllustration } from "@/components/graphics/TechIllustration";
 import { AnimatedBackground } from "@/components/graphics/AnimatedBackground";
+import { FloatingTechOrbs, ServiceGridBackground, AnimatedStatsSection } from "@/components/graphics/ServiceGraphics";
 
 const cloudSecurityFeatures = [
   {
-    icon: Search,
+    icon: Scan,
     title: "Cloud Security Posture Assessment",
     description: "Identify misconfigurations in AWS, Azure, GCP. CIS Benchmarks & compliance mapping."
   },
@@ -36,7 +41,7 @@ const cloudSecurityFeatures = [
     description: "Zero Trust Architecture, Identity and Access Management (IAM), Network segmentation and firewall policies."
   },
   {
-    icon: Key,
+    icon: Fingerprint,
     title: "Identity and Access Management (IAM)",
     description: "RBAC, ABAC policy design. SSO, MFA integration. Identity lifecycle management."
   },
@@ -54,17 +59,17 @@ const cybersecurityFeatures = [
     description: "Infrastructure, application, and cloud VAPT. Black-box, white-box, and grey-box testing."
   },
   {
-    icon: Eye,
+    icon: AlertCircle,
     title: "Security Monitoring & Incident Response",
     description: "SIEM implementation (Splunk, ELK, AWS GuardDuty). 24/7 monitoring and threat detection. Incident handling and forensic analysis."
   },
   {
-    icon: Radio,
+    icon: Eye,
     title: "Managed Detection and Response (MDR)",
     description: "Outsourced SOC for continuous monitoring. Threat hunting and response."
   },
   {
-    icon: Network,
+    icon: FileWarning,
     title: "Third-Party Risk Management",
     description: "Vendor security assessments. Supply chain security audits."
   },
@@ -84,6 +89,9 @@ const SecurityServices = () => {
         <GradientOrbs />
         <FloatingIcons count={10} />
         <HexagonGrid />
+        <CircuitLines className="opacity-30" />
+        <FloatingTechOrbs count={4} />
+        <ServiceGridBackground />
         <div className="absolute inset-0 opacity-10">
           <motion.div
             animate={{ 
@@ -92,6 +100,14 @@ const SecurityServices = () => {
             }}
             transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
             className="absolute top-20 right-20 w-64 h-64 bg-red-500/20 rounded-full blur-3xl"
+          />
+          <motion.div
+            animate={{ 
+              scale: [1.1, 1, 1.1],
+              y: [0, -30, 0]
+            }}
+            transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute bottom-20 left-20 w-72 h-72 bg-orange-500/15 rounded-full blur-3xl"
           />
         </div>
         <div className="container mx-auto px-4 relative z-10">
