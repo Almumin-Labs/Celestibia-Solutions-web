@@ -34,8 +34,11 @@ import {
   X,
   Loader2,
   Shield,
+  Upload,
+  ImageIcon,
 } from "lucide-react";
 import { AdminManagement } from "@/components/admin/AdminManagement";
+import { supabase } from "@/integrations/supabase/client";
 
 const AdminDashboard = () => {
   const { isAdmin, isSuperAdmin, isLoading: authLoading, logout } = useAdminAuth();
@@ -57,12 +60,15 @@ const AdminDashboard = () => {
     read_time: "5 min read",
     meta_title: "",
     meta_description: "",
+    image_url: "",
     date: new Date().toLocaleDateString("en-US", {
       month: "short",
       day: "numeric",
       year: "numeric",
     }),
   });
+  const [isUploadingImage, setIsUploadingImage] = useState(false);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
 
   useEffect(() => {
     if (!authLoading && !isAdmin) {
@@ -137,8 +143,10 @@ const AdminDashboard = () => {
       read_time: blog.read_time,
       meta_title: blog.meta_title || "",
       meta_description: blog.meta_description || "",
+      image_url: blog.image_url || "",
       date: blog.date,
     });
+    setImagePreview(blog.image_url || null);
     setShowBlogForm(true);
   };
 
@@ -169,11 +177,69 @@ const AdminDashboard = () => {
       read_time: "5 min read",
       meta_title: "",
       meta_description: "",
+      image_url: "",
       date: new Date().toLocaleDateString("en-US", {
         month: "short",
         day: "numeric",
         year: "numeric",
       }),
+    });
+    setImagePreview(null);
+  };
+
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    // Validate file type
+    if (!file.type.startsWith('image/')) {
+      toast({ 
+        title: "Invalid file", 
+        description: "Please upload an image file", 
+        variant: "destructive" 
+      });
+      return;
+    }
+
+    // Validate file size (max 5MB)
+    if (file.size > 5 * 1024 * 1024) {
+      toast({ 
+        title: "File too large", 
+        description: "Maximum file size is 5MB", 
+        variant: "destructive" 
+      });
+      return;
+    }
+
+    setIsUploadingImage(true);
+    
+    const fileExt = file.name.split('.').pop();
+    const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`;
+    
+    const { error } = await supabase.storage
+      .from('blog-images')
+      .upload(fileName, file);
+
+    if (error) {
+      toast({ 
+        title: "Upload failed", 
+        description: error.message, 
+        variant: "destructive" 
+      });
+      setIsUploadingImage(false);
+      return;
+    }
+
+    const { data: { publicUrl } } = supabase.storage
+      .from('blog-images')
+      .getPublicUrl(fileName);
+
+    setBlogForm({ ...blogForm, image_url: publicUrl });
+    setImagePreview(publicUrl);
+    setIsUploadingImage(false);
+    toast({ 
+      title: "Image uploaded!", 
+      description: "Your blog image has been uploaded successfully." 
     });
   };
 
@@ -438,6 +504,65 @@ const AdminDashboard = () => {
                           }
                           placeholder="e.g., 5 min read"
                         />
+                      </div>
+                    </div>
+
+                    {/* Blog Featured Image */}
+                    <div className="border-t border-border pt-4 mt-4">
+                      <h4 className="font-medium mb-3 text-sm text-muted-foreground flex items-center gap-2">
+                        <ImageIcon className="w-4 h-4" />
+                        Blog Featured Image
+                      </h4>
+                      <div className="space-y-3">
+                        {/* Image Preview */}
+                        {(imagePreview || blogForm.image_url) && (
+                          <div className="relative rounded-lg overflow-hidden aspect-video max-w-md border border-border">
+                            <img 
+                              src={imagePreview || blogForm.image_url} 
+                              alt="Blog preview" 
+                              className="w-full h-full object-cover"
+                            />
+                            <button
+                              type="button"
+                              onClick={() => {
+                                setBlogForm({ ...blogForm, image_url: "" });
+                                setImagePreview(null);
+                              }}
+                              className="absolute top-2 right-2 p-1.5 bg-destructive text-destructive-foreground rounded-full hover:bg-destructive/90 transition-colors"
+                            >
+                              <X className="w-4 h-4" />
+                            </button>
+                          </div>
+                        )}
+                        
+                        {/* Upload Button */}
+                        <div className="flex items-center gap-3">
+                          <label className="cursor-pointer">
+                            <input
+                              type="file"
+                              accept="image/*"
+                              onChange={handleImageUpload}
+                              className="hidden"
+                              disabled={isUploadingImage}
+                            />
+                            <div className="inline-flex items-center gap-2 px-4 py-2 bg-secondary hover:bg-secondary/80 rounded-lg text-sm font-medium transition-colors">
+                              {isUploadingImage ? (
+                                <>
+                                  <Loader2 className="w-4 h-4 animate-spin" />
+                                  Uploading...
+                                </>
+                              ) : (
+                                <>
+                                  <Upload className="w-4 h-4" />
+                                  Upload Image
+                                </>
+                              )}
+                            </div>
+                          </label>
+                          <span className="text-xs text-muted-foreground">
+                            Max 5MB. JPG, PNG, or WebP recommended.
+                          </span>
+                        </div>
                       </div>
                     </div>
 
