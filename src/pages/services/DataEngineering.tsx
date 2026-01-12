@@ -17,8 +17,8 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { FloatingIcons, GradientOrbs, GridPattern } from "@/components/graphics/FloatingIcons";
-import { DataFlowIllustration } from "@/components/graphics/TechIllustration";
 import { AnimatedBackground } from "@/components/graphics/AnimatedBackground";
+import { dataEngineeringPlatforms, PlatformBadge } from "@/components/logos/PlatformLogos";
 
 // Import illustrations
 import dataPrepWorkflow from "@/assets/illustrations/data-prep-workflow-orchestration.svg";
@@ -75,11 +75,7 @@ const dataScienceFeatures = [
   },
 ];
 
-const platforms = [
-  "Snowflake", "Databricks", "BigQuery", "Redshift", "Apache Spark",
-  "Airflow", "dbt", "Kafka", "Flink", "Tableau", "Power BI", "Looker",
-  "Delta Lake", "Iceberg", "Glue", "Kinesis", "Great Expectations", "DataHub"
-];
+// Using dataEngineeringPlatforms from PlatformLogos component
 
 const DataEngineering = () => {
   return (
@@ -257,7 +253,7 @@ const DataEngineering = () => {
           </motion.div>
 
           <div className="flex flex-wrap justify-center gap-4">
-            {platforms.map((platform, index) => (
+            {dataEngineeringPlatforms.map((platform, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, scale: 0.9 }}
@@ -265,9 +261,8 @@ const DataEngineering = () => {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.03 }}
                 whileHover={{ scale: 1.05 }}
-                className="px-6 py-3 rounded-full bg-background border border-border hover:border-primary/50 transition-all cursor-default"
               >
-                <span className="font-medium text-foreground">{platform}</span>
+                <PlatformBadge platform={platform} index={index} variant="data" />
               </motion.div>
             ))}
           </div>

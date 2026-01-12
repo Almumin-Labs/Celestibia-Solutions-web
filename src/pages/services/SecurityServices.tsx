@@ -25,9 +25,9 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { FloatingIcons, GradientOrbs, HexagonGrid, CircuitLines } from "@/components/graphics/FloatingIcons";
-import { TechIllustration } from "@/components/graphics/TechIllustration";
 import { AnimatedBackground } from "@/components/graphics/AnimatedBackground";
-import { FloatingTechOrbs, ServiceGridBackground, AnimatedStatsSection } from "@/components/graphics/ServiceGraphics";
+import { FloatingTechOrbs, ServiceGridBackground } from "@/components/graphics/ServiceGraphics";
+import { complianceFrameworkItems, PlatformBadge } from "@/components/logos/PlatformLogos";
 
 const cloudSecurityFeatures = [
   {
@@ -75,9 +75,7 @@ const cybersecurityFeatures = [
   },
 ];
 
-const complianceFrameworks = [
-  "SOC 2", "HIPAA", "PCI-DSS", "GDPR", "ISO 27001", "NIST", "CIS Benchmarks", "FedRAMP"
-];
+// Using complianceFrameworkItems from PlatformLogos component
 
 const SecurityServices = () => {
   return (
@@ -237,7 +235,7 @@ const SecurityServices = () => {
           </motion.div>
 
           <div className="flex flex-wrap justify-center gap-4">
-            {complianceFrameworks.map((framework, index) => (
+            {complianceFrameworkItems.map((framework, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, scale: 0.9 }}
@@ -245,9 +243,8 @@ const SecurityServices = () => {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.05 }}
                 whileHover={{ scale: 1.05 }}
-                className="px-6 py-3 rounded-full bg-background border border-border hover:border-primary/50 transition-all cursor-default"
               >
-                <span className="font-medium text-foreground">{framework}</span>
+                <PlatformBadge platform={framework} index={index} variant="security" />
               </motion.div>
             ))}
           </div>
