@@ -2,10 +2,10 @@ import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { Calendar, User, ArrowRight, Clock, Loader2, Image as ImageIcon } from "lucide-react";
+import { Calendar, User, ArrowRight, Clock, Loader2, Image as ImageIcon, BookOpen } from "lucide-react";
 import { Link } from "react-router-dom";
 import { getBlogs, BlogPost } from "@/lib/storage";
-import { HexagonPattern, IsometricIcons } from "@/components/graphics/InfraCloudStyle";
+import { CloudHeroGraphics } from "@/components/graphics/HeroGraphics";
 
 const categories = ["All", "Cloud", "DevOps", "Security", "Data", "AI"];
 
@@ -33,15 +33,7 @@ const Blog = () => {
       
       {/* Hero Section */}
       <section className="pt-32 pb-20 bg-gradient-hero relative overflow-hidden">
-        <HexagonPattern />
-        <IsometricIcons className="opacity-30" />
-        
-        <motion.div 
-          animate={{ scale: [1, 1.2, 1], opacity: [0.15, 0.25, 0.15] }}
-          transition={{ duration: 10, repeat: Infinity }}
-          className="absolute -top-32 -right-32 w-[400px] h-[400px] bg-gradient-to-br from-[#F97316]/20 to-[#8B5CF6]/10 rounded-full blur-[100px]" 
-        />
-        
+        <CloudHeroGraphics />
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -49,7 +41,15 @@ const Blog = () => {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto text-center"
           >
-            <span className="inline-block px-4 py-1.5 rounded-full bg-secondary text-sm font-medium text-foreground mb-4">
+            <motion.div 
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.5 }}
+              className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-500 mb-6"
+            >
+              <BookOpen className="w-10 h-10 text-white" />
+            </motion.div>
+            <span className="inline-block px-4 py-1.5 rounded-full bg-secondary text-sm font-medium text-foreground mb-4 ml-4">
               Blog
             </span>
             <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
@@ -66,6 +66,21 @@ const Blog = () => {
       {/* Blog Content */}
       <section className="py-20 bg-card">
         <div className="container mx-auto px-4">
+          {/* Section Header */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
+              Latest Articles
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
+              Expert insights on cloud, DevOps, security, and more
+            </p>
+          </motion.div>
+
           {/* Categories */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -78,10 +93,10 @@ const Blog = () => {
               <button
                 key={category}
                 onClick={() => setSelectedCategory(category)}
-                className={`px-5 py-2 rounded-full text-sm font-medium transition-colors ${
+                className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
                   category === selectedCategory
-                    ? "bg-gradient-primary text-primary-foreground"
-                    : "bg-secondary text-foreground hover:bg-coral hover:text-primary-foreground"
+                    ? "bg-gradient-primary text-primary-foreground shadow-lg scale-105"
+                    : "bg-secondary text-foreground hover:bg-coral hover:text-primary-foreground hover:scale-105"
                 }`}
               >
                 {category}
@@ -95,9 +110,16 @@ const Blog = () => {
               <Loader2 className="w-8 h-8 animate-spin text-coral" />
             </div>
           ) : filteredPosts.length === 0 ? (
-            <div className="text-center py-20 text-muted-foreground">
-              No blog posts found.
-            </div>
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="text-center py-20"
+            >
+              <div className="w-20 h-20 rounded-full bg-secondary mx-auto mb-4 flex items-center justify-center">
+                <BookOpen className="w-10 h-10 text-muted-foreground" />
+              </div>
+              <p className="text-muted-foreground text-lg">No blog posts found.</p>
+            </motion.div>
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredPosts.map((post, index) => (
@@ -107,7 +129,8 @@ const Blog = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.05 }}
-                  className="bg-background rounded-2xl border border-border overflow-hidden hover:shadow-xl hover:border-coral/30 transition-all duration-300 group"
+                  whileHover={{ y: -8 }}
+                  className="bg-background rounded-2xl border border-border overflow-hidden hover:shadow-2xl hover:border-coral/30 transition-all duration-300 group"
                 >
                   {/* Featured Image */}
                   <Link to={`/blog/${post.slug}`} className="block relative overflow-hidden aspect-video">
@@ -115,7 +138,7 @@ const Blog = () => {
                       <img 
                         src={post.image_url} 
                         alt={post.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                       />
                     ) : (
                       <div className="w-full h-full bg-gradient-to-br from-primary/20 to-coral/20 flex items-center justify-center">
@@ -123,14 +146,14 @@ const Blog = () => {
                       </div>
                     )}
                     {/* Category overlay */}
-                    <span className="absolute top-4 left-4 px-3 py-1 rounded-full bg-background/90 backdrop-blur-sm text-xs font-medium text-foreground">
+                    <span className="absolute top-4 left-4 px-3 py-1 rounded-full bg-background/90 backdrop-blur-sm text-xs font-medium text-foreground shadow-lg">
                       {post.category}
                     </span>
                   </Link>
 
                   {/* Content */}
                   <div className="p-6">
-                    <h2 className="font-heading text-xl font-bold mb-3 group-hover:text-coral transition-colors">
+                    <h2 className="font-heading text-xl font-bold mb-3 group-hover:text-coral transition-colors line-clamp-2">
                       <Link to={`/blog/${post.slug}`}>{post.title}</Link>
                     </h2>
                     <p className="text-muted-foreground mb-4 line-clamp-2">
@@ -156,7 +179,7 @@ const Blog = () => {
                       </span>
                       <Link
                         to={`/blog/${post.slug}`}
-                        className="flex items-center gap-1 text-coral font-semibold text-sm hover:gap-2 transition-all"
+                        className="flex items-center gap-1 text-coral font-semibold text-sm hover:gap-2 transition-all group-hover:text-coral"
                       >
                         Read More
                         <ArrowRight className="w-4 h-4" />

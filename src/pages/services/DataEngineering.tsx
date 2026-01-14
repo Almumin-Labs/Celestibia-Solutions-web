@@ -16,7 +16,7 @@ import {
   FileSearch
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { FloatingIcons, GradientOrbs, GridPattern } from "@/components/graphics/FloatingIcons";
+import { DataHeroGraphics } from "@/components/graphics/HeroGraphics";
 import { AnimatedBackground } from "@/components/graphics/AnimatedBackground";
 import { dataEngineeringPlatforms, PlatformBadge } from "@/components/logos/PlatformLogos";
 
@@ -84,19 +84,7 @@ const DataEngineering = () => {
       
       {/* Hero Section */}
       <section className="pt-32 pb-20 bg-gradient-hero relative overflow-hidden">
-        <GradientOrbs />
-        <FloatingIcons count={10} />
-        <GridPattern />
-        <div className="absolute inset-0 opacity-10">
-          <motion.div
-            animate={{ 
-              scale: [1, 1.2, 1],
-              rotate: [0, 180, 360]
-            }}
-            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-            className="absolute top-20 right-20 w-64 h-64 bg-green-500/20 rounded-full blur-3xl"
-          />
-        </div>
+        <DataHeroGraphics />
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -104,9 +92,14 @@ const DataEngineering = () => {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto text-center"
           >
-            <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-green-500 to-emerald-500 mb-6">
+            <motion.div 
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.5 }}
+              className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-green-500 to-emerald-500 mb-6"
+            >
               <Database className="w-10 h-10 text-white" />
-            </div>
+            </motion.div>
             <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
               Data Engineering{" "}
               <span className="text-gradient">& Data Science</span>

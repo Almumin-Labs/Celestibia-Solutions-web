@@ -10,10 +10,12 @@ import {
   Car,
   Server,
   ArrowRight,
-  CheckCircle
+  CheckCircle,
+  TrendingUp
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { CloudHeroGraphics } from "@/components/graphics/HeroGraphics";
 
 const caseStudies = [
   {
@@ -132,25 +134,42 @@ const CaseStudiesPage = () => {
       <Header />
       
       {/* Hero Section */}
-      <section className="pt-32 pb-20 bg-gradient-hero">
-        <div className="container mx-auto px-4">
+      <section className="pt-32 pb-20 bg-gradient-hero relative overflow-hidden">
+        <CloudHeroGraphics />
+        <div className="container mx-auto px-4 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto text-center"
           >
-            <span className="inline-block px-4 py-1.5 rounded-full bg-secondary text-sm font-medium text-foreground mb-4">
+            <motion.div 
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.5 }}
+              className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-coral to-orange mb-6"
+            >
+              <TrendingUp className="w-10 h-10 text-white" />
+            </motion.div>
+            <span className="inline-block px-4 py-1.5 rounded-full bg-secondary text-sm font-medium text-foreground mb-4 ml-4">
               Case Studies
             </span>
             <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
               Real Results,{" "}
               <span className="text-gradient">Real Impact</span>
             </h1>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
               Explore how we've helped enterprises across industries achieve measurable 
               business outcomes through cloud-native solutions and DevOps excellence.
             </p>
+            <div className="flex flex-wrap justify-center gap-4">
+              <Button variant="gradient" size="lg" asChild>
+                <Link to="/contact" className="flex items-center gap-2">
+                  Start Your Journey
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </Button>
+            </div>
           </motion.div>
         </div>
       </section>
@@ -158,7 +177,20 @@ const CaseStudiesPage = () => {
       {/* Case Studies List */}
       <section className="py-20 bg-card">
         <div className="container mx-auto px-4">
-          <div className="space-y-12">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
+              Success Stories
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Proven track record of delivering transformative results
+            </p>
+          </motion.div>
+          <div className="space-y-8">
             {caseStudies.map((study, index) => (
               <motion.div
                 key={index}
@@ -166,38 +198,45 @@ const CaseStudiesPage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5 }}
-                className="bg-background rounded-2xl border border-border overflow-hidden hover:shadow-xl transition-shadow"
+                whileHover={{ scale: 1.01 }}
+                className="bg-background rounded-2xl border border-border overflow-hidden hover:shadow-2xl hover:border-coral/20 transition-all duration-300 group"
               >
                 {/* Gradient Top Bar */}
-                <div className={`h-2 bg-gradient-to-r ${study.color}`} />
+                <div className={`h-1.5 bg-gradient-to-r ${study.color}`} />
 
                 <div className="p-8 lg:p-10">
                   {/* Header */}
                   <div className="flex flex-wrap items-start gap-4 mb-6">
-                    <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${study.color} flex items-center justify-center flex-shrink-0`}>
+                    <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${study.color} flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform shadow-lg`}>
                       <study.icon className="w-7 h-7 text-primary-foreground" />
                     </div>
                     <div className="flex-1">
-                      <span className="text-sm font-medium text-muted-foreground">
+                      <span className="inline-block px-3 py-1 rounded-full bg-secondary text-xs font-medium text-muted-foreground mb-2">
                         {study.industry}
                       </span>
-                      <h2 className="font-heading text-2xl font-bold">{study.title}</h2>
+                      <h2 className="font-heading text-2xl font-bold group-hover:text-coral transition-colors">{study.title}</h2>
                       <p className="text-muted-foreground">Client: {study.client}</p>
                     </div>
                   </div>
 
                   <div className="grid lg:grid-cols-3 gap-8">
                     {/* Challenge */}
-                    <div>
-                      <h3 className="font-semibold text-lg mb-3 text-coral">Challenge</h3>
+                    <div className="p-4 rounded-xl bg-card/50">
+                      <h3 className="font-semibold text-lg mb-3 text-coral flex items-center gap-2">
+                        <span className="w-2 h-2 rounded-full bg-coral" />
+                        Challenge
+                      </h3>
                       <p className="text-muted-foreground leading-relaxed">
                         {study.challenge}
                       </p>
                     </div>
 
                     {/* Solution */}
-                    <div>
-                      <h3 className="font-semibold text-lg mb-3 text-coral">Our Solution</h3>
+                    <div className="p-4 rounded-xl bg-card/50">
+                      <h3 className="font-semibold text-lg mb-3 text-coral flex items-center gap-2">
+                        <span className="w-2 h-2 rounded-full bg-coral" />
+                        Our Solution
+                      </h3>
                       <div className="space-y-2">
                         {study.solution.map((item, idx) => (
                           <div key={idx} className="flex items-start gap-2">
@@ -209,8 +248,11 @@ const CaseStudiesPage = () => {
                     </div>
 
                     {/* Results */}
-                    <div>
-                      <h3 className="font-semibold text-lg mb-3 text-coral">Results</h3>
+                    <div className="p-4 rounded-xl bg-gradient-to-br from-coral/5 to-orange/5 border border-coral/10">
+                      <h3 className="font-semibold text-lg mb-3 text-coral flex items-center gap-2">
+                        <span className="w-2 h-2 rounded-full bg-coral" />
+                        Results
+                      </h3>
                       <div className="space-y-3">
                         {study.results.map((result, idx) => (
                           <div key={idx} className="flex items-center gap-3">

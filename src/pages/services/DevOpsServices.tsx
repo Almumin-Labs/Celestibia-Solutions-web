@@ -14,6 +14,7 @@ import {
   Cog
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { DevOpsHeroGraphics } from "@/components/graphics/HeroGraphics";
 
 // Import original logos
 import gitlabLogo from "@/assets/logos/gitlab.png";
@@ -87,24 +88,7 @@ const DevOpsServices = () => {
       
       {/* Hero Section */}
       <section className="pt-32 pb-20 bg-gradient-hero relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <motion.div
-            animate={{ 
-              scale: [1, 1.2, 1],
-              rotate: [0, 180, 360]
-            }}
-            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-            className="absolute top-20 right-20 w-64 h-64 bg-purple-500/20 rounded-full blur-3xl"
-          />
-          <motion.div
-            animate={{ 
-              scale: [1.2, 1, 1.2],
-              rotate: [360, 180, 0]
-            }}
-            transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-            className="absolute bottom-20 left-20 w-96 h-96 bg-coral/20 rounded-full blur-3xl"
-          />
-        </div>
+        <DevOpsHeroGraphics />
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
