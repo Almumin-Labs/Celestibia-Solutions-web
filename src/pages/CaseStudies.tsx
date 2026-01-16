@@ -134,8 +134,19 @@ const CaseStudiesPage = () => {
       <Header />
       
       {/* Hero Section */}
-      <section className="pt-32 pb-20 bg-gradient-hero relative overflow-hidden">
+      <section className="pt-32 pb-24 bg-gradient-hero relative overflow-hidden">
         <CloudHeroGraphics />
+        
+        {/* Additional animated orbs */}
+        <motion.div
+          animate={{
+            scale: [1, 1.3, 1],
+            opacity: [0.2, 0.35, 0.2],
+          }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-20 left-20 w-[350px] h-[350px] bg-gradient-to-br from-coral/40 to-orange/30 rounded-full blur-[100px]"
+        />
+        
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -147,18 +158,18 @@ const CaseStudiesPage = () => {
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.5 }}
-              className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-coral to-orange mb-6"
+              className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-coral to-orange mb-6 shadow-xl"
             >
               <TrendingUp className="w-10 h-10 text-white" />
             </motion.div>
-            <span className="inline-block px-4 py-1.5 rounded-full bg-secondary text-sm font-medium text-foreground mb-4 ml-4">
+            <span className="inline-block px-4 py-1.5 rounded-full bg-coral/20 text-coral text-sm font-medium mb-4 ml-4">
               Case Studies
             </span>
             <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
               Real Results,{" "}
               <span className="text-gradient">Real Impact</span>
             </h1>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8 leading-relaxed">
               Explore how we've helped enterprises across industries achieve measurable 
               business outcomes through cloud-native solutions and DevOps excellence.
             </p>
@@ -175,18 +186,27 @@ const CaseStudiesPage = () => {
       </section>
 
       {/* Case Studies List */}
-      <section className="py-20 bg-card">
-        <div className="container mx-auto px-4">
+      <section className="py-24 bg-card relative overflow-hidden">
+        {/* Background decoration */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-coral to-orange rounded-full blur-[150px]" />
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-br from-purple to-blue-500 rounded-full blur-[150px]" />
+        </div>
+        
+        <div className="container mx-auto px-4 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="text-center mb-16"
           >
+            <span className="inline-block px-4 py-1.5 rounded-full bg-coral/20 text-coral text-sm font-medium mb-4">
+              Our Work
+            </span>
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
-              Success Stories
+              Success <span className="text-gradient">Stories</span>
             </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Proven track record of delivering transformative results
             </p>
           </motion.div>
@@ -198,8 +218,8 @@ const CaseStudiesPage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5 }}
-                whileHover={{ scale: 1.01 }}
-                className="bg-background rounded-2xl border border-border overflow-hidden hover:shadow-2xl hover:border-coral/20 transition-all duration-300 group"
+                whileHover={{ scale: 1.01, y: -5 }}
+                className="bg-background rounded-2xl border border-border overflow-hidden hover:shadow-2xl hover:border-coral/30 transition-all duration-300 group"
               >
                 {/* Gradient Top Bar */}
                 <div className={`h-1.5 bg-gradient-to-r ${study.color}`} />
@@ -207,11 +227,11 @@ const CaseStudiesPage = () => {
                 <div className="p-8 lg:p-10">
                   {/* Header */}
                   <div className="flex flex-wrap items-start gap-4 mb-6">
-                    <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${study.color} flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform shadow-lg`}>
-                      <study.icon className="w-7 h-7 text-primary-foreground" />
+                    <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${study.color} flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform shadow-lg`}>
+                      <study.icon className="w-8 h-8 text-primary-foreground" />
                     </div>
                     <div className="flex-1">
-                      <span className="inline-block px-3 py-1 rounded-full bg-secondary text-xs font-medium text-muted-foreground mb-2">
+                      <span className="inline-block px-3 py-1 rounded-full bg-coral/20 text-coral text-xs font-medium mb-2">
                         {study.industry}
                       </span>
                       <h2 className="font-heading text-2xl font-bold group-hover:text-coral transition-colors">{study.title}</h2>
@@ -221,10 +241,12 @@ const CaseStudiesPage = () => {
 
                   <div className="grid lg:grid-cols-3 gap-8">
                     {/* Challenge */}
-                    <div className="p-4 rounded-xl bg-card/50">
-                      <h3 className="font-semibold text-lg mb-3 text-coral flex items-center gap-2">
-                        <span className="w-2 h-2 rounded-full bg-coral" />
-                        Challenge
+                    <div className="p-5 rounded-xl bg-card border border-border">
+                      <h3 className="font-semibold text-lg mb-3 flex items-center gap-2">
+                        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-coral to-orange flex items-center justify-center">
+                          <span className="text-white text-sm font-bold">!</span>
+                        </div>
+                        <span className="text-coral">Challenge</span>
                       </h3>
                       <p className="text-muted-foreground leading-relaxed">
                         {study.challenge}
@@ -232,15 +254,19 @@ const CaseStudiesPage = () => {
                     </div>
 
                     {/* Solution */}
-                    <div className="p-4 rounded-xl bg-card/50">
-                      <h3 className="font-semibold text-lg mb-3 text-coral flex items-center gap-2">
-                        <span className="w-2 h-2 rounded-full bg-coral" />
-                        Our Solution
+                    <div className="p-5 rounded-xl bg-card border border-border">
+                      <h3 className="font-semibold text-lg mb-3 flex items-center gap-2">
+                        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-coral to-orange flex items-center justify-center">
+                          <CheckCircle className="w-4 h-4 text-white" />
+                        </div>
+                        <span className="text-coral">Our Solution</span>
                       </h3>
-                      <div className="space-y-2">
+                      <div className="space-y-3">
                         {study.solution.map((item, idx) => (
-                          <div key={idx} className="flex items-start gap-2">
-                            <CheckCircle className="w-4 h-4 text-coral flex-shrink-0 mt-1" />
+                          <div key={idx} className="flex items-start gap-3 group/item">
+                            <div className="flex-shrink-0 w-5 h-5 rounded-full bg-gradient-to-br from-coral to-orange flex items-center justify-center mt-0.5 shadow-sm group-hover/item:scale-110 transition-transform">
+                              <CheckCircle className="w-3 h-3 text-white" />
+                            </div>
                             <span className="text-muted-foreground text-sm">{item}</span>
                           </div>
                         ))}
@@ -248,12 +274,14 @@ const CaseStudiesPage = () => {
                     </div>
 
                     {/* Results */}
-                    <div className="p-4 rounded-xl bg-gradient-to-br from-coral/5 to-orange/5 border border-coral/10">
-                      <h3 className="font-semibold text-lg mb-3 text-coral flex items-center gap-2">
-                        <span className="w-2 h-2 rounded-full bg-coral" />
-                        Results
+                    <div className="p-5 rounded-xl bg-gradient-to-br from-coral/10 to-orange/10 border border-coral/20">
+                      <h3 className="font-semibold text-lg mb-3 flex items-center gap-2">
+                        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-coral to-orange flex items-center justify-center">
+                          <TrendingUp className="w-4 h-4 text-white" />
+                        </div>
+                        <span className="text-coral">Results</span>
                       </h3>
-                      <div className="space-y-3">
+                      <div className="space-y-4">
                         {study.results.map((result, idx) => (
                           <div key={idx} className="flex items-center gap-3">
                             <span className="text-2xl font-bold text-gradient">{result.metric}</span>

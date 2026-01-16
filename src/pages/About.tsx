@@ -45,11 +45,11 @@ const team = [
 ];
 
 const whatWeDo = [
-  { emoji: " ", title: "Custom Software Development" },
-  { emoji: " ", title: "Cloud & DevOps Solutions" },
-  { emoji: " ", title: "Web & Mobile App Engineering" },
-  { emoji: " ", title: "Automation & Process Optimization" },
-  { emoji: " ", title: "Secure, Reliable & High-Performance Systems" },
+  "Custom Software Development",
+  "Cloud & DevOps Solutions",
+  "Web & Mobile App Engineering",
+  "Automation & Process Optimization",
+  "Secure, Reliable & High-Performance Systems",
 ];
 
 const About = () => {
@@ -58,27 +58,37 @@ const About = () => {
       <Header />
 
       {/* Hero Section */}
-      <section className="pt-32 pb-20 bg-gradient-hero relative overflow-hidden">
+      <section className="pt-32 pb-24 bg-gradient-hero relative overflow-hidden">
         {/* InfraCloud-style backgrounds */}
         <HexagonPattern />
         <IsometricIcons />
 
-        {/* Animated orbs */}
+        {/* Animated orbs - Enhanced */}
         <motion.div
           animate={{
-            scale: [1, 1.3, 1],
-            opacity: [0.15, 0.3, 0.15],
+            scale: [1, 1.4, 1],
+            opacity: [0.2, 0.4, 0.2],
+            x: [0, 30, 0],
           }}
-          transition={{ duration: 10, repeat: Infinity }}
-          className="absolute top-20 right-20 w-[400px] h-[400px] bg-gradient-to-br from-[#F97316]/30 to-[#8B5CF6]/20 rounded-full blur-[100px]"
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-10 right-10 w-[500px] h-[500px] bg-gradient-to-br from-coral/40 to-purple/30 rounded-full blur-[120px]"
         />
         <motion.div
           animate={{
-            scale: [1.2, 1, 1.2],
-            opacity: [0.15, 0.25, 0.15],
+            scale: [1.3, 1, 1.3],
+            opacity: [0.2, 0.35, 0.2],
+            y: [0, -20, 0],
           }}
-          transition={{ duration: 12, repeat: Infinity }}
-          className="absolute bottom-20 left-20 w-[350px] h-[350px] bg-gradient-to-br from-[#8B5CF6]/30 to-[#06B6D4]/20 rounded-full blur-[100px]"
+          transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute bottom-10 left-10 w-[400px] h-[400px] bg-gradient-to-br from-purple/40 to-cyan-500/30 rounded-full blur-[120px]"
+        />
+        <motion.div
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.15, 0.3, 0.15],
+          }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-gradient-to-br from-orange/30 to-coral/20 rounded-full blur-[100px]"
         />
 
         <div className="container mx-auto px-4 relative z-10">
@@ -88,13 +98,21 @@ const About = () => {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto text-center"
           >
-            <span className="inline-block px-4 py-1.5 rounded-full bg-secondary text-sm font-medium text-foreground mb-4">
+            <motion.div 
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.5 }}
+              className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-coral to-orange mb-6 shadow-xl"
+            >
+              <Users className="w-10 h-10 text-white" />
+            </motion.div>
+            <span className="inline-block px-4 py-1.5 rounded-full bg-coral/20 text-coral text-sm font-medium mb-4 ml-4">
               About Us
             </span>
             <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
               Where Innovation Meets <span className="text-gradient">Precision</span>
             </h1>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
               Welcome to Celesibia Solutions — where innovation meets precision, and ideas transform into impactful
               digital solutions.
             </p>
@@ -134,10 +152,12 @@ const About = () => {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.1 }}
-                    className="flex items-center gap-3"
+                    className="flex items-center gap-3 group"
                   >
-                    <span className="text-2xl">{item.emoji}</span>
-                    <span className="font-medium">{item.title}</span>
+                    <div className="flex-shrink-0 w-6 h-6 rounded-full bg-gradient-to-br from-coral to-orange flex items-center justify-center shadow-md group-hover:scale-110 transition-transform">
+                      <CheckCircle className="w-4 h-4 text-white" />
+                    </div>
+                    <span className="font-medium text-foreground">{item}</span>
                   </motion.div>
                 ))}
               </div>
