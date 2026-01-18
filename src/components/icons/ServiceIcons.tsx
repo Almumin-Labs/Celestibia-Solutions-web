@@ -64,6 +64,14 @@ export const ServiceIconBox = ({
   size = "md",
   className = ""
 }: ServiceIconBoxProps) => {
-  return;
+  return (
+    <div className={`${boxSizeClasses[size]} rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center ${className}`}>
+      <img 
+        src={serviceIcons[service]} 
+        alt={`${service} service icon`} 
+        className={`${iconSizeInBox[size]} object-contain`} 
+      />
+    </div>
+  );
 };
 export default serviceIcons;
