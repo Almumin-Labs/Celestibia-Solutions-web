@@ -83,13 +83,6 @@ const SecurityServices = () => {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto text-center"
           >
-            <motion.div 
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.5 }}
-            >
-              <ServiceIconBox service="security" size="hero" className="mx-auto mb-6" />
-            </motion.div>
             <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
               Security{" "}
               <span className="text-gradient">Services</span>
