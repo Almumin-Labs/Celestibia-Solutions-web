@@ -10,38 +10,38 @@ import slackSvg from "@/assets/logos/slack.svg";
 
 const pipelineSteps = [
   {
-    id: 1,
+    
     title: "Code Commit",
     description: "Developer pushes code to repository",
     logo: githubSvg,
   },
   {
-    id: 2,
+    
     title: "Build & Test",
     description: "Automated builds and unit tests",
     logo: jenkinsLogo,
   },
   {
-    id: 3,
+    
     title: "Code Quality",
     description: "Static analysis and security scan",
     logo: null, // Will use icon instead
     icon: ShieldCheck,
   },
   {
-    id: 4,
+   
     title: "Containerize",
     description: "Build Docker image and push to registry",
     logo: dockerSvg,
   },
   {
-    id: 5,
+    
     title: "Deploy",
     description: "Deploy to Kubernetes cluster",
     logo: kubernetesSvg,
   },
   {
-    id: 6,
+   
     title: "Notify",
     description: "Team notification on success/failure",
     logo: slackSvg,
@@ -97,10 +97,7 @@ export const CICDPipeline = () => {
                     </motion.div>
                     
                     {/* Step Number Badge */}
-                    <div className="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold shadow-md">
-                      {step.id}
-                    </div>
-                  </div>
+            
 
                   {/* Step Info */}
                   <div className="text-center max-w-[140px]">
