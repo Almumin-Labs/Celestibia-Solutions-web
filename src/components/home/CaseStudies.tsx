@@ -9,7 +9,8 @@ const caseStudies = [
     icon: Building2,
     industry: "Banking & Finance",
     title: "Banking App Migration to Azure",
-    description: "Migrated core banking CRM from private cloud to Azure with 25% cost savings and RBI/PCI-DSS compliance.",
+    description:
+      "Migrated core banking CRM from private cloud to Azure with 25% cost savings and RBI/PCI-DSS compliance.",
     results: ["25% cost reduction", "RTO: 4hrs → 30min", "Compliance achieved"],
     color: "from-blue-600 to-blue-400",
   },
@@ -17,7 +18,8 @@ const caseStudies = [
     icon: Stethoscope,
     industry: "Healthcare",
     title: "Real-Time Health Data Platform",
-    description: "Built a scalable health monitoring platform with <5s latency for real-time alerts and HIPAA compliance.",
+    description:
+      "Built a scalable health monitoring platform with <5s latency for real-time alerts and HIPAA compliance.",
     results: ["<5s alert latency", "1K to 50K+ users", "HIPAA compliant"],
     color: "from-green-600 to-emerald-400",
   },
@@ -45,14 +47,14 @@ export const CaseStudies = () => {
       {/* InfraCloud-style backgrounds */}
       <HexagonPattern />
       <IsometricIcons className="opacity-20" />
-      
+
       {/* Gradient orbs */}
-      <motion.div 
+      <motion.div
         animate={{ scale: [1, 1.2, 1], opacity: [0.15, 0.25, 0.15] }}
         transition={{ duration: 10, repeat: Infinity }}
-        className="absolute -top-32 -left-32 w-[400px] h-[400px] bg-gradient-to-br from-[#F97316]/20 to-[#8B5CF6]/10 rounded-full blur-[100px]" 
+        className="absolute -top-32 -left-32 w-[400px] h-[400px] bg-gradient-to-br from-[#F97316]/20 to-[#8B5CF6]/10 rounded-full blur-[100px]"
       />
-      
+
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
         <motion.div
@@ -62,16 +64,12 @@ export const CaseStudies = () => {
           transition={{ duration: 0.5 }}
           className="text-center max-w-3xl mx-auto mb-16"
         >
-          <span className="inline-block px-4 py-1.5 rounded-full bg-secondary text-sm font-medium text-foreground mb-4">
-            Case Studies
-          </span>
           <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
-            Real Results,{" "}
-            <span className="text-gradient">Real Impact</span>
+            Real Results, <span className="text-gradient">Real Impact</span>
           </h2>
           <p className="text-lg text-muted-foreground">
-            See how we've helped enterprises across industries achieve measurable 
-            business outcomes through cloud-native solutions.
+            See how we've helped enterprises across industries achieve measurable business outcomes through cloud-native
+            solutions.
           </p>
         </motion.div>
 
@@ -92,27 +90,22 @@ export const CaseStudies = () => {
               <div className="p-8">
                 {/* Industry Badge */}
                 <div className="flex items-center gap-3 mb-4">
-                  <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${study.color} flex items-center justify-center shadow-lg`}>
+                  <div
+                    className={`w-10 h-10 rounded-lg bg-gradient-to-br ${study.color} flex items-center justify-center shadow-lg`}
+                  >
                     <study.icon className="w-5 h-5 text-white drop-shadow-md" />
                   </div>
-                  <span className="text-sm font-medium text-muted-foreground">
-                    {study.industry}
-                  </span>
+                  <span className="text-sm font-medium text-muted-foreground">{study.industry}</span>
                 </div>
 
                 {/* Content */}
                 <h3 className="font-heading text-xl font-bold mb-3">{study.title}</h3>
-                <p className="text-muted-foreground mb-6 leading-relaxed">
-                  {study.description}
-                </p>
+                <p className="text-muted-foreground mb-6 leading-relaxed">{study.description}</p>
 
                 {/* Results */}
                 <div className="flex flex-wrap gap-2 mb-6">
                   {study.results.map((result, idx) => (
-                    <span
-                      key={idx}
-                      className="px-3 py-1 rounded-full bg-secondary text-sm font-medium text-foreground"
-                    >
+                    <span key={idx} className="px-3 py-1 rounded-full bg-secondary text-sm font-medium text-foreground">
                       {result}
                     </span>
                   ))}
