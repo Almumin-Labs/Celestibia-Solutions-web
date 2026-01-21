@@ -1,52 +1,47 @@
 import { motion } from "framer-motion";
-import { Building2, Stethoscope, ShoppingCart, Factory, Truck, GraduationCap, Landmark, Plane } from "lucide-react";
 import { useABTest } from "@/hooks/useABTest";
 import { CircuitBoard, WaveGradient } from "@/components/graphics/InfraCloudStyle";
+import { IndustryIcon } from "@/components/icons/IndustryIcons";
+
 const industries = [
   {
-    icon: Building2,
+    iconKey: "banking",
     name: "Banking & Finance",
-    gradient: "from-blue-500 to-cyan-500",
   },
   {
-    icon: Stethoscope,
+    iconKey: "healthcare",
     name: "Healthcare",
-    gradient: "from-green-500 to-emerald-500",
   },
   {
-    icon: ShoppingCart,
+    iconKey: "ecommerce",
     name: "E-Commerce & Retail",
-    gradient: "from-orange-500 to-yellow-500",
   },
   {
-    icon: Factory,
+    iconKey: "manufacturing",
     name: "Manufacturing",
-    gradient: "from-slate-500 to-zinc-500",
   },
   {
-    icon: Truck,
+    iconKey: "logistics",
     name: "Logistics",
-    gradient: "from-purple-500 to-pink-500",
   },
   {
-    icon: GraduationCap,
+    iconKey: "edtech",
     name: "EdTech",
-    gradient: "from-violet-500 to-purple-500",
   },
   {
-    icon: Landmark,
+    iconKey: "government",
     name: "Government",
-    gradient: "from-red-500 to-orange-500",
   },
   {
-    icon: Plane,
+    iconKey: "travel",
     name: "Travel & Hospitality",
-    gradient: "from-cyan-500 to-blue-500",
   },
 ];
+
 export const Industries = () => {
   const { getVariantValue } = useABTest("industries_headline");
   const headline = getVariantValue() || "Transforming Industries with Cloud Innovation";
+  
   return (
     <section className="py-24 bg-gradient-warm text-primary-foreground overflow-hidden relative">
       {/* InfraCloud-style backgrounds */}
@@ -157,8 +152,11 @@ export const Industries = () => {
                 scale: 1.05,
                 y: -5,
               }}
-              className="group p-6 md:p-8 rounded-2xl bg-primary-foreground/5 border border-primary-foreground/10 hover:bg-primary-foreground/10 hover:border-coral/30 transition-all duration-300 cursor-pointer"
+              className="group p-6 md:p-8 rounded-2xl bg-primary-foreground/5 border border-primary-foreground/10 hover:bg-primary-foreground/10 hover:border-coral/30 transition-all duration-300 cursor-pointer flex flex-col items-center text-center"
             >
+              <div className="mb-4 group-hover:scale-110 transition-transform duration-300">
+                <IndustryIcon industry={industry.iconKey as any} size="lg" />
+              </div>
               <h3 className="font-heading font-bold text-lg">{industry.name}</h3>
             </motion.div>
           ))}

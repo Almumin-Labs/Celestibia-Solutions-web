@@ -1,12 +1,13 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowRight, Building2, Stethoscope, ShoppingCart, Factory } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { HexagonPattern, IsometricIcons } from "@/components/graphics/InfraCloudStyle";
+import { IndustryIcon } from "@/components/icons/IndustryIcons";
 
 const caseStudies = [
   {
-    icon: Building2,
+    iconKey: "banking",
     industry: "Banking & Finance",
     title: "Banking App Migration to Azure",
     description:
@@ -15,7 +16,7 @@ const caseStudies = [
     color: "from-blue-600 to-blue-400",
   },
   {
-    icon: Stethoscope,
+    iconKey: "healthcare",
     industry: "Healthcare",
     title: "Real-Time Health Data Platform",
     description:
@@ -24,7 +25,7 @@ const caseStudies = [
     color: "from-green-600 to-emerald-400",
   },
   {
-    icon: ShoppingCart,
+    iconKey: "ecommerce",
     industry: "E-Commerce",
     title: "E-Commerce AWS to Azure Migration",
     description: "Seamless cloud-to-cloud migration with Microsoft ERP integration and 35% faster checkout.",
@@ -32,7 +33,7 @@ const caseStudies = [
     color: "from-orange-600 to-amber-400",
   },
   {
-    icon: Factory,
+    iconKey: "manufacturing",
     industry: "Enterprise SaaS",
     title: "SaaS Platform Scaling",
     description: "Implemented GitOps architecture reducing monthly cloud bill by 38% with zero-downtime deployments.",
@@ -90,10 +91,8 @@ export const CaseStudies = () => {
               <div className="p-8">
                 {/* Industry Badge */}
                 <div className="flex items-center gap-3 mb-4">
-                  <div
-                    className={`w-10 h-10 rounded-lg bg-gradient-to-br ${study.color} flex items-center justify-center shadow-lg`}
-                  >
-                    <study.icon className="w-5 h-5 text-white drop-shadow-md" />
+                  <div className="w-12 h-12 rounded-lg bg-white flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                    <IndustryIcon industry={study.iconKey as any} size="sm" />
                   </div>
                   <span className="text-sm font-medium text-muted-foreground">{study.industry}</span>
                 </div>

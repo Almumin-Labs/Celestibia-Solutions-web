@@ -2,21 +2,13 @@ import { motion } from "framer-motion";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { CTA } from "@/components/home/CTA";
-import {
-  Building2,
-  Stethoscope,
-  ShoppingCart,
-  Factory,
-  Truck,
-  GraduationCap,
-  Landmark,
-  Plane,
-  CheckCircle,
-} from "lucide-react";
+import { CheckCircle } from "lucide-react";
 import { CloudHeroGraphics } from "@/components/graphics/HeroGraphics";
+import { IndustryIcon } from "@/components/icons/IndustryIcons";
+
 const industries = [
   {
-    icon: Building2,
+    iconKey: "banking",
     name: "Banking & Financial Services",
     description:
       "Secure, compliant cloud infrastructure for banks, investment firms, and fintech startups. PCI-DSS, SOC2, and RBI compliance expertise.",
@@ -29,7 +21,7 @@ const industries = [
     color: "from-blue-600 to-blue-400",
   },
   {
-    icon: Stethoscope,
+    iconKey: "healthcare",
     name: "Healthcare & Life Sciences",
     description:
       "HIPAA-compliant solutions for hospitals, diagnostics, and healthtech platforms with real-time data processing capabilities.",
@@ -42,7 +34,7 @@ const industries = [
     color: "from-green-600 to-emerald-400",
   },
   {
-    icon: ShoppingCart,
+    iconKey: "ecommerce",
     name: "E-Commerce & Retail",
     description:
       "Scalable, high-performance platforms that handle seasonal traffic spikes with seamless Microsoft/SAP ERP integrations.",
@@ -55,7 +47,7 @@ const industries = [
     color: "from-orange to-coral",
   },
   {
-    icon: Factory,
+    iconKey: "manufacturing",
     name: "Manufacturing",
     description:
       "Smart factory solutions with IoT integration, predictive maintenance, and real-time production monitoring.",
@@ -68,7 +60,7 @@ const industries = [
     color: "from-slate-600 to-slate-400",
   },
   {
-    icon: Truck,
+    iconKey: "logistics",
     name: "Logistics & Supply Chain",
     description:
       "End-to-end visibility solutions with real-time tracking, route optimization, and warehouse management systems.",
@@ -76,7 +68,7 @@ const industries = [
     color: "from-amber-600 to-yellow-400",
   },
   {
-    icon: GraduationCap,
+    iconKey: "edtech",
     name: "EdTech",
     description: "Scalable learning management systems, virtual classrooms, and AI-powered educational tools.",
     useCases: [
@@ -88,7 +80,7 @@ const industries = [
     color: "from-purple to-purple",
   },
   {
-    icon: Landmark,
+    iconKey: "government",
     name: "Government & Public Sector",
     description: "Secure, citizen-centric digital services with data sovereignty and compliance requirements.",
     useCases: [
@@ -100,7 +92,7 @@ const industries = [
     color: "from-red-600 to-rose-400",
   },
   {
-    icon: Plane,
+    iconKey: "travel",
     name: "Travel & Hospitality",
     description:
       "Booking engines, customer experience platforms, and operational optimization for hotels and airlines.",
@@ -113,6 +105,7 @@ const industries = [
     color: "from-cyan-600 to-teal-400",
   },
 ];
+
 const IndustriesPage = () => {
   return (
     <main className="min-h-screen">
@@ -231,10 +224,8 @@ const IndustriesPage = () => {
                 />
 
                 <div className="relative z-10">
-                  <div
-                    className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${industry.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg`}
-                  >
-                    <industry.icon className="w-8 h-8 text-primary-foreground" />
+                  <div className="w-16 h-16 rounded-2xl bg-white flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                    <IndustryIcon industry={industry.iconKey as any} size="lg" />
                   </div>
                   <h2 className="font-heading text-2xl font-bold mb-3 group-hover:text-coral transition-colors">
                     {industry.name}
@@ -265,4 +256,5 @@ const IndustriesPage = () => {
     </main>
   );
 };
+
 export default IndustriesPage;
