@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Link2 } from "lucide-react";
 import { useABTest } from "@/hooks/useABTest";
-import veeamLogo from "@/assets/veeam-logo.jpg";
+import veeamLogo from "@/assets/veeam-logo.png";
 
 // Import original logos
 import awsSvg from "@/assets/logos/aws.svg";

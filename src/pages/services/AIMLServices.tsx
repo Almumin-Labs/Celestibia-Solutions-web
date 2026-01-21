@@ -82,13 +82,6 @@ const AIMLServices = () => {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto text-center"
           >
-            <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.5 }}
-            >
-              <ServiceIconBox service="aiml" size="hero" className="mx-auto mb-6" />
-            </motion.div>
             <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6">AI & ML </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
               Unlock the power of artificial intelligence to drive innovation, automate processes, and create

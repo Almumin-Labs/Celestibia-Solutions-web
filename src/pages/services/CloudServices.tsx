@@ -117,7 +117,6 @@ const CloudServices = () => {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto text-center"
           >
-            <ServiceIconBox service="cloud" size="hero" className="mx-auto mb-6" />
             <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
               Core Cloud{" "}
               <span className="text-gradient">Services</span>
