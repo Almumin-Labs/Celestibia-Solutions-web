@@ -106,9 +106,7 @@ const About = () => {
             >
               <Users className="w-10 h-10 text-white" />
             </motion.div>
-            <span className="inline-block px-4 py-1.5 rounded-full bg-coral/20 text-coral text-sm font-medium mb-4 ml-4">
-              About Us
-            </span>
+            <span className="inline-block px-4 py-1.5 rounded-full bg-coral/20 text-coral text-sm font-medium mb-4 ml-4"></span>
             <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
               Where Innovation Meets <span className="text-gradient">Precision</span>
             </h1>
