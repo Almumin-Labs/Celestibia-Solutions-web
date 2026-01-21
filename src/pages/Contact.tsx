@@ -121,9 +121,6 @@ const Contact = () => {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto text-center"
           >
-            <span className="inline-block px-4 py-1.5 rounded-full bg-secondary text-sm font-medium text-foreground mb-4">
-              Contact Us
-            </span>
             <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
               Let's Build Something <span className="text-gradient">Extraordinary</span>
             </h1>
