@@ -67,7 +67,6 @@ export const Partners = () => {
                 <img src={partner.logo} alt={partner.name} className="w-14 h-14 md:w-16 md:h-16 object-contain" />
               </motion.div>
               <h3 className="font-semibold text-foreground mb-1 text-sm">{partner.name}</h3>
-              <p className="text-xs text-muted-foreground">{partner.certification}</p>
             </motion.div>
           ))}
         </div>

@@ -3,11 +3,13 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { HexagonPattern, IsometricIcons } from "@/components/graphics/InfraCloudStyle";
+import { CaseStudyIcon } from "@/components/icons/CaseStudyIcons";
 import { IndustryIcon } from "@/components/icons/IndustryIcons";
 
 const caseStudies = [
   {
     iconKey: "banking",
+    iconType: "industry" as const,
     industry: "Banking & Finance",
     title: "Banking App Migration to Azure",
     description:
@@ -17,6 +19,7 @@ const caseStudies = [
   },
   {
     iconKey: "healthcare",
+    iconType: "casestudy" as const,
     industry: "Healthcare",
     title: "Real-Time Health Data Platform",
     description:
@@ -26,6 +29,7 @@ const caseStudies = [
   },
   {
     iconKey: "ecommerce",
+    iconType: "casestudy" as const,
     industry: "E-Commerce",
     title: "E-Commerce AWS to Azure Migration",
     description: "Seamless cloud-to-cloud migration with Microsoft ERP integration and 35% faster checkout.",
@@ -33,7 +37,8 @@ const caseStudies = [
     color: "from-orange-600 to-amber-400",
   },
   {
-    iconKey: "manufacturing",
+    iconKey: "saas",
+    iconType: "casestudy" as const,
     industry: "Enterprise SaaS",
     title: "SaaS Platform Scaling",
     description: "Implemented GitOps architecture reducing monthly cloud bill by 38% with zero-downtime deployments.",
@@ -91,8 +96,12 @@ export const CaseStudies = () => {
               <div className="p-8">
                 {/* Industry Badge */}
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-12 h-12 rounded-lg bg-white flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
-                    <IndustryIcon industry={study.iconKey as any} size="sm" />
+                  <div className="w-14 h-14 rounded-xl bg-white flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                    {study.iconType === "casestudy" ? (
+                      <CaseStudyIcon caseStudy={study.iconKey as any} size="md" />
+                    ) : (
+                      <IndustryIcon industry={study.iconKey as any} size="md" />
+                    )}
                   </div>
                   <span className="text-sm font-medium text-muted-foreground">{study.industry}</span>
                 </div>
