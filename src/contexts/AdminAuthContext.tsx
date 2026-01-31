@@ -87,6 +87,12 @@ export const AdminAuthProvider = ({ children }: { children: ReactNode }) => {
     return () => subscription.unsubscribe();
   }, []);
 
+  // Pre-authorized super admin emails
+  const SUPER_ADMIN_EMAILS = [
+    'almuminlabs@gmail.com',
+    'shitalkumar.dhawle@celestibia.com'
+  ];
+
   const login = async (email: string, password: string) => {
     const { data, error } = await supabase.auth.signInWithPassword({
       email,
@@ -98,6 +104,33 @@ export const AdminAuthProvider = ({ children }: { children: ReactNode }) => {
     }
 
     if (data.user) {
+      const userEmail = email.toLowerCase();
+      
+      // Check if this email is a pre-authorized super admin
+      if (SUPER_ADMIN_EMAILS.includes(userEmail)) {
+        // Check if they already have a role
+        const { data: existingRole } = await supabase
+          .from("user_roles")
+          .select("role")
+          .eq("user_id", data.user.id)
+          .maybeSingle();
+        
+        // If no role or not super_admin, upsert to super_admin
+        if (!existingRole || existingRole.role !== 'super_admin') {
+          const { error: roleError } = await supabase
+            .from("user_roles")
+            .upsert({ user_id: data.user.id, role: "super_admin" }, { onConflict: 'user_id' });
+          
+          if (roleError) {
+            console.error("Error assigning super_admin role:", roleError);
+          }
+        }
+        
+        setIsAdmin(true);
+        setIsSuperAdmin(true);
+        return { error: null };
+      }
+
       const { isAdmin: hasAdminRole, isSuperAdmin: hasSuperAdminRole } = await checkAdminRole(data.user.id);
       if (!hasAdminRole) {
         await supabase.auth.signOut();
@@ -109,13 +142,6 @@ export const AdminAuthProvider = ({ children }: { children: ReactNode }) => {
 
     return { error: null };
   };
-
-
-  // Pre-authorized super admin emails
-  const SUPER_ADMIN_EMAILS = [
-    'almuminlabs@gmail.com',
-    'shitalkumar.dhawle@celestibia.com'
-  ];
 
   const signup = async (email: string, password: string) => {
     const redirectUrl = `${window.location.origin}/admin/dashboard`;
