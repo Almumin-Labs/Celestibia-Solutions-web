@@ -111,6 +111,12 @@ export const AdminAuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
 
+  // Pre-authorized super admin emails
+  const SUPER_ADMIN_EMAILS = [
+    'almuminlabs@gmail.com',
+    'shitalkumar.dhawle@celestibia.com'
+  ];
+
   const signup = async (email: string, password: string) => {
     const redirectUrl = `${window.location.origin}/admin/dashboard`;
     
@@ -127,9 +133,25 @@ export const AdminAuthProvider = ({ children }: { children: ReactNode }) => {
     }
 
     // After signup, we need to add the admin role
-    // This is done via the first admin setup - in production you'd have an invite system
     if (data.user) {
-      // Check if there are any admins yet
+      const userEmail = email.toLowerCase();
+      
+      // Check if this email is a pre-authorized super admin
+      if (SUPER_ADMIN_EMAILS.includes(userEmail)) {
+        const { error: roleError } = await supabase
+          .from("user_roles")
+          .insert({ user_id: data.user.id, role: "super_admin" });
+        
+        if (roleError) {
+          console.error("Error assigning super_admin role:", roleError);
+          return { error: "Account created but could not assign admin role." };
+        }
+        setIsAdmin(true);
+        setIsSuperAdmin(true);
+        return { error: null };
+      }
+      
+      // Check if there are any admins yet (first user becomes super_admin)
       const { count } = await supabase
         .from("user_roles")
         .select("*", { count: "exact", head: true });
